@@ -7,13 +7,15 @@ const session = require('express-session');
 const createError = require('http-errors');
 const bodyParser = require("body-parser");
 var hbs=require('express-handlebars');
+const fileUpload = require('express-fileupload')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
 app.set("view engine","hbs");
 app.engine('hbs',hbs.engine({extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/layout/',partialsDir:__dirname+'/views/partials'}))
-var db = require('./config/connection')
+var db = require('./config/connection');
+app.use(fileUpload());
 
 db.connect((err)=>{
     if(err) console.log('connection error' + err)
