@@ -69,6 +69,7 @@
                                             <tr>
                                                 <th></th>
                                                 <th>Product Name</th>
+                                                <th>Category</th>
                                                 <th>Product Id</th>
                                                 <th>Description</th>
                                                 <th>Price</th>
@@ -81,8 +82,9 @@
                                         <tbody>
                                             {{#each data}}
                                             <tr>
-                                                <td><img class="rounded-circle" width="35" src="/admin/images/profile/small/pic1.jpg" alt=""></td>
+                                                <td><img class="rounded" width="100" src="/product-images/{{this.image.[0]}}" alt=""></td>
                                                 <td>{{this.name}}</td>
+                                                <td>{{this.category}}</td>
                                                 <td>{{this.id}}</td>
                                                 <td>{{this.description}}</td>
                                                 <td>{{this.price}}</td>
@@ -92,7 +94,7 @@
                                                 <td>
 													<div class="d-flex">
 														<a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-														<a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+														<a href="/admin/delete-product/{{this._id}}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
 													</div>												
 												</td>												
                                             </tr>

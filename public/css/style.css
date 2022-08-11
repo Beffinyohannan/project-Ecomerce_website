@@ -15570,7 +15570,7 @@ input {
 }
 @media (min-width: 768px) {
     .product-list-img-link {
-        width: auto;
+        width: 300px;
     }
 }
 .product-list-img-link img {
@@ -16473,7 +16473,10 @@ a.ui-button:active,
 }
 
 .breadcrumb-bg-color--golden {
-    background-color: #FEF5EF;
+    /* background-color: #FEF5EF; */
+    background: url(/images/width\(1200\).jpg);
+    background-size: cover;
+    background-position-y: 575px;
 }
 
 .breadcrumb-nav-color--black li a {

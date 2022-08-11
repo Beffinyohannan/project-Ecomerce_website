@@ -8,6 +8,7 @@
     <title>Acara - Ticketing Bootstrap Admin Dashboard</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/admin/images/favicon.png">
+    
     <!-- Datatable -->
     <link href="/admin/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Custom Stylesheet -->
@@ -70,6 +71,7 @@
                                                 <th>Name</th>
                                                 <th>Mobile</th>
                                                 <th>Email</th>
+                                                <th>Status</th>
                                                 <th>Joining Date</th>
                                                 <th>Action</th>
                                             </tr>
@@ -81,11 +83,13 @@
                                                 <td>{{this.name}}</td>
                                                 <td><a href="javascript:void(0);"><strong class="text-black">{{this.number}}</strong></a></td>
                                                 <td><a href="javascript:void(0);"><strong class="text-black">{{this.email}}</strong></a></td>
+                                                <td>{{this.state}}</td>
                                                 <td>2022/04/25</td>
                                                 <td>
-													<div class="d-flex">
-														<a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-														<a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                   
+													<div class="d-flex ">
+														<a href="/admin/users/{{this._id}}" class="btn btn-primary shadow btn-md sharp mr-1">Block</a>
+														<a href="/admin/user/{{this._id}}" class="btn btn-danger shadow btn-md sharp">Unblock</a>
 													</div>												
 												</td>												
                                             </tr>

@@ -1,8 +1,9 @@
 
 const { response } = require("../app");
 const app = require("../app");
-const { loginAuthSchema } = require("../helpers/validationSchema");
-const userSchema = require("../model/userSchema")
+// const adminHelpers = require("../helpers/adminHelpers");
+// const userSchema = require("../model/userSchema")
+const userHelpers = require("../helpers/userHelper")
 
 
 const getLogin = (req, res) => {
@@ -10,9 +11,11 @@ const getLogin = (req, res) => {
 }
 
 const postLogin = (req, res) => {
-    userSchema.doLogin(req.body).then((response) => {
+    userHelpers.doLogin(req.body).then((response) => {
         if (response.status) {
-            res.redirect('/homePage')
+            req.session.loggedIn=true
+            req.session.user=response.user
+            res.redirect('/')
         } else {
             res.redirect('/login')
         }
@@ -25,7 +28,7 @@ const getSignup = (req, res) => {
 }
 
 const postSignup = (req, res) => {
-    userSchema.doSignup(req.body).then((response) => {
+    userHelpers.doSignup(req.body).then((response) => {
         if (response.status) {
             res.redirect('/signup')
         } else {
@@ -34,16 +37,46 @@ const postSignup = (req, res) => {
     })
 }
 
+const getVerify =(req,res)=>{
+    res.render('user/verifyOtp')
+}
+
 const getHomePage = (req, res) => {
-    res.render('user/homePage')
+    let user=req.session.user
+    // console.log(user);
+    res.render('user/homePage',{user})
 }
 
 const getProducts = (req, res) => {
-    res.render('user/products')
+    userHelpers.viewProducts().then((data)=>{
+        res.render('user/products',{data})
+    })
+    
 }
 
 const getProductSinglePage = (req, res) => {
-    res.render('user/productSinglePage')
+    let Id = req.params.id
+    userHelpers.singleProduct(Id).then((data)=>{
+        res.render('user/productSinglePage',data)
+    })
+   
 }
 
-module.exports = { getHomePage, getLogin, getSignup, getProducts, getProductSinglePage, postSignup,postLogin }
+const getLogout = (req,res)=>{
+    req.session.destroy()
+    res.redirect("/")
+}
+
+
+
+module.exports = {
+     getHomePage,
+     getLogin,
+     getSignup,
+     getProducts, 
+     getProductSinglePage,
+     postSignup,
+     postLogin,
+     getLogout,
+     getVerify 
+    }

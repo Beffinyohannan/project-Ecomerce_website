@@ -39,6 +39,7 @@
 
 <body>
 
+
     <!-- ...:::: Start Breadcrumb Section:::... -->
     <div class="breadcrumb-section breadcrumb-bg-color--golden">
         <div class="breadcrumb-wrapper">
@@ -65,14 +66,14 @@
     <div class="product-details-section">
         <div class="container">
             <div class="row">
+                
                 <div class="col-xl-5 col-lg-6">
                     <div class="product-details-gallery-area" data-aos="fade-up" data-aos-delay="0">
-                        
                         <!-- Start Large Image -->
                         <div class="product-large-image product-large-image-horaizontal swiper-container">
                             <div class="swiper-wrapper">
                                 <div class="product-image-large-image swiper-slide zoom-image-hover img-responsive">
-                                    <img src="/images/product/default/home-1/default-1.jpg" alt="">
+                                    <img src="/product-images/{{this.image.[0]}}" alt="">
                                 </div>
                                 <div class="product-image-large-image swiper-slide zoom-image-hover img-responsive">
                                     <img src="/images/product/default/home-1/default-2.jpg" alt="">
@@ -133,7 +134,7 @@
                         data-aos-delay="200">
                         <!-- Start  Product Details Text Area-->
                         <div class="product-details-text">
-                            <h4 class="title">Ornare sed consequat</h4>
+                            <h4 class="title">{{this.name}}</h4>
                             <div class="d-flex align-items-center">
                                 <ul class="review-star">
                                     <li class="fill"><i class="ion-android-star"></i></li>
@@ -144,11 +145,8 @@
                                 </ul>
                                 <a href="#" class="customer-review ml-2">(customer review )</a>
                             </div>
-                            <div class="price">$80.00</div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est
-                                tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis
-                                justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id
-                                nulla.</p>
+                            <div class="price">{{this.price}}</div>
+                            <p>{{this.description}}</p>
                         </div> <!-- End  Product Details Text Area-->
                         <!-- Start Product Variable Area -->
                         <div class="product-details-variable">
@@ -202,6 +200,7 @@
                         </div> <!-- End  Product Details Social Area-->
                     </div>
                 </div>
+            
             </div>
         </div>
     </div> <!-- End Product Details Section -->
