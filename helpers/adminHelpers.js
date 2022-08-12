@@ -3,6 +3,7 @@ const collection = require('../config/collection')
 const { resolveInclude } = require('ejs')
 const { ObjectId } = require('mongodb')
 const { categoryCollection } = require('../config/collection')
+const { ReservationList } = require('twilio/lib/rest/taskrouter/v1/workspace/task/reservation')
 
 
 module.exports = {
@@ -44,7 +45,7 @@ module.exports = {
 
     blockUser:(Id)=>{
         return new  Promise(async(resolve,reject)=>{
-             await db.get().collection(collection.userCollection).updateOne({_id:ObjectId(Id)},{$set:{state:false}}).then((data)=>{
+             await db.get().collection(collection.userCollection).updateOne({_id:ObjectId(Id)},{$set:{state:"blocked"}}).then((data)=>{
                 // console.log(data);
                 resolve(data)
             })
@@ -53,7 +54,7 @@ module.exports = {
 
     unblockUser: (Id)=>{
         return new  Promise(async(resolve,reject)=>{
-             await db.get().collection(collection.userCollection).updateOne({_id:ObjectId(Id)},{$set:{state:true}}).then((data)=>{
+             await db.get().collection(collection.userCollection).updateOne({_id:ObjectId(Id)},{$set:{state:"active"}}).then((data)=>{
                 resolve(data)
             })
         })
@@ -101,6 +102,28 @@ module.exports = {
         return new Promise(async(resolve,reject)=>{
             let data = await db.get().collection(collection.categoryCollection).deleteOne({_id:ObjectId(Id)})
             resolve(data)
+        })
+    },
+
+    viewEditProduct :(Id)=>{
+        return new Promise(async(resolve,reject)=>{
+            let datas = await db.get().collection(collection.productCollection).findOne({_id:ObjectId(Id)})
+            resolve(datas)
+        })
+    },
+
+    editProducts :(Id,product)=>{
+        return new  Promise (async(resolve,reject)=>{
+            await db.get().collection(collection.productCollection).updateOne({_id:ObjectId(Id)},{$set:{
+                name:product.name,
+                id:product.id,
+                price:product.price,
+                stock:product.stock,
+                offer:product.offer,
+                description:product.description
+            }}).then((data)=>{
+                resolve(data)
+            })
         })
     }
 

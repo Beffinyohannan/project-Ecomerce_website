@@ -44,7 +44,10 @@ const getVerify =(req,res)=>{
 const getHomePage = (req, res) => {
     let user=req.session.user
     // console.log(user);
-    res.render('user/homePage',{user})
+    userHelpers.viewProducts().then((data)=>{
+        res.render('user/homePage',{user,data})
+    })
+    
 }
 
 const getProducts = (req, res) => {

@@ -5,10 +5,13 @@ const adminHelpers = require('../helpers/adminHelpers')
 const multer = require('../helpers/multer')
 const { Db } = require('mongodb')
 
+
+// get login page
 const getAdminLogin = (req,res) =>{
     res.render('admin/adminLogin')
 }
 
+// get admin dashboard
 const getAdminDasboard =(req,res)=>{
     // res.send('hi')
     res.render('admin/adminDashboard')
@@ -23,7 +26,7 @@ const getUser = (req,res)=>{
    
 }
 
-// view producs
+// view products
 const getProducts= (req,res)=>{
     adminHelpers.viewProducts().then((data)=>{
         res.render('admin/products',{data})
@@ -51,11 +54,41 @@ const postAddProduct =(req,res)=>{
         if(response.status){
             res.redirect('/admin/add-product')
         }else{
-            res.send('product added')
+            // res.send('product added')
+            res.redirect('/admin/products')
            
            
         }
 
+    })
+}
+
+// get edit products
+const getEditProducts =(req,res)=>{
+    let Id = req.params.id
+    adminHelpers.viewEditProduct(Id).then((datas)=>{
+        res.render('admin/editProducts',datas)
+    })
+
+    adminHelpers.viewCategory().then((data)=>{
+        res.render('admin/addProducts',{data})
+    })
+    
+}
+
+// post edit products page
+const postEditProducts = (req,res)=>{
+    let Id = req.params.id
+    adminHelpers.editProducts(Id,req.body).then((data)=>{
+        console.log(req.body);
+        // res.send('product edit sucessfully')
+        res.redirect('/admin/products')
+        // if(req.files.Image){
+        //     var filename = req.files.map(function(file){
+        //         return file.filename
+        //     })
+        //     req.body.image=filename
+        // }
     })
 }
 
@@ -126,5 +159,8 @@ module.exports = {
     unblockusers,
     deleteProduct,
     getCategory,
-    postAddCategory,deleteCategory
+    postAddCategory,
+    deleteCategory,
+    getEditProducts,
+    postEditProducts
 }

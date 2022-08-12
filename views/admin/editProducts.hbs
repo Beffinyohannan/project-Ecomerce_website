@@ -55,54 +55,55 @@
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
-                                    <form action="/admin/add-product" method="POST" enctype="multipart/form-data">
+                                    <form action="/admin/product-edit/{{this._id}}" method="POST" >
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Product Name</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="name" placeholder="">
+                                                <input type="text" class="form-control" value="{{this.name}}" name="name" placeholder="">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Category</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="category" id="inlineFormCustomSelect">
-                                                    <option selected>Choose...</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                    {{#each data}}
+                                                    <option selected >{{this.name}}</option>
+                                                    {{!-- <option value="{{this.category}}">One</option> --}}
+                                                    {{/each}}
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Product Id</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="id" placeholder="">
+                                                <input type="text" value="{{this.id}}" class="form-control" name="id" placeholder="">
                                             </div>
                                         </div>
                                          <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Price</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="price" placeholder="">
+                                                <input type="text" class="form-control" value="{{this.price}}" name="price" placeholder="">
                                             </div>
                                         </div>
                                          <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Stock</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="stock" placeholder="">
+                                                <input type="text" class="form-control" value="{{this.stock}}" name="stock" placeholder="">
                                             </div>
                                         </div>
                                          <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Offer</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="offer" placeholder="">
+                                                <input type="text" class="form-control" value="{{this.offer}}" name="offer" placeholder="">
                                             </div>
                                         </div>
                                          <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Description</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="description" placeholder="">
+                                                <input type="text" class="form-control" value="{{this.description}}" name="description" placeholder="">
                                             </div>
                                         </div>
+                                         <img src="/product-images/{{this.image.[0]}}" alt="" style="width: 100px; height:auto">
 
                                          <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -134,7 +135,7 @@
 
                                         <div class="form-group row">
                                             <div class="col-sm-10">
-                                                <button type="submit" class="btn btn-primary">Add Product</button>
+                                                <button type="submit" class="btn btn-primary">Edit Product</button>
                                             </div>
                                         </div>
                                     </form>

@@ -29,7 +29,6 @@
         <div class="container">
             <div class="row flex-column-reverse flex-lg-row">
 
-               {{!-- <%- include('filterSidebar') %> --}}
                {{>filterSidebar}}
 
                
@@ -45,10 +44,10 @@
                                     <div class="sort-tablist d-flex align-items-center">
                                         <ul class="tablist nav sort-tab-btn">
                                             <li><a class="nav-link active" data-bs-toggle="tab"
-                                                    href="#layout-3-grid"><img src="/images/icons/bkg_grid.png"
+                                                    href="#layout-3-grid"><img src="/user/images/icons/bkg_grid.png"
                                                         alt=""></a></li>
                                             <li><a class="nav-link" data-bs-toggle="tab" href="#layout-list"><img
-                                                        src="/images/icons/bkg_list.png" alt=""></a></li>
+                                                        src="/user/images/icons/bkg_list.png" alt=""></a></li>
                                         </ul>
 
                                         <!-- Start Page Amount -->
@@ -100,7 +99,7 @@
                                                             <a href="/product_view/{{this._id}}" class="image-link">
                                                                 <img src="/product-images/{{this.image.[0]}}"
                                                                     alt="">
-                                                                <img src="/images/product/default/home-1/default-9.jpg"
+                                                                <img src="/product-images/{{this.image.[1]}}"/user
                                                                     alt="">
                                                             </a>
                                                             <div class="action-link">
@@ -220,7 +219,6 @@
         </div>
     </div> <!-- ...:::: End Shop Section:::... -->
 
- {{!-- footer included --}}
 
     <!-- Start Modal Add cart -->
     <div class="modal fade" id="modalAddcart" tabindex="-1" role="dialog" aria-hidden="true">
@@ -242,7 +240,7 @@
                                     <div class="col-md-4">
                                         <div class="modal-add-cart-product-img">
                                             <img class="img-fluid"
-                                                src="/images/product/default/home-1/default-1.jpg" alt="">
+                                                src="/user/images/product/default/home-1/default-1.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-md-8">
@@ -292,22 +290,22 @@
                                     <div class="product-large-image modal-product-image-large swiper-container">
                                         <div class="swiper-wrapper">
                                             <div class="product-image-large-image swiper-slide img-responsive">
-                                                <img src="/images/product/default/home-1/default-1.jpg" alt="">
+                                                <img src="/user/images/product/default/home-1/default-1.jpg" alt="">
                                             </div>
                                             <div class="product-image-large-image swiper-slide img-responsive">
-                                                <img src="/images/product/default/home-1/default-2.jpg" alt="">
+                                                <img src="/user/images/product/default/home-1/default-2.jpg" alt="">
                                             </div>
                                             <div class="product-image-large-image swiper-slide img-responsive">
-                                                <img src="/images/product/default/home-1/default-3.jpg" alt="">
+                                                <img src="/user/images/product/default/home-1/default-3.jpg" alt="">
                                             </div>
                                             <div class="product-image-large-image swiper-slide img-responsive">
-                                                <img src="/images/product/default/home-1/default-4.jpg" alt="">
+                                                <img src="/user/images/product/default/home-1/default-4.jpg" alt="">
                                             </div>
                                             <div class="product-image-large-image swiper-slide img-responsive">
-                                                <img src="/images/product/default/home-1/default-5.jpg" alt="">
+                                                <img src="/user/images/product/default/home-1/default-5.jpg" alt="">
                                             </div>
                                             <div class="product-image-large-image swiper-slide img-responsive">
-                                                <img src="/images/product/default/home-1/default-6.jpg" alt="">
+                                                <img src="/user/images/product/default/home-1/default-6.jpg" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -318,27 +316,27 @@
                                         <div class="swiper-wrapper">
                                             <div class="product-image-thumb-single swiper-slide">
                                                 <img class="img-fluid"
-                                                    src="/images/product/default/home-1/default-1.jpg" alt="">
+                                                    src="/user/images/product/default/home-1/default-1.jpg" alt="">
                                             </div>
                                             <div class="product-image-thumb-single swiper-slide">
                                                 <img class="img-fluid"
-                                                    src="/images/product/default/home-1/default-2.jpg" alt="">
+                                                    src="/user/images/product/default/home-1/default-2.jpg" alt="">
                                             </div>
                                             <div class="product-image-thumb-single swiper-slide">
                                                 <img class="img-fluid"
-                                                    src="/images/product/default/home-1/default-3.jpg" alt="">
+                                                    src="/user/images/product/default/home-1/default-3.jpg" alt="">
                                             </div>
                                             <div class="product-image-thumb-single swiper-slide">
                                                 <img class="img-fluid"
-                                                    src="/images/product/default/home-1/default-4.jpg" alt="">
+                                                    src="/user/images/product/default/home-1/default-4.jpg" alt="">
                                             </div>
                                             <div class="product-image-thumb-single swiper-slide">
                                                 <img class="img-fluid"
-                                                    src="/images/product/default/home-1/default-5.jpg" alt="">
+                                                    src="/user/images/product/default/home-1/default-5.jpg" alt="">
                                             </div>
                                             <div class="product-image-thumb-single swiper-slide">
                                                 <img class="img-fluid"
-                                                    src="/images/product/default/home-1/default-6.jpg" alt="">
+                                                    src="/user/images/product/default/home-1/default-6.jpg" alt="">
                                             </div>
                                         </div>
                                         <!-- Add Arrows -->
@@ -460,11 +458,11 @@
     <script src="assets/js/plugins/ajax-mail.js"></script> -->
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
-    <script src="/js/vendor/vendor.min.js"></script>
-    <script src="/js/plugins/plugins.min.js"></script>
+    <script src="/user/js/vendor/vendor.min.js"></script>
+    <script src="/user/js/plugins/plugins.min.js"></script>
 
     <!-- Main JS -->
-    <script src="/js/main.js"></script>
+    <script src="/user/js/main.js"></script>
 </body>
 
 

@@ -12,7 +12,7 @@ module.exports = {
 
         return new Promise(async (resolve, reject) => {
             let email = await db.get().collection(collection.userCollection).findOne({ email: userData.email })
-            let number = await db.get().collection(collection.userCollection).findOne({number:userData.number})
+            let number = await db.get().collection(collection.userCollection).findOne({ number: userData.number })
 
             if (email) {
                 console.log(email);
@@ -26,7 +26,7 @@ module.exports = {
                 // .then(verification => console.log(verification.status));
 
                 console.log(userData);
-                userData.state =true
+                userData.state = "active"
                 userData.password = await bcrypt.hash(userData.password, 10)
                 db.get().collection(collection.userCollection).insert(userData).then((data) => {
                     resolve(data)
@@ -37,47 +37,50 @@ module.exports = {
 
     },
 
-    doLogin: (userData)=>{
-        let response={}
+    doLogin: (userData) => {
+        let response = {}
         let loginStatus = false
-        return new Promise(async (resolve,reject)=>{
-            let user = await db.get().collection(collection.userCollection).findOne({email:userData.email})
-            let check = await db.get().collection(collection.userCollection).findOne({state:true})
-           
-            if(user && check){
-                console.log(user);
-                bcrypt.compare(userData.password,user.password).then((status)=>{
-                    console.log(status);
-                    if(status){
-                        response.user = user
-                        response.user.status =true
-                        response.status = true
-                        resolve(response)      
-                    }else{
-                        resolve({status:false})
-                    }
-                   
+        userData.state = "active"
 
-                })
-               
-            }else{
-                response.status = false
-                resolve(response)
-            }
+        return new Promise(async (resolve, reject) => {
+            let user = await db.get().collection(collection.userCollection).findOne({ $and:[{email: userData.email},{state: userData.state}]})
+
+                console.log(user);
+                if (user) {
+                    console.log(user);
+                    bcrypt.compare(userData.password, user.password).then((status) => {
+                        console.log(status);
+                        if (status) {
+                            response.user = user
+                            response.user.status = true
+                            response.status = true
+                            resolve(response)
+                        } else {
+                            resolve({ status: false })
+                        }
+
+
+                    })
+
+                } else {
+                    response.status = false
+                    resolve(response)
+                }
+            
         })
     },
 
-    viewProducts :()=>{
-        return new Promise(async(resolve,reject)=>{
+    viewProducts: () => {
+        return new Promise(async (resolve, reject) => {
             let data = await db.get().collection(collection.productCollection).find().toArray()
             resolve(data)
         })
     },
 
-    singleProduct :(Id)=>{
-        return new Promise(async(resolve,reject)=>{
-            let data = await db.get().collection(collection.productCollection).findOne({_id:ObjectID(Id)})
-            console.log(data);
+    singleProduct: (Id) => {
+        return new Promise(async (resolve, reject) => {
+            let data = await db.get().collection(collection.productCollection).findOne({ _id: ObjectID(Id) })
+            // console.log(data);
             resolve(data)
         })
     }
