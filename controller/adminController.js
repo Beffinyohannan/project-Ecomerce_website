@@ -4,24 +4,44 @@ const app = require('../app')
 const adminHelpers = require('../helpers/adminHelpers')
 const multer = require('../helpers/multer')
 const { Db } = require('mongodb')
+const { userCollection } = require('../config/collection')
 
+const admin = {
+    myemail:"admin@gmail.com",
+    mypassword:12345
+}
 
 // get login page
 const getAdminLogin = (req,res) =>{
-    res.render('admin/adminLogin')
+    res.render('admin/adminLogin',{adminLogin:true})
+}
+
+//post login page 
+ const postAdminLogin =(req,res)=>{
+    const{email,password} = req.body
+    if(email==admin.myemail && password==admin.mypassword){
+        res.redirect("/admin/dashboard")
+    }else{
+        res.redirect("/admin/login")
+    }
+}
+
+// logout page
+const adminLogout =(rq,res)=>{
+    res.redirect("/admin/login")
 }
 
 // get admin dashboard
 const getAdminDasboard =(req,res)=>{
     // res.send('hi')
-    res.render('admin/adminDashboard')
+    res.render('admin/adminDashboard',{admin:true})
 }
 
 // view users
 const getUser = (req,res)=>{
     adminHelpers.viewUser().then((data)=>{
         // console.log(data);
-        res.render('admin/users',{data})
+        res.render('admin/users',{data,admin:true})
     })
    
 }
@@ -29,7 +49,7 @@ const getUser = (req,res)=>{
 // view products
 const getProducts= (req,res)=>{
     adminHelpers.viewProducts().then((data)=>{
-        res.render('admin/products',{data})
+        res.render('admin/products',{data,admin:true})
     })
    
 }
@@ -37,7 +57,7 @@ const getProducts= (req,res)=>{
 // get add product page
 const getAddProduct =(req,res)=>{
     adminHelpers.viewCategory().then((data)=>{
-        res.render('admin/addProducts',{data})
+        res.render('admin/addProducts',{data,admin:true})
     })
     
 }
@@ -67,12 +87,15 @@ const postAddProduct =(req,res)=>{
 const getEditProducts =(req,res)=>{
     let Id = req.params.id
     adminHelpers.viewEditProduct(Id).then((datas)=>{
-        res.render('admin/editProducts',datas)
+        adminHelpers.viewCategory().then((data)=>{
+            res.render('admin/editProducts',{datas,data,admin:true})
+        })
+       
     })
 
-    adminHelpers.viewCategory().then((data)=>{
-        res.render('admin/addProducts',{data})
-    })
+    // adminHelpers.viewCategory().then((data)=>{
+    //     res.render('admin/editProducts',{data})
+    // })
     
 }
 
@@ -122,7 +145,7 @@ const deleteProduct =(req,res)=>{
 // category get page
 const getCategory =(req,res)=>{
     adminHelpers.viewCategory().then((data)=>{
-        res.render('admin/category',{data})
+        res.render('admin/category',{data,admin:true})
     })
    
 }
@@ -150,6 +173,8 @@ const deleteCategory =(req,res)=>{
 
 module.exports = {
     getAdminLogin,
+    postAdminLogin,
+    adminLogout,
     getAdminDasboard,
     getUser,
     getProducts,

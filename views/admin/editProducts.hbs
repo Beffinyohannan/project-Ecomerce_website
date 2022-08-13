@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,7 +14,7 @@
     <link href="/admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="/admin/css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-</head>
+</head> --}}
 
 <body>
 
@@ -55,11 +55,11 @@
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
-                                    <form action="/admin/product-edit/{{this._id}}" method="POST" >
+                                    <form action="/admin/product-edit/{{datas._id}}" method="POST" >
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Product Name</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="{{this.name}}" name="name" placeholder="">
+                                                <input type="text" class="form-control" value="{{datas.name}}" name="name" placeholder="">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -76,34 +76,34 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Product Id</label>
                                             <div class="col-sm-9">
-                                                <input type="text" value="{{this.id}}" class="form-control" name="id" placeholder="">
+                                                <input type="text" value="{{datas.id}}" class="form-control" name="id" placeholder="">
                                             </div>
                                         </div>
                                          <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Price</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="{{this.price}}" name="price" placeholder="">
+                                                <input type="text" class="form-control" value="{{datas.price}}" name="price" placeholder="">
                                             </div>
                                         </div>
                                          <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Stock</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="{{this.stock}}" name="stock" placeholder="">
+                                                <input type="text" class="form-control" value="{{datas.stock}}" name="stock" placeholder="">
                                             </div>
                                         </div>
                                          <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Offer</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="{{this.offer}}" name="offer" placeholder="">
+                                                <input type="text" class="form-control" value="{{datas.offer}}" name="offer" placeholder="">
                                             </div>
                                         </div>
                                          <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Description</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="{{this.description}}" name="description" placeholder="">
+                                                <input type="text" class="form-control" value="{{datas.description}}" name="description" placeholder="">
                                             </div>
                                         </div>
-                                         <img src="/product-images/{{this.image.[0]}}" alt="" style="width: 100px; height:auto">
+                                         <img src="/product-images/{{datas.image.[0]}}" alt="" style="width: 100px; height:auto">
 
                                          <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -181,14 +181,14 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
-    <script src="/admin/vendor/global/global.min.js"></script>
+    {{!-- <script src="/admin/vendor/global/global.min.js"></script>
 	<script src="/admin/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
     <script src="/admin/js/custom.min.js"></script>
 	<script src="/admin/js/deznav-init.js"></script>
 	
     <!-- Datatable -->
     <script src="/admin/vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="/admin/js/plugins-init/datatables.init.js"></script>
+    <script src="/admin/js/plugins-init/datatables.init.js"></script> --}}
 
 </body>
 </html>

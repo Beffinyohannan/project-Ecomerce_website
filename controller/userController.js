@@ -7,7 +7,7 @@ const userHelpers = require("../helpers/userHelper")
 
 
 const getLogin = (req, res) => {
-    res.render('user/userLogin')
+    res.render('user/userLogin',{userLogin:true})
 }
 
 const postLogin = (req, res) => {
@@ -24,7 +24,7 @@ const postLogin = (req, res) => {
 
 
 const getSignup = (req, res) => {
-    res.render('user/userSignup')
+    res.render('user/userSignup',{userLogin:true})
 }
 
 const postSignup = (req, res) => {

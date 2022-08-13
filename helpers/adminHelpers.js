@@ -20,7 +20,7 @@ module.exports = {
             } else {
                 
                 db.get().collection(collection.productCollection).insertOne(product).then((data) => {
-                    // console.log(data)
+                    console.log(data)
                     resolve(data)
                 })
                 resolve({ status: false })
@@ -116,6 +116,7 @@ module.exports = {
         return new  Promise (async(resolve,reject)=>{
             await db.get().collection(collection.productCollection).updateOne({_id:ObjectId(Id)},{$set:{
                 name:product.name,
+                category:product.category,
                 id:product.id,
                 price:product.price,
                 stock:product.stock,
