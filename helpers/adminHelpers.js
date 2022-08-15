@@ -7,6 +7,8 @@ const { ReservationList } = require('twilio/lib/rest/taskrouter/v1/workspace/tas
 
 
 module.exports = {
+
+    /* ------------------------ add product in admin side ----------------------- */
     addProduct: (product) => {
         let response = {}
 
@@ -29,6 +31,7 @@ module.exports = {
 
     },
 
+    /* ------------------------ view users in admin side ----------------------- */
     viewUser : ()=>{
         return new Promise(async(resolve,reject)=>{
            let data = await db.get().collection(collection.userCollection).find().toArray()
@@ -36,6 +39,8 @@ module.exports = {
            resolve(data)
         })
     },
+
+    /* ------------------------------ view products ----------------------------- */
     viewProducts :()=>{
         return new Promise(async(resolve,reject)=>{
             let data = await db.get().collection(collection.productCollection).find().toArray()
@@ -43,6 +48,7 @@ module.exports = {
         })
     },
 
+    /* ----------------------------- block the user ----------------------------- */
     blockUser:(Id)=>{
         return new  Promise(async(resolve,reject)=>{
              await db.get().collection(collection.userCollection).updateOne({_id:ObjectId(Id)},{$set:{state:"blocked"}}).then((data)=>{
@@ -52,6 +58,7 @@ module.exports = {
         })
     },
 
+    /* ---------------------------- unblock the user ---------------------------- */
     unblockUser: (Id)=>{
         return new  Promise(async(resolve,reject)=>{
              await db.get().collection(collection.userCollection).updateOne({_id:ObjectId(Id)},{$set:{state:"active"}}).then((data)=>{
@@ -60,6 +67,7 @@ module.exports = {
         })
     },
 
+    /* ----------------------------- delete products ---------------------------- */
     productDelete:(Id)=>{
         return new Promise(async(resolve,reject)=>{
             await db.get().collection(collection.productCollection).deleteOne({_id:ObjectId(Id)}).then((data)=>{
@@ -69,6 +77,7 @@ module.exports = {
         })
     },
 
+    /* ----------------------------- add categorys ----------------------------- */
     addCategory:(category)=>{
         // let response={}
         return new Promise(async(resolve,reject)=>{
@@ -91,6 +100,7 @@ module.exports = {
         })
     },
 
+    /* ------------------------------ view category ----------------------------- */
     viewCategory :()=>{
         return new Promise(async(resolve,reject)=>{
             let data = await db.get().collection(collection.categoryCollection).find().toArray()
@@ -98,6 +108,7 @@ module.exports = {
         })
     },
 
+    /* ----------------------------- delete category ---------------------------- */
     categoryDelete :(Id)=>{
         return new Promise(async(resolve,reject)=>{
             let data = await db.get().collection(collection.categoryCollection).deleteOne({_id:ObjectId(Id)})
@@ -105,13 +116,14 @@ module.exports = {
         })
     },
 
+    /* --------------------------- edit products view --------------------------- */
     viewEditProduct :(Id)=>{
         return new Promise(async(resolve,reject)=>{
             let datas = await db.get().collection(collection.productCollection).findOne({_id:ObjectId(Id)})
             resolve(datas)
         })
     },
-
+/* ------------------------------ edit product ------------------------------ */
     editProducts :(Id,product)=>{
         return new  Promise (async(resolve,reject)=>{
             await db.get().collection(collection.productCollection).updateOne({_id:ObjectId(Id)},{$set:{

@@ -9,7 +9,9 @@ router.get('/signup',getSignup)
 router.get('/products',getProducts)
 router.get('/product_view/:id',getProductSinglePage)
 router.post('/signup',postSignup)
-router.post('/login',postLogin)
+
+router.post('/logins',postLogin)
+
 router.get('/logout',getLogout)
 router.get('/verify',getVerify)
 

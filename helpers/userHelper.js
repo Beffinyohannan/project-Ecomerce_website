@@ -8,6 +8,7 @@ const client = require('twilio')('AC7fe6767700d9caf3ff25c194493cb8c3', 'a2807d9a
 
 module.exports = {
     doSignup: (userData) => {
+        // console.log(userData);
         let response = {}
 
         return new Promise(async (resolve, reject) => {
@@ -39,6 +40,7 @@ module.exports = {
 
     doLogin: (userData) => {
         let response = {}
+        // console.log(userData);
         let loginStatus = false
         userData.state = "active"
 

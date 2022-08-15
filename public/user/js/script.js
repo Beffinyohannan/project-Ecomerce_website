@@ -5,6 +5,12 @@ var passwordError=document.getElementById('password-error');
 var numberError=document.getElementById('number-error');
 var submitError=document.getElementById('submit-error');
 
+var loginEmailError=document.getElementById('loginEmail-error');
+var loginPasswordError=document.getElementById('loginPassword-error');
+var loginSubmitError=document.getElementById('loginSubmit-error');
+
+
+
 
 function validateName()
 {
@@ -111,11 +117,72 @@ function validateNumber(){
        
 // }
 
+
+
 function validateForm(){
-      if(!validateName() || !validatePassword() || !validateEmail() || !validateNumber()) {
+      if(!validateName() || !validateEmail() || !validateNumber() ||  !validatePassword()) {
         submitError.style.display='block';
         submitError.innerHTML='please fill correctly';
         setTimeout(function(){submitError.style.display='none';},3000);
         return false;
       }
+}
+
+
+/* ---------------------------- login validation ---------------------------- */
+
+function validateEmailLogin(){
+    var email =  document.getElementById('login-email').value;
+    if(email.length==0){
+        loginEmailError.innerHTML = 'Email is required'
+        return false;
+    }
+    if(!email.match( /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+        loginEmailError.innerHTML = 'Email Invalid'
+        return false;
+    }
+    if(email=='beffinyohannan25@gmail.com'){
+        loginEmailError.innerHTML = 'its my gmail id you can\'t use this.'
+        return false;
+    }
+  
+
+    loginEmailError.innerHTML = '<i class="fa fa-check" aria-hidden="true" style="color:green;"></i>';
+    return true;
+   
+}
+
+function validatePasswordLogin(){
+    var password = document.getElementById('login-password').value;
+
+
+    if(password == ""){
+        loginPasswordError.innerHTML ="Fill the password please!"
+        return false;
+    }
+    if(password.length < 6){
+        loginPasswordError.innerHTML =  "Password length must be atleast 6 characters";
+        return false;
+    }
+    // if(!password.match(  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/)){
+    //     loginPasswordError.innerHTML='password should contain at least one numeric digit, one uppercase and one lowercase letter';
+    //     return false;
+    // }
+   
+    if(password.length > 15){
+        loginPasswordError.innerHTML = "Password length must not exceed 15 characters";
+        return false;
+    }
+    
+    loginPasswordError.innerHTML = '<i class="fa fa-check" aria-hidden="true" style="color:green;"></i>'
+    return true;
+}
+
+function validateFormLogin(){
+    if(!validateEmailLogin() || !validatePasswordLogin() ) {
+      loginSubmitError.style.display='block';
+      loginSubmitError.innerHTML='please fill correctly';
+      setTimeout(function(){loginSubmitError.style.display='none';},3000);
+      return false;
+    }
 }
