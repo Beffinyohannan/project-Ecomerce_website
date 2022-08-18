@@ -1,4 +1,5 @@
-{{!-- <!DOCTYPE html>
+{{!--
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,7 +14,9 @@
     <!-- Custom Stylesheet -->
     <link href="/admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="/admin/css/style.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
 </head> --}}
 
 <body>
@@ -38,17 +41,17 @@
     ***********************************-->
     <div id="main-wrapper">
 
- {{>adminHeader}}
+        {{>adminHeader}}
         <!--**********************************
             Content body start
         ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
-				
+
 
 
                 <div class="row">
-					<div class="col-xl-6 col-lg-12">
+                    <div class="col-xl-6 col-lg-12">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Add Products</h4>
@@ -65,10 +68,11 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Category</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control" name="category" id="inlineFormCustomSelect">
-                                                     {{#each data}}
+                                                <select class="form-control" name="category"
+                                                    id="inlineFormCustomSelect">
+                                                    {{#each data}}
                                                     <option selected>{{this.name}}</option>
-                                                     {{/each}}
+                                                    {{/each}}
                                                 </select>
                                             </div>
                                         </div>
@@ -78,49 +82,42 @@
                                                 <input type="text" class="form-control" name="id" placeholder="">
                                             </div>
                                         </div>
-                                         <div class="form-group row">
+                                        <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Price</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" name="price" placeholder="">
                                             </div>
                                         </div>
-                                         <div class="form-group row">
+                                        <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Stock</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" name="stock" placeholder="">
                                             </div>
                                         </div>
-                                         <div class="form-group row">
+                                        <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Offer</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" name="offer" placeholder="">
                                             </div>
                                         </div>
-                                         <div class="form-group row">
+                                        <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Description</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="description" placeholder="">
+                                                <input type="text" class="form-control" name="description"
+                                                    placeholder="">
                                             </div>
                                         </div>
 
-                                         {{!-- <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Upload</span>
-                                            </div>
-                                            <div class="custom-file">
-                                                <input type="file" multiple name="image" id="image" class="custom-file-input">
-                                                <label class="custom-file-label">Choose image</label>
-                                            </div>
-                                        </div>
-                                       --}}
-
-                                          <div class="Image-upload">
-                                           <span class="image-option-close">&times;</span>
+                                        <div class="Image-upload">
+                                            <img src="" alt="" style="width: 100px; height:auto" id="imgView">
+                                            {{!-- <span class="image-option-close">&times;</span> --}}
                                             <label for="product_images">Upload Image </label>
-                                             <img src="" id="image"  class="h-100" alt="">
-                                               <input type="file"  multiple id="product_images[]" accept="image/*" name="image" onchange="readURL(this);">
-                                              </div>
+                                            <img src="" id="image" class="h-100" alt="">
+                                            <input type="file" multiple id="product_images[]" accept="image/*"
+                                                name="image" onchange="viewImage(event)">
+                                        </div> <br>
                                         
+
 
                                         <div class="form-group row">
                                             <div class="col-sm-10">
@@ -131,8 +128,8 @@
                                 </div>
                             </div>
                         </div>
-					</div>
-				</div>
+                    </div>
+                </div>
             </div>
         </div>
         <!--**********************************
@@ -145,7 +142,8 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">DexignZone</a> 2021</p>
+                <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/"
+                        target="_blank">DexignZone</a> 2021</p>
             </div>
         </div>
         <!--**********************************
@@ -160,7 +158,7 @@
            Support ticket button end
         ***********************************-->
 
-        
+
     </div>
     <!--**********************************
         Main wrapper end
@@ -170,40 +168,50 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
-    {{!-- <script src="/admin/vendor/global/global.min.js"></script>
-	<script src="/admin/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    {{!--
+    <script src="/admin/vendor/global/global.min.js"></script>
+    <script src="/admin/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
     <script src="/admin/js/custom.min.js"></script>
-	<script src="/admin/js/deznav-init.js"></script>
-	
+    <script src="/admin/js/deznav-init.js"></script>
+
     <!-- Datatable -->
     <script src="/admin/vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="/admin/js/plugins-init/datatables.init.js"></script> --}}
 
-    
-    {{!-- <script>
+
+    {{!--
+    <script>
         $(function () {
-        $(this).on('click', '#add-product-image', function () {
-            var form = '<div class="form-group"><div class="Image-upload"><span class="image-option-close">&times;</span><label for="product_images" class="">Upload Image</label><input type="file" id="product_images" accept="image/*" name="product_images[]" onchange="readURL(this);"></div></div>';
-            $('.product-image').append(form)
+            $(this).on('click', '#add-product-image', function () {
+                var form = '<div class="form-group"><div class="Image-upload"><span class="image-option-close">&times;</span><label for="product_images" class="">Upload Image</label><input type="file" id="product_images" accept="image/*" name="product_images[]" onchange="readURL(this);"></div></div>';
+                $('.product-image').append(form)
+            });
+
+            $(this).on('click', '.image-option-close', function () {
+                var target_input = $(this).parent();
+                target_input.remove();
+            })
         });
 
-        $(this).on('click', '.image-option-close', function () {
-            var target_input = $(this).parent();
-            target_input.remove();
-        })
-    });
-
-function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#image')
-                    .attr('src', e.target.result)
-            };
-            reader.readAsDataURL(input.files[0]);
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#image')
+                        .attr('src', e.target.result)
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
         }
-    }
     </script> --}}
 
+
+    <script>
+        function viewImage(event) {
+            document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
+        }
+    </script>
+
 </body>
+
 </html>

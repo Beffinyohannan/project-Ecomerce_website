@@ -5,7 +5,13 @@ const userHelpers = require("../helpers/userHelper")
 
 /* ----------------------------- get login page ----------------------------- */
 const getLogin = (req, res) => {
-    res.render('user/login',{userLogin:true})
+    if(req.session.loggedIn){
+        res.redirect('/')
+    }else{
+        res.render('user/login',{"loginErr":req.session.loggedErrs, userLogin:true})
+        req.session.loggedErrs=false
+    }
+    
 }
 
 /* --------------------------- post the login page -------------------------- */
@@ -17,7 +23,47 @@ const postLogin = (req, res) => {
             req.session.user=response.user
             res.redirect('/')
         } else {
+            req.session.loggedErrs=true      //setting an error messeage
             res.redirect('/login')
+        }
+    })
+}
+
+/* -------------------------- get otp mobile number ------------------------- */
+const getNumber = (req,res)=>{
+    res.render('user/login',{numberPage:true})
+}
+
+/* ------------------------------ post  number ------------------------------ */
+let  signupData
+const postNumber =(req,res)=>{
+    // console.log(req.body);
+    userHelpers.otpLOgin(req.body).then((response)=>{
+        if(response.status){
+            signupData = response.user
+            res.redirect('/otpVerify')
+        }else{
+            res.redirect('/otpNumber')
+        }
+    })
+}
+
+/* ------------------------------ get OTP page ------------------------------ */
+const getOTP = (req,res)=>{
+    res.render('user/login',{otpPage:true})
+}
+
+
+/* ----------------------------- post submit otp ---------------------------- */
+
+const postVerify=(req,res)=>{
+    userHelpers.otp(req.body,signupData).then((response)=>{
+        if(response.status){
+            req.session.loggedIn=true
+            req.session.user = signupData
+            res.redirect('/')
+        }else{
+            res.redirect('/otpVerify')
         }
     })
 }
@@ -26,6 +72,8 @@ const postLogin = (req, res) => {
 const getSignup = (req, res) => {
     res.render('user/signup',{userLogin:true})
 }
+
+
 
 /* ---------------------------- post signup page ---------------------------- */
 const postSignup = (req, res) => {
@@ -39,10 +87,7 @@ const postSignup = (req, res) => {
     })
 }
 
-/* -------------------------------- otp page -------------------------------- */
-const getVerify =(req,res)=>{
-    res.render('user/verifyOtp')
-}
+
 
 /* ---------------------------- get the homepage ---------------------------- */
 const getHomePage = (req, res) => {
@@ -77,7 +122,24 @@ const getLogout = (req,res)=>{
     res.redirect("/")
 }
 
+/* -------------------------------- 404 page -------------------------------- */
+const errorPage = (req,res)=>{
+   res.render('404page2',{userLogin:true})
+}
 
+/* ------------------------------ get cart page ----------------------------- */
+const getCart = (req,res)=>{
+    let products = userHelpers.getCartProducts(req.session.user._id)
+    res.render('user/cart')
+}
+
+/* ------------------------------- add to cart ------------------------------ */
+const addToCart = (req,res)=>{
+    console.log(req.params.id);
+    userHelpers.addCart(req.params.id,req.session.user._id).then(()=>{
+        res.redirect('/')
+    })
+}
 
 module.exports = {
      getHomePage,
@@ -88,5 +150,12 @@ module.exports = {
      postSignup,
      postLogin,
      getLogout,
-     getVerify 
+     errorPage,
+     getCart,
+     addToCart,
+     getNumber,
+     getOTP,
+     postNumber,
+     postVerify
+
     }

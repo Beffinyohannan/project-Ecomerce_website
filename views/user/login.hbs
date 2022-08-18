@@ -27,7 +27,31 @@
 
             <div class="login-page">
                 <div class="form">
-                    {{!-- <h1>please enter your details</h1><br> --}}
+                    {{#if numberPage}}
+                    <form class="login-form" action="/otpNumber" method="post">
+                     {{!-- {{#if loginErr}}
+                     <p class="error">Invalid Username or Password</p>
+                      {{/if}} --}}
+                        <h3>please enter your Mobile Number</h3>
+                        <input type="number" name="number"  placeholder="number">
+                        {{!-- <span id="loginEmail-error"></span> --}}
+                        <button type="submit">Send OTP</button>
+                        <span id="loginSubmit-error"></span>
+                        <p class="message"> <a href="/login">Back To Login</a></p>
+                    </form>
+                    {{else if otpPage}}
+                    <form class="login-form" action="/otpVerify" method="post">
+                     {{!-- {{#if loginErr}}
+                     <p class="error">Invalid Username or Password</p>
+                      {{/if}} --}}
+                        <h3>please enter your OTP</h3>
+                        <input type="number" name="otp"  placeholder="OTP">
+                        {{!-- <span id="loginEmail-error"></span> --}}
+                        <button type="submit" >Verify</button>
+                        <span id="loginSubmit-error"></span>
+                        <p class="message"> <a href="/otpNumber">Back</a></p>
+                    </form>
+                    {{else}}
                     <form class="register-form" action="/signup" method="post">
                         <h1>Register</h1>
                         <h3>please enter your details</h3>
@@ -47,7 +71,9 @@
                         <p class="message">Already registered? <a href="#">Sign In</a></p>
                     </form>
                     <form class="login-form" action="/logins" method="post">
-                        <h1>Login</h1>
+                     {{#if loginErr}}
+                     <p class="error">Invalid Username or Password</p>
+                      {{/if}}
                         <h3>please enter your details</h3>
                         <input type="email" name="email" id="login-email" placeholder="email address"
                             onkeyup="validateEmailLogin()">
@@ -57,9 +83,11 @@
                         <span id="loginPassword-error"></span>
                         <button type="submit" onclick="return validateFormLogin()">login</button>
                         <span id="loginSubmit-error"></span>
+                        <h5 style="margin-top: 10px;"> <a href="/otpNumber">Login with Mobile number</a> </h5>
                         <p class="message"> <a href="">Forgot password</a></p>
                         <p class="message">Not registered? <a href="#">Create an account</a></p>
                     </form>
+                    {{/if}}
                 </div>
             </div>
 
@@ -450,7 +478,7 @@
 <script src="/user/js/main.js"></script> --}}
 
 
-
+ {{>userfooter}}
 
 </body>
 

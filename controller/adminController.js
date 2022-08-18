@@ -98,17 +98,17 @@ const getEditProducts = (req, res) => {
 
 /* ------------------------- post edit products page ------------------------ */
 const postEditProducts = (req, res) => {
+    //   console.log(req.files);
+      const filename = req.files.map(function (file) {
+        return file.filename
+    })
+    req.body.image = filename
+
     let Id = req.params.id
     adminHelpers.editProducts(Id, req.body).then((data) => {
         console.log(req.body);
-        // res.send('product edit sucessfully')
         res.redirect('/admin/products')
-        // if(req.files.Image){
-        //     var filename = req.files.map(function(file){
-        //         return file.filename
-        //     })
-        //     req.body.image=filename
-        // }
+      
     })
 }
 
@@ -168,6 +168,30 @@ const deleteCategory = (req, res) => {
     })
 }
 
+/* ---------------------------get banner add and view banner-------------------------- */
+const getBanner =(req,res)=>{
+    adminHelpers.viewBanner().then((data)=>{
+        res.render('admin/banner',{data})
+    })
+}
+
+/* ----------------------------- post add banner ---------------------------- */
+const postAddBanner =(req,res)=>{
+        console.log(req.body);
+    const filename = req.files.map(function (file) {
+        return file.filename
+    })
+    req.body.image = filename
+    adminHelpers.addBanner(req.body).then((data)=>{
+        res.redirect('/admin/banner')
+    })
+
+}
+
+/* ----------------------------- get edit banner ---------------------------- */
+const getEditBanner =(req,res)=>{
+    res.render('admin/editBanner')
+}
 
 
 
@@ -187,5 +211,9 @@ module.exports = {
     postAddCategory,
     deleteCategory,
     getEditProducts,
-    postEditProducts
+    postEditProducts,
+    getBanner,
+    postAddBanner,
+    getEditBanner
+
 }

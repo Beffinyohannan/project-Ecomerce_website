@@ -133,10 +133,28 @@ module.exports = {
                 price:product.price,
                 stock:product.stock,
                 offer:product.offer,
-                description:product.description
+                description:product.description,
+                image:product.image
             }}).then((data)=>{
                 resolve(data)
             })
+        })
+    },
+
+    /* ------------------------------- add banners ------------------------------ */
+    addBanner :(banner)=>{
+        return new Promise (async(resolve,reject)=>{
+            await db.get().collection(collection.bannerCollection).insertOne(banner).then((data)=>{
+                resolve(data)
+            })
+        })
+    },
+
+    viewBanner :(banner)=>{
+        return new Promise (async(reslove,reject)=>{
+         let data =   await db.get().collection(collection.bannerCollection).find().toArray()
+                reslove(data)
+            
         })
     }
 

@@ -2,8 +2,9 @@ const db = require('../config/connection')
 const collection = require('../config/collection')
 const bcrypt = require('bcrypt');
 const { ObjectID } = require('bson');
-
-const client = require('twilio')('AC7fe6767700d9caf3ff25c194493cb8c3', 'a2807d9a035a50e2a5912fa892852ec4');
+const { response } = require('../app');
+const verify =require('../config/verify')
+const client = require('twilio')(verify.accountId,verify.authToken);
 
 
 module.exports = {
@@ -84,6 +85,101 @@ module.exports = {
             let data = await db.get().collection(collection.productCollection).findOne({ _id: ObjectID(Id) })
             // console.log(data);
             resolve(data)
+        })
+    },
+
+    /* ------------------------------- add to cart ------------------------------ */
+    addCart : (proId,userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let userCart = await db.get().collection(collection.cartCollection).findOne({user:ObjectID(userId)})
+
+            if(userCart){
+                db.get().collection(collection.cartCollection).updateOne({user:ObjectID(userId)},
+                {$push:{products:ObjectID(proId)}}).then((respone)=>{
+                    resolve()
+                })
+            
+            }else{
+                let cartobj={user:ObjectID(userId),
+                products:[ObjectID(proId)]}
+
+                db.get().collection(collection.cartCollection).insertOne(cartobj).then((response)=>{
+                    resolve()
+                })
+            }
+        })
+    },
+
+    /* --------------------- get the products from database --------------------- */
+    getCartProducts : (userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let cartItems = await db.get().collection(collection.cartCollection).aggregate([
+                {
+                    $match : {user:ObjectID(userId)}
+                },
+                {
+                    $lookup:{
+                        from:collection.productCollection,
+                        let:{prodList:'$products'},
+                        pipeline:[{
+                                $match:{
+                                    $expr:{
+                                        $in:["$_id","$$prodList"]
+                                    }
+                                }
+                            }],
+                            as:'cartItems'
+                    }
+                }
+            ]).toArray()
+            resolve(cartItems[0].cartItems)
+        })
+    },
+
+    /* ----------------------- generate otp to the number ----------------------- */
+    otpLOgin: (userData)=>{
+        let response ={}
+        // console.log(userData);
+        return new Promise(async(resolve,reject)=>{
+            let user = await db.get().collection(collection.userCollection).findOne({number:userData.number})
+            // console.log(user);
+
+            if(user){
+                response.status=true
+                response.user = user
+                client.verify.services(verify.serviceId).verifications
+                .create({
+                    to:`+91${userData.number}`,
+                    channel:'sms'
+                })
+                .then((data)=>{
+
+                })
+                // console.log(response);
+                resolve(response)
+            }else{
+                response.status=false
+                response.message='Phone not registered'
+                resolve(response)
+            }
+
+        })
+    },
+
+    /* ------------------------------ verifing otp ------------------------------ */
+    otp:(otpData,userData)=>{
+        return new Promise((resolve,reject)=>{
+            client.verify.services(verify.serviceId).verificationChecks
+            .create({
+                to:`+91${userData.number}`,
+                code : otpData.otp
+            }).then((data)=>{
+                if(data.status == 'approved'){
+                    resolve({status:true})
+                }else{
+                    resolve({status:false})
+                }
+            })
         })
     }
 }

@@ -48,75 +48,38 @@
 
 
                 <div class="row">
-					<div class="col-xl-6 col-lg-12">
+					
+
+
+                    <div class="col-xl-6 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Edit Products</h4>
+                                <h4 class="card-title">Edit Bannner</h4>
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
-                                    <form action="/admin/product-edit/{{datas._id}}" method="POST" enctype="multipart/form-data">
+                                    <form action="/admin/product-edit/{{datas._id}}" method="POST" >
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Product Name</label>
+                                            <label class="col-sm-3 col-form-label">Banner Name</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" value="{{datas.name}}" name="name" placeholder="">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Category</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control" name="category" id="inlineFormCustomSelect">
-                                                    {{#each data}}
-                                                    <option selected >{{this.name}}</option>
-                                                    {{!-- <option value="{{this.category}}">One</option> --}}
-                                                    {{/each}}
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Product Id</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" value="{{datas.id}}" class="form-control" name="id" placeholder="">
-                                            </div>
-                                        </div>
-                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Price</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="{{datas.price}}" name="price" placeholder="">
-                                            </div>
-                                        </div>
-                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Stock</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="{{datas.stock}}" name="stock" placeholder="">
-                                            </div>
-                                        </div>
-                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Offer</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="{{datas.offer}}" name="offer" placeholder="">
-                                            </div>
-                                        </div>
+                            
                                          <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Description</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" value="{{datas.description}}" name="description" placeholder="">
                                             </div>
                                         </div>
-                                         <img src="/product-images/{{datas.image.[0]}}" alt="" style="width: 100px; height:auto" id="imgView">
-                                          <img src="/product-images/{{datas.image.[1]}}" alt="" style="width: 100px; height:auto" id="imgView">
-                                          <img src="/product-images/{{datas.image.[2]}}" alt="" style="width: 100px; height:auto" id="imgView">
-                                          <img src="/product-images/{{datas.image.[3]}}" alt="" style="width: 100px; height:auto" id="imgView">
-                                          <img src="/product-images/{{datas.image.[4]}}" alt="" style="width: 100px; height:auto" id="imgView">
-                                          <img src="/product-images/{{datas.image.[5]}}" alt="" style="width: 100px; height:auto" id="imgView">
-                                          
+                                         <img src="/product-images/{{datas.image.[0]}}" alt="" style="width: 100px; height:auto">
 
                                          {{!-- <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Upload</span>
                                             </div>
                                             <div class="custom-file">
-                                                <input type="file" name="image" id="image" class="custom-file-input" onchange="viewImage(event)">
+                                                <input type="file" name="image" id="image" class="custom-file-input">
                                                 <label class="custom-file-label">Choose image</label>
                                             </div>
                                         </div> --}}
@@ -124,12 +87,12 @@
                                            {{!-- <span class="image-option-close">&times;</span> --}}
                                             <label for="product_images">Upload Image </label>
                                              <img src="" id="image"  class="h-100" alt="">
-                                               <input type="file"  multiple id="product_images[]"  accept="image/*" name="image"  onchange="viewImage(event)">
+                                               <input type="file"  multiple id="product_images[]" accept="image/*" name="image" onchange="readURL(this);">
                                               </div> <br>
                                        
                                         <div class="form-group row">
                                             <div class="col-sm-10">
-                                                <button type="submit" class="btn btn-primary">Edit Product</button>
+                                                <button type="submit" class="btn btn-primary">Edit Banner</button>
                                             </div>
                                         </div>
                                     </form>
@@ -138,12 +101,17 @@
                         </div>
 					</div>
 				</div>
+
+
+                
             </div>
         </div>
         <!--**********************************
             Content body end
         ***********************************-->
 
+
+    
 
         <!--**********************************
             Footer start
@@ -183,12 +151,6 @@
     <!-- Datatable -->
     <script src="/admin/vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="/admin/js/plugins-init/datatables.init.js"></script> --}}
-
-<script>
-    function viewImage(event){
-        document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
-    }
-</script>
 
 </body>
 </html>
