@@ -1,4 +1,5 @@
-{{!-- <!DOCTYPE html>
+{{!--
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,7 +14,9 @@
     <!-- Custom Stylesheet -->
     <link href="/admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="/admin/css/style.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
 </head> --}}
 
 <body>
@@ -38,25 +41,25 @@
     ***********************************-->
     <div id="main-wrapper">
 
- {{>adminHeader}}
+        {{>adminHeader}}
         <!--**********************************
             Content body start
         ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
-				<!-- Add Order -->
-				
+                <!-- Add Order -->
+
                 <div class="page-titles">
-					<ol class="breadcrumb">
-						
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Products</a></li>
-					</ol>
+                    <ol class="breadcrumb">
+
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Products</a></li>
+                    </ol>
                 </div>
                 <!-- row -->
 
 
                 <div class="row">
-					<div class="col-12">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Products Datatable</h4>
@@ -82,23 +85,32 @@
                                         <tbody>
                                             {{#each data}}
                                             <tr>
-                                                <td><img class="rounded" width="100" src="/product-images/{{this.image.[0]}}" alt=""></td>
+                                                <td><img class="rounded" width="100"
+                                                        src="/product-images/{{this.image.[0]}}" alt=""></td>
                                                 <td>{{this.name}}</td>
                                                 <td>{{this.category}}</td>
                                                 <td>{{this.id}}</td>
                                                 <td>{{this.description}}</td>
                                                 <td>{{this.price}}</td>
-                                                <td><a href="javascript:void(0);"><strong class="text-black">{{this.stock}}</strong></a></td>
-                                                <td><a href="javascript:void(0);"><strong class="text-black">{{this.offer}}</strong></a></td>
+                                                <td><a href="javascript:void(0);"><strong
+                                                            class="text-black">{{this.stock}}</strong></a></td>
+                                                <td><a href="javascript:void(0);"><strong
+                                                            class="text-black">{{this.offer}}</strong></a></td>
                                                 <td>2022/04/25</td>
                                                 <td>
-													<div class="d-flex">
-														<a href="/admin/product-edit/{{this._id}}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-														<a href="/admin/delete-product/{{this._id}}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-													</div>												
-												</td>												
+                                                    <div class="d-flex">
+                                                        <a href="/admin/product-edit/{{this._id}}"
+                                                            class="btn btn-primary shadow btn-xs sharp mr-1"><i
+                                                                class="fa fa-pencil"></i></a>
+                                                        <a href="/admin/delete-product/{{this._id}}"
+                                                            class="btn btn-danger shadow btn-xs sharp"><i
+                                                                class="fa fa-trash"></i></a>
+
+
+                                                    </div>
+                                                </td>
                                             </tr>
-                                        
+
                                             {{/each}}
                                         </tbody>
                                     </table>
@@ -106,7 +118,7 @@
                             </div>
                         </div>
                     </div>
-				</div>
+                </div>
             </div>
         </div>
         <!--**********************************
@@ -119,7 +131,8 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">DexignZone</a> 2021</p>
+                <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/"
+                        target="_blank">DexignZone</a> 2021</p>
             </div>
         </div>
         <!--**********************************
@@ -134,7 +147,7 @@
            Support ticket button end
         ***********************************-->
 
-        
+
     </div>
     <!--**********************************
         Main wrapper end
@@ -144,14 +157,16 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
-    {{!-- <script src="/admin/vendor/global/global.min.js"></script>
-	<script src="/admin/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    {{!--
+    <script src="/admin/vendor/global/global.min.js"></script>
+    <script src="/admin/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
     <script src="/admin/js/custom.min.js"></script>
-	<script src="/admin/js/deznav-init.js"></script>
-	
+    <script src="/admin/js/deznav-init.js"></script>
+
     <!-- Datatable -->
     <script src="/admin/vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="/admin/js/plugins-init/datatables.init.js"></script> --}}
 
 </body>
+
 </html>

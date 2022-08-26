@@ -1,0 +1,538 @@
+<body>
+    {{>navbar}}
+
+    <!-- ...:::: Start Breadcrumb Section:::... -->
+    <div class="breadcrumb-section breadcrumb-bg-color--golden">
+        <div class="breadcrumb-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="breadcrumb-title">My Account</h3>
+                        <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                            <nav aria-label="breadcrumb">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="shop-grid-sidebar-left.html">Shop</a></li>
+                                    <li class="active" aria-current="page">My Account</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- ...:::: End Breadcrumb Section:::... -->
+
+    <!-- ...:::: Start Account Dashboard Section:::... -->
+    <div class="account-dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <!-- Nav tabs -->
+                    <div class="dashboard_tab_button" data-aos="fade-up" data-aos-delay="0">
+                        <ul role="tablist" class="nav flex-column dashboard-list">
+                            <li><a href="#dashboard" data-bs-toggle="tab"
+                                    class="nav-link btn btn-block btn-md btn-black-default-hover active">Profile</a>
+                            </li>
+                            <li> <a href="#orders" data-bs-toggle="tab"
+                                    class="nav-link btn btn-block btn-md btn-black-default-hover">Orders</a></li>
+                            <li><a href="#downloads" data-bs-toggle="tab"
+                                    class="nav-link btn btn-block btn-md btn-black-default-hover">Downloads</a></li>
+                            <li><a href="#address" data-bs-toggle="tab"
+                                    class="nav-link btn btn-block btn-md btn-black-default-hover">Addresses</a></li>
+                            {{!-- <li><a href="#account-details" data-bs-toggle="tab"
+                                    class="nav-link btn btn-block btn-md btn-black-default-hover">Account details</a>
+                            </li> --}}
+                            <li><a href="login.html"
+                                    class="nav-link btn btn-block btn-md btn-black-default-hover">logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-9 col-lg-9">
+                    <!-- Tab panes -->
+                    <div class="tab-content dashboard_content" data-aos="fade-up" data-aos-delay="200">
+                        <div class="tab-pane fade show active" id="dashboard">
+                            <h4>Dashboard </h4>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                                            class="rounded-circle" width="150">
+                                        <div class="mt-3">
+                                            <h4>{{user.name}}</h4>
+                                            {{!-- <p class="text-secondary mb-1">Full Stack Developer</p> --}}
+                                            {{!-- <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                            --}}
+                                            {{!-- <button class="btn btn-primary">Follow</button>
+                                            <button class="btn btn-outline-primary">Message</button> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Full Name</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{user.name}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Email</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{user.email}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Phone</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{user.number}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    {{!-- <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Mobile</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            (320) 380-4539
+                                        </div>
+                                    </div>
+                                    <hr> --}}
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Address</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <a class="btn-sm btn-info " target="__blank"
+                                                href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>From your profile. you can easily check &amp; view your <a href="#">recent
+                                    orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a
+                                    href="#">Edit your password and account details.</a></p>
+                        </div>
+                        <div class="tab-pane fade" id="orders">
+                            <h4>Orders</h4>
+                            {{!-- table-responsive --}}
+                            <div class="table_page ">
+                                <table>
+                                    <thead class="bg-dark">
+                                        <tr>
+                                            <th class="text-white">Order</th>
+                                            <th class="text-white">Date</th>
+                                            <th class="text-white">Address</th>
+                                            <th class="text-white">Number</th>
+                                            <th class="text-white">Status</th>
+                                            <th class="text-white">Total</th>
+                                            <th class="text-white">Payment</th>
+                                            <th class="text-white">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each orders}}
+                                        <tr>
+                                            <td>{{inc @index}}</td>
+                                            <td>{{this.date}}</td>
+                                            <td>{{this.deliveryDetails.address}}</td>
+                                            <td>{{this.deliveryDetails.number}}</td>
+                                            <td><span class="success">{{this.status}}</span></td>
+                                            <td>{{this.totalAmount}}</td>
+                                            <td>{{this.paymentMethod}}</td>
+                                            <td><a href="/view-order-products/{{this._id}}" class="view">view</a></td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="downloads">
+                            <h4>Downloads</h4>
+                            <div class="table_page table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Downloads</th>
+                                            <th>Expires</th>
+                                            <th>Download</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Shopnovilla - Free Real Estate PSD Template</td>
+                                            <td>May 10, 2018</td>
+                                            <td><span class="danger">Expired</span></td>
+                                            <td><a href="#" class="view">Click Here To Download Your File</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Organic - ecommerce html template</td>
+                                            <td>Sep 11, 2018</td>
+                                            <td>Never</td>
+                                            <td><a href="#" class="view">Click Here To Download Your File</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="address">
+                             {{!-- <h2><strong>{{user.name}}</strong></h2> --}}
+                            <p>The following addresses will be used on the checkout page by default.</p>
+                           
+                            {{!-- <address>
+                                Address: Your address goes here.
+                            </address> --}}
+                            <h5 class="billing-address">Billing address</h5>
+                             <div class="table_page ">
+                                <a href="/add-address"><button class="btn btn-info mb-3" style="float:right;">Add Address</button></a>
+                                <table>
+                                    <thead class="bg-dark">
+                                        <tr >
+                                            <th class="text-white">s no.</th>
+                                            <th class="text-white">Address</th>
+                                            <th class="text-white">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       {{#each details}}
+                                       
+                                        <tr>
+                                            {{!-- {{#each this.address}} --}}
+                                            <tr>
+                                            <td>{{inc @index}}</td>
+                                            {{!-- <td style="text-align: left;">
+                                                  <p>{{this.name}} <br>
+                                                  {{this.address}} <br>
+                                                  {{this.pincode}} <br>
+                                                  {{this.state}} <br>
+                                                  {{this.city}} <br>
+                                                  {{this.number}}</p>
+                                            </td> --}}
+                                            <td style="text-align: left;">
+                                            {{this.address.name}} <br>
+                                            {{this.address.address}} <br>
+                                            {{this.address.pincode}} <br>
+                                            {{this.address.state}} <br>
+                                            {{this.address.city}} <br>
+                                            {{this.address.number}} <br>
+                                            </td>
+                                           
+                                            <td><a href="/edit-addresss/{{this.address.number}}" class="view">Edit</a></td>
+                                            </tr> 
+                                            {{!-- {{/each}}  --}}
+                                        </tr>
+                                       
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {{!-- <a href="#" class="view">Edit</a> --}}
+                            
+                                
+
+                        </div>
+                        <div class="tab-pane fade" id="account-details">
+                            <h3>Account details </h3>
+                            <div class="login">
+                                <div class="login_form_container">
+                                    <div class="account_login_form">
+                                        <form action="#">
+                                            <p>Already have an account? <a href="#">Log in instead!</a></p>
+                                            <div class="input-radio">
+                                                <span class="custom-radio"><input type="radio" value="1"
+                                                        name="id_gender"> Mr.</span>
+                                                <span class="custom-radio"><input type="radio" value="1"
+                                                        name="id_gender"> Mrs.</span>
+                                            </div> <br>
+                                            <div class="default-form-box mb-20">
+                                                <label>First Name</label>
+                                                <input type="text" name="first-name">
+                                            </div>
+                                            <div class="default-form-box mb-20">
+                                                <label>Last Name</label>
+                                                <input type="text" name="last-name">
+                                            </div>
+                                            <div class="default-form-box mb-20">
+                                                <label>Email</label>
+                                                <input type="text" name="email-name">
+                                            </div>
+                                            <div class="default-form-box mb-20">
+                                                <label>Password</label>
+                                                <input type="password" name="user-password">
+                                            </div>
+                                            <div class="default-form-box mb-20">
+                                                <label>Birthdate</label>
+                                                <input type="date" name="birthday">
+                                            </div>
+                                            <span class="example">
+                                                (E.g.: 05/31/1970)
+                                            </span>
+                                            <br>
+                                            <label class="checkbox-default" for="offer">
+                                                <input type="checkbox" id="offer">
+                                                <span>Receive offers from our partners</span>
+                                            </label>
+                                            <br>
+                                            <label class="checkbox-default checkbox-default-more-text" for="newsletter">
+                                                <input type="checkbox" id="newsletter">
+                                                <span>Sign up for our newsletter<br><em>You may unsubscribe at any
+                                                        moment. For that purpose, please find our contact info in the
+                                                        legal notice.</em></span>
+                                            </label>
+                                            <div class="save_button mt-3">
+                                                <button class="btn btn-md btn-black-default-hover"
+                                                    type="submit">Save</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- ...:::: End Account Dashboard Section:::... -->
+
+
+
+    <!-- material-scrolltop button -->
+    <button class="material-scrolltop" type="button"></button>
+
+    <!-- Start Modal Add cart -->
+    <div class="modal fade" id="modalAddcart" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col text-right">
+                                <button type="button" class="close modal-close" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="modal-add-cart-product-img">
+                                            <img class="img-fluid"
+                                                src="assets/images/product/default/home-1/default-1.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="modal-add-cart-info"><i class="fa fa-check-square"></i>Added to cart
+                                            successfully!</div>
+                                        <div class="modal-add-cart-product-cart-buttons">
+                                            <a href="cart.html">View Cart</a>
+                                            <a href="checkout.html">Checkout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 modal-border">
+                                <ul class="modal-add-cart-product-shipping-info">
+                                    <li> <strong><i class="icon-shopping-cart"></i> There Are 5 Items In Your
+                                            Cart.</strong></li>
+                                    <li> <strong>TOTAL PRICE: </strong> <span>$187.00</span></li>
+                                    <li class="modal-continue-button"><a href="#" data-bs-dismiss="modal">CONTINUE
+                                            SHOPPING</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Modal Add cart -->
+
+    <!-- Start Modal Quickview cart -->
+    <div class="modal fade" id="modalQuickview" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col text-right">
+                                <button type="button" class="close modal-close" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="product-details-gallery-area mb-7">
+                                    <!-- Start Large Image -->
+                                    <div class="product-large-image modal-product-image-large swiper-container">
+                                        <div class="swiper-wrapper">
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="assets/images/product/default/home-1/default-1.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="assets/images/product/default/home-1/default-2.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="assets/images/product/default/home-1/default-3.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="assets/images/product/default/home-1/default-4.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="assets/images/product/default/home-1/default-5.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="assets/images/product/default/home-1/default-6.jpg" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Large Image -->
+                                    <!-- Start Thumbnail Image -->
+                                    <div
+                                        class="product-image-thumb modal-product-image-thumb swiper-container pos-relative mt-5">
+                                        <div class="swiper-wrapper">
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="assets/images/product/default/home-1/default-1.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="assets/images/product/default/home-1/default-2.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="assets/images/product/default/home-1/default-3.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="assets/images/product/default/home-1/default-4.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="assets/images/product/default/home-1/default-5.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="assets/images/product/default/home-1/default-6.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <!-- Add Arrows -->
+                                        <div class="gallery-thumb-arrow swiper-button-next"></div>
+                                        <div class="gallery-thumb-arrow swiper-button-prev"></div>
+                                    </div>
+                                    <!-- End Thumbnail Image -->
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="modal-product-details-content-area">
+                                    <!-- Start  Product Details Text Area-->
+                                    <div class="product-details-text">
+                                        <h4 class="title">Nonstick Dishwasher PFOA</h4>
+                                        <div class="price"><del>$70.00</del>$80.00</div>
+                                    </div> <!-- End  Product Details Text Area-->
+                                    <!-- Start Product Variable Area -->
+                                    <div class="product-details-variable">
+                                        <!-- Product Variable Single Item -->
+                                        <div class="variable-single-item">
+                                            <span>Color</span>
+                                            <div class="product-variable-color">
+                                                <label for="modal-product-color-red">
+                                                    <input name="modal-product-color" id="modal-product-color-red"
+                                                        class="color-select" type="radio" checked>
+                                                    <span class="product-color-red"></span>
+                                                </label>
+                                                <label for="modal-product-color-tomato">
+                                                    <input name="modal-product-color" id="modal-product-color-tomato"
+                                                        class="color-select" type="radio">
+                                                    <span class="product-color-tomato"></span>
+                                                </label>
+                                                <label for="modal-product-color-green">
+                                                    <input name="modal-product-color" id="modal-product-color-green"
+                                                        class="color-select" type="radio">
+                                                    <span class="product-color-green"></span>
+                                                </label>
+                                                <label for="modal-product-color-light-green">
+                                                    <input name="modal-product-color"
+                                                        id="modal-product-color-light-green" class="color-select"
+                                                        type="radio">
+                                                    <span class="product-color-light-green"></span>
+                                                </label>
+                                                <label for="modal-product-color-blue">
+                                                    <input name="modal-product-color" id="modal-product-color-blue"
+                                                        class="color-select" type="radio">
+                                                    <span class="product-color-blue"></span>
+                                                </label>
+                                                <label for="modal-product-color-light-blue">
+                                                    <input name="modal-product-color"
+                                                        id="modal-product-color-light-blue" class="color-select"
+                                                        type="radio">
+                                                    <span class="product-color-light-blue"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!-- Product Variable Single Item -->
+                                        <div class="d-flex align-items-center flex-wrap">
+                                            <div class="variable-single-item ">
+                                                <span>Quantity</span>
+                                                <div class="product-variable-quantity">
+                                                    <input min="1" max="100" value="1" type="number">
+                                                </div>
+                                            </div>
+
+                                            <div class="product-add-to-cart-btn">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart">Add To
+                                                    Cart</a>
+                                            </div>
+                                        </div>
+                                    </div> <!-- End Product Variable Area -->
+                                    <div class="modal-product-about-text">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste
+                                            laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam
+                                            in quos qui nemo ipsum numquam, reiciendis maiores quidem aperiam, rerum vel
+                                            recusandae</p>
+                                    </div>
+                                    <!-- Start  Product Details Social Area-->
+                                    <div class="modal-product-details-social">
+                                        <span class="title">SHARE THIS PRODUCT</span>
+                                        <ul>
+                                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a></li>
+                                            <li><a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                                            </li>
+                                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                        </ul>
+
+                                    </div> <!-- End  Product Details Social Area-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Modal Quickview cart -->
+    {{>userfooter}}
+
+</body>
+
+</html>

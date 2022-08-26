@@ -1,9 +1,10 @@
-const { response } = require('../app')
+const { response, render } = require('../app')
 const app = require('../app')
 const adminHelpers = require('../helpers/adminHelpers')
 const multer = require('../helpers/multer')
 const { Db } = require('mongodb')
 const { userCollection } = require('../config/collection')
+const userHelper = require('../helpers/userHelper')
 
 const admin = {
     myemail: "admin@gmail.com",
@@ -14,7 +15,7 @@ const admin = {
 
 /* ----------------------------- get login page ----------------------------- */
 const getAdminLogin = (req, res) => {
-    res.render('admin/adminLogin', { adminLogin: true, userLogin: true })
+    res.render('admin/adminLogin', { admin: true })
 }
 
 /* ----------------------------- post login page ---------------------------- */
@@ -99,7 +100,7 @@ const getEditProducts = (req, res) => {
 /* ------------------------- post edit products page ------------------------ */
 const postEditProducts = (req, res) => {
     //   console.log(req.files);
-      const filename = req.files.map(function (file) {
+    const filename = req.files.map(function (file) {
         return file.filename
     })
     req.body.image = filename
@@ -108,7 +109,7 @@ const postEditProducts = (req, res) => {
     adminHelpers.editProducts(Id, req.body).then((data) => {
         console.log(req.body);
         res.redirect('/admin/products')
-      
+
     })
 }
 
@@ -169,30 +170,76 @@ const deleteCategory = (req, res) => {
 }
 
 /* ---------------------------get banner add and view banner-------------------------- */
-const getBanner =(req,res)=>{
-    adminHelpers.viewBanner().then((data)=>{
-        res.render('admin/banner',{data})
+const getBanner = (req, res) => {
+    adminHelpers.viewBanner().then((data) => {
+        res.render('admin/banner', { data, admin: true })
     })
 }
 
 /* ----------------------------- post add banner ---------------------------- */
-const postAddBanner =(req,res)=>{
-        console.log(req.body);
+const postAddBanner = (req, res) => {
+    // console.log(req.body);
     const filename = req.files.map(function (file) {
         return file.filename
     })
     req.body.image = filename
-    adminHelpers.addBanner(req.body).then((data)=>{
+    adminHelpers.addBanner(req.body).then((data) => {
         res.redirect('/admin/banner')
     })
 
 }
 
 /* ----------------------------- get edit banner ---------------------------- */
-const getEditBanner =(req,res)=>{
-    res.render('admin/editBanner')
+const getEditBanner = (req, res) => {
+    let banId = req.params.id
+    adminHelpers.viewEditBanner(banId).then((data) => {
+        res.render('admin/editBanner', { data, admin: true })
+    })
 }
 
+/* ---------------------------- post edit banner ---------------------------- */
+const postEditBanner = (req, res) => {
+
+    const filename = req.files.map(function (file) {
+        return file.filename
+    })
+    req.body.image = filename
+
+    banId = req.params.id
+    // console.log(req.body);
+    adminHelpers.editBanner(banId, req.body).then((data) => {
+        res.redirect('/admin/banner')
+    })
+}
+
+
+/* ------------------------------ delete banner ----------------------------- */
+const bannerDelete = (req, res) => {
+    let banId = req.params.id
+    adminHelpers.deleteBanner(banId).then((data) => {
+        res.redirect('/admin/banner')
+    })
+}
+
+/* ---------------------------- order management ---------------------------- */
+const getOrder = (req, res) => {
+    adminHelpers.getOrders().then((order) => {
+        res.render('admin/order', { order, admin: true })
+    })
+}
+
+const orderCanel = (req, res) => {
+    // console.log(req.params.id);
+    adminHelpers.cancelOrder(req.params.id).then((response)=>{
+        console.log(response);
+        res.json(response)
+   
+    })
+        // res.redirect('/admin/orders')
+       
+
+
+}
 
 
 module.exports = {
@@ -214,6 +261,11 @@ module.exports = {
     postEditProducts,
     getBanner,
     postAddBanner,
-    getEditBanner
+    getEditBanner,
+    postEditBanner,
+    bannerDelete,
+    getOrder,
+    orderCanel
+
 
 }

@@ -1,5 +1,9 @@
 module.exports ={
-    serviceId :"VA3706a99e99a11ac3b2532dedcc2bf9c4",
-    accountId:"ACdd98ff37748b1ef301967510b87d044b",
-    authToken:"46176897927a69c8ea0d860abbecb095"
+    serviceId :process.env.SERVICE_ID,
+    accountId:process.env.ACCOUNT_ID,
+    authToken:process.env.AUTH_TOKEN,
+
+
+     keyId : process.env.KEY_ID,
+    keySecret :process.env.KEY_SECRET
 }

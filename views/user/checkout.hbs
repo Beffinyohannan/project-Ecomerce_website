@@ -1,0 +1,698 @@
+<body>
+
+    {{>navbar}}
+    <!-- ...:::: Start Breadcrumb Section:::... -->
+    <div class="breadcrumb-section breadcrumb-bg-color--golden">
+        <div class="breadcrumb-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="breadcrumb-title">Checkout</h3>
+                        <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                            <nav aria-label="breadcrumb">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="shop-grid-sidebar-left.html">Shop</a></li>
+                                    <li class="active" aria-current="page">Checkout</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- ...:::: End Breadcrumb Section:::... -->
+
+    <!-- ...:::: Start Checkout Section:::... -->
+    <div class="checkout-section">
+        <div class="container">
+            <div class="row">
+                <!-- User Quick Action Form -->
+                {{!-- <div class="col-12">
+                    <div class="user-actions accordion" data-aos="fade-up" data-aos-delay="0">
+                        <h3>
+                            <i class="fa fa-file-o" aria-hidden="true"></i>
+                            Returning customer?
+                            <a class="Returning" href="#" data-bs-toggle="collapse" data-bs-target="#checkout_login"
+                                aria-expanded="true">Click here to login</a>
+                        </h3>
+                        <div id="checkout_login" class="collapse" data-parent="#checkout_login">
+                            <div class="checkout_info">
+                                <p>If you have shopped with us before, please enter your details in the boxes below. If
+                                    you are a new customer please proceed to the Billing &amp; Shipping section.</p>
+                                <form action="#">
+                                    <div class="form_group default-form-box">
+                                        <label>Username or email <span>*</span></label>
+                                        <input type="text">
+                                    </div>
+                                    <div class="form_group default-form-box">
+                                        <label>Password <span>*</span></label>
+                                        <input type="password">
+                                    </div>
+                                    <div class="form_group group_3 default-form-box">
+                                        <button class="btn btn-md btn-black-default-hover" type="submit">Login</button>
+                                        <label class="checkbox-default">
+                                            <input type="checkbox">
+                                            <span>Remember me</span>
+                                        </label>
+                                    </div>
+                                    <a href="#">Lost your password?</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-actions accordion" data-aos="fade-up" data-aos-delay="200">
+                        <h3>
+                            <i class="fa fa-file-o" aria-hidden="true"></i>
+                            Returning customer?
+                            <a class="Returning" href="#" data-bs-toggle="collapse" data-bs-target="#checkout_coupon"
+                                aria-expanded="true">Click here to enter your code</a>
+
+                        </h3>
+                        <div id="checkout_coupon" class="collapse checkout_coupon" data-parent="#checkout_coupon">
+                            <div class="checkout_info">
+                                <form action="#">
+                                    <input placeholder="Coupon code" type="text">
+                                    <button class="btn btn-md btn-black-default-hover" type="submit">Apply
+                                        coupon</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+                <!-- User Quick Action Form -->
+            </div>
+            <!-- Start User Details Checkout Form -->
+            <div class="checkout_form" data-aos="fade-up" data-aos-delay="400">
+                <div class="row">
+                    <form action="" id="checkout-form">
+                        <div class="col-lg-6 col-md-6">
+
+                            <h3>Billing Details</h3>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="default-form-box">
+                                        <label>First Name <span>*</span></label>
+                                        <input type="text" name="firstName">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="default-form-box">
+                                        <label>Last Name <span>*</span></label>
+                                        <input type="text" name="last-name">
+                                    </div>
+                                </div>
+                                {{!-- <div class="col-12">
+                                    <div class="default-form-box">
+                                        <label>Company Name</label>
+                                        <input type="text" name="">
+                                    </div>
+                                </div> --}}
+                                <div class="col-12">
+                                    <div class="default-form-box">
+                                        <label for="country">country <span>*</span></label>
+                                        <input placeholder="Counrty name" name="country" type="text">
+                                        {{!-- <select class="country_option nice-select wide" name="country"
+                                            id="country">
+                                            <option value="2">Bangladesh</option>
+                                            <option value="3">Algeria</option>
+                                            <option value="4">Afghanistan</option>
+                                            <option value="5">Ghana</option>
+                                            <option value="6">Albania</option>
+                                            <option value="7">Bahrain</option>
+                                            <option value="8">Colombia</option>
+                                            <option value="9">Dominican Republic</option>
+                                        </select> --}}
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="default-form-box">
+                                        <label>Street address <span>*</span></label>
+                                        <input placeholder="House number and street name" name="address" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="default-form-box">
+                                        <input placeholder="Apartment, suite, unit etc. (optional)" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="default-form-box">
+                                        <label>Town / City <span>*</span></label>
+                                        <input type="text" name="city">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="default-form-box">
+                                        <label>State / County <span>*</span></label>
+                                        <input type="text" name="state">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="default-form-box">
+                                        <label>Phone<span>*</span></label>
+                                        <input type="text" name="number">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="default-form-box">
+                                        <label> Email Address <span>*</span></label>
+                                        <input type="text" name="email">
+                                    </div>
+                                </div>
+                                <input type="text" name="userId" value="{{user._id}}" hidden>
+                                {{!-- <div class="col-12">
+                                    <label class="checkbox-default" for="newAccount" data-bs-toggle="collapse"
+                                        data-bs-target="#newAccountPassword">
+                                        <input type="checkbox" id="newAccount">
+                                        <span>Create an account?</span>
+                                    </label>
+                                    <div id="newAccountPassword" class="collapse mt-3"
+                                        data-parent="#newAccountPassword">
+                                        <div class="card-body1 default-form-box">
+                                            <label> Account password <span>*</span></label>
+                                            <input placeholder="password" type="password">
+                                        </div>
+                                    </div>
+                                </div> --}}
+                                <div class="col-12">
+                                    <label class="checkbox-default" for="newShipping" data-bs-toggle="collapse"
+                                        data-bs-target="#anotherShipping">
+                                        <input type="checkbox" id="newShipping">
+                                        <span>Ship to a different address?</span>
+                                    </label>
+
+                                    <div id="anotherShipping" class="collapse mt-3" data-parent="#anotherShipping">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="default-form-box">
+                                                    <label>First Name <span>*</span></label>
+                                                    <input type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="default-form-box">
+                                                    <label>Last Name <span>*</span></label>
+                                                    <input type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="default-form-box">
+                                                    <label>Company Name</label>
+                                                    <input type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="select_form_select default-form-box">
+                                                    <label for="countru_name">country <span>*</span></label>
+                                                    <input placeholder="Country" type="text">
+                                                    {{!-- <select class="niceselect_option wide" name="country"
+                                                        id="countru_name">
+                                                        <option value="2">Bangladesh</option>
+                                                        <option value="3">Algeria</option>
+                                                        <option value="4">Afghanistan</option>
+                                                        <option value="5">Ghana</option>
+                                                        <option value="6">Albania</option>
+                                                        <option value="7">Bahrain</option>
+                                                        <option value="8">Colombia</option>
+                                                        <option value="9">Dominican Republic</option>
+                                                    </select> --}}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="default-form-box">
+                                                    <label>Street address <span>*</span></label>
+                                                    <input placeholder="House number and street name" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="default-form-box">
+                                                    <input placeholder="Apartment, suite, unit etc. (optional)"
+                                                        type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="default-form-box">
+                                                    <label>Town / City <span>*</span></label>
+                                                    <input type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="default-form-box">
+                                                    <label>State / County <span>*</span></label>
+                                                    <input type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="default-form-box">
+                                                    <label>Phone<span>*</span></label>
+                                                    <input type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="default-form-box">
+                                                    <label> Email Address <span>*</span></label>
+                                                    <input type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{!-- <div class="col-12 mt-3">
+                                    <div class="order-notes">
+                                        <label for="order_note">Order Notes</label>
+                                        <textarea id="order_note"
+                                            placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                    </div>
+                                </div> --}}
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+
+
+
+                            {{!-- <div class="col-lg-6 col-md-6"> --}}
+                                <div class="coupon_code left" data-aos="fade-up" data-aos-delay="200">
+                                    <h3>Coupon</h3>
+                                    <div class="coupon_inner">
+                                        <p>Enter your coupon code if you have one.</p>
+                                        <input class="mb-2" placeholder="Coupon code" type="text">
+                                        <button type="submit" class="btn btn-md btn-golden">Apply coupon</button>
+                                    </div>
+                                </div>
+                                {{!--
+                            </div> --}}
+                            <br>
+
+
+
+
+
+                            <h3>Your order</h3>
+                            <div class="order_table table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    {{!-- <tbody>
+                                        <tr>
+                                            <td> Handbag fringilla <strong> × 2</strong></td>
+                                            <td> $165.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td> Handbag justo <strong> × 2</strong></td>
+                                            <td> $50.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td> Handbag elit <strong> × 2</strong></td>
+                                            <td> $50.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td> Handbag Rutrum <strong> × 1</strong></td>
+                                            <td> $50.00</td>
+                                        </tr>
+                                    </tbody> --}}
+                                    <tfoot>
+                                        <tr>
+                                            <th>Cart Subtotal</th>
+                                            <td>$215.00</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Shipping</th>
+                                            <td><strong>$5.00</strong></td>
+                                        </tr>
+                                        <tr class="order_total">
+                                            <th>Order Total</th>
+                                            <td><strong>₹ {{total}}</strong></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="payment_method">
+                                <p>Please select your payment method:</p>
+                                {{!-- <input type="radio" id="COD" name="payment-method" value="COD">
+                                <label for="html">Cash On Delivery</label><br>
+                                <input type="radio" id="Online" name="payment-method" value="Online">
+                                <label for="css">Online Payment</label><br>
+                                <input type="radio" id="UPI" name="payment-method" value="UPI">
+                                <label for="javascript">UPI</label> --}}
+
+                                <div class="panel-default">
+                                    <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse"
+                                        data-bs-target="#methodCod">
+                                        <input type="radio" id="currencyCod" value="COD" name="payment-method">
+                                        <span>Cash on Delivery</span>
+                                    </label>
+
+                                    {{!-- <div id="methodCod" class="collapse" data-parent="#methodCod">
+                                        <div class="card-body1">
+                                            <p>Please send a check to Store Name, Store Street, Store Town, Store State
+                                                / County, Store Postcode.</p>
+                                        </div>
+                                    </div> --}}
+                                </div>
+                                <div class="panel-default">
+                                    <label class="checkbox-default" for="currencyPaypal" data-bs-toggle="collapse"
+                                        data-bs-target="#methodPaypal">
+                                        <input type="radio" id="currencyPaypal" value="Online" name="payment-method">
+                                        <span>Online Payment</span>
+                                    </label>
+                                    {{!-- <div id="methodPaypal" class="collapse " data-parent="#methodPaypal">
+                                        <div class="card-body1">
+                                            <p>Pay via PayPal; you can pay with your credit card if you don’t have a
+                                                PayPal account.</p>
+                                        </div>
+                                    </div> --}}
+                                </div>
+                                <div class="order_button pt-3">
+                                    <button class="btn btn-md btn-black-default-hover" type="submit">Place order
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div> <!-- Start User Details Checkout Form -->
+        </div>
+    </div><!-- ...:::: End Checkout Section:::... -->
+
+
+
+    <!-- material-scrolltop button -->
+    <button class="material-scrolltop" type="button"></button>
+
+    <!-- Start Modal Add cart -->
+    <div class="modal fade" id="modalAddcart" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col text-right">
+                                <button type="button" class="close modal-close" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="modal-add-cart-product-img">
+                                            <img class="img-fluid"
+                                                src="assets/images/product/default/home-1/default-1.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="modal-add-cart-info"><i class="fa fa-check-square"></i>Added to cart
+                                            successfully!</div>
+                                        <div class="modal-add-cart-product-cart-buttons">
+                                            <a href="cart.html">View Cart</a>
+                                            <a href="checkout.html">Checkout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 modal-border">
+                                <ul class="modal-add-cart-product-shipping-info">
+                                    <li> <strong><i class="icon-shopping-cart"></i> There Are 5 Items In Your
+                                            Cart.</strong></li>
+                                    <li> <strong>TOTAL PRICE: </strong> <span>$187.00</span></li>
+                                    <li class="modal-continue-button"><a href="#" data-bs-dismiss="modal">CONTINUE
+                                            SHOPPING</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Modal Add cart -->
+
+    <!-- Start Modal Quickview cart -->
+    <div class="modal fade" id="modalQuickview" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col text-right">
+                                <button type="button" class="close modal-close" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="product-details-gallery-area mb-7">
+                                    <!-- Start Large Image -->
+                                    <div class="product-large-image modal-product-image-large swiper-container">
+                                        <div class="swiper-wrapper">
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="assets/images/product/default/home-1/default-1.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="assets/images/product/default/home-1/default-2.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="assets/images/product/default/home-1/default-3.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="assets/images/product/default/home-1/default-4.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="assets/images/product/default/home-1/default-5.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-large-image swiper-slide img-responsive">
+                                                <img src="assets/images/product/default/home-1/default-6.jpg" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Large Image -->
+                                    <!-- Start Thumbnail Image -->
+                                    <div
+                                        class="product-image-thumb modal-product-image-thumb swiper-container pos-relative mt-5">
+                                        <div class="swiper-wrapper">
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="assets/images/product/default/home-1/default-1.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="assets/images/product/default/home-1/default-2.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="assets/images/product/default/home-1/default-3.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="assets/images/product/default/home-1/default-4.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="assets/images/product/default/home-1/default-5.jpg" alt="">
+                                            </div>
+                                            <div class="product-image-thumb-single swiper-slide">
+                                                <img class="img-fluid"
+                                                    src="assets/images/product/default/home-1/default-6.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <!-- Add Arrows -->
+                                        <div class="gallery-thumb-arrow swiper-button-next"></div>
+                                        <div class="gallery-thumb-arrow swiper-button-prev"></div>
+                                    </div>
+                                    <!-- End Thumbnail Image -->
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="modal-product-details-content-area">
+                                    <!-- Start  Product Details Text Area-->
+                                    <div class="product-details-text">
+                                        <h4 class="title">Nonstick Dishwasher PFOA</h4>
+                                        <div class="price"><del>$70.00</del>$80.00</div>
+                                    </div> <!-- End  Product Details Text Area-->
+                                    <!-- Start Product Variable Area -->
+                                    <div class="product-details-variable">
+                                        <!-- Product Variable Single Item -->
+                                        <div class="variable-single-item">
+                                            <span>Color</span>
+                                            <div class="product-variable-color">
+                                                <label for="modal-product-color-red">
+                                                    <input name="modal-product-color" id="modal-product-color-red"
+                                                        class="color-select" type="radio" checked>
+                                                    <span class="product-color-red"></span>
+                                                </label>
+                                                <label for="modal-product-color-tomato">
+                                                    <input name="modal-product-color" id="modal-product-color-tomato"
+                                                        class="color-select" type="radio">
+                                                    <span class="product-color-tomato"></span>
+                                                </label>
+                                                <label for="modal-product-color-green">
+                                                    <input name="modal-product-color" id="modal-product-color-green"
+                                                        class="color-select" type="radio">
+                                                    <span class="product-color-green"></span>
+                                                </label>
+                                                <label for="modal-product-color-light-green">
+                                                    <input name="modal-product-color"
+                                                        id="modal-product-color-light-green" class="color-select"
+                                                        type="radio">
+                                                    <span class="product-color-light-green"></span>
+                                                </label>
+                                                <label for="modal-product-color-blue">
+                                                    <input name="modal-product-color" id="modal-product-color-blue"
+                                                        class="color-select" type="radio">
+                                                    <span class="product-color-blue"></span>
+                                                </label>
+                                                <label for="modal-product-color-light-blue">
+                                                    <input name="modal-product-color"
+                                                        id="modal-product-color-light-blue" class="color-select"
+                                                        type="radio">
+                                                    <span class="product-color-light-blue"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!-- Product Variable Single Item -->
+                                        <div class="d-flex align-items-center flex-wrap">
+                                            <div class="variable-single-item ">
+                                                <span>Quantity</span>
+                                                <div class="product-variable-quantity">
+                                                    <input min="1" max="100" value="1" type="number">
+                                                </div>
+                                            </div>
+
+                                            <div class="product-add-to-cart-btn">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart">Add To
+                                                    Cart</a>
+                                            </div>
+                                        </div>
+                                    </div> <!-- End Product Variable Area -->
+                                    <div class="modal-product-about-text">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste
+                                            laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam
+                                            in quos qui nemo ipsum numquam, reiciendis maiores quidem aperiam, rerum vel
+                                            recusandae</p>
+                                    </div>
+                                    <!-- Start  Product Details Social Area-->
+                                    <div class="modal-product-details-social">
+                                        <span class="title">SHARE THIS PRODUCT</span>
+                                        <ul>
+                                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a></li>
+                                            <li><a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                                            </li>
+                                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                        </ul>
+
+                                    </div> <!-- End  Product Details Social Area-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Modal Quickview cart -->
+
+    {{>userfooter}}
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script>
+        $("#checkout-form").submit((e) => {
+            e.preventDefault()
+
+            swal({
+                title: "Please confirm your order",
+                text: "Click ok to confirm",
+                icon: "info",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: '/place-order',
+                            method: 'post',
+                            data: $('#checkout-form').serialize(),
+                            success: (response) => {
+
+                                if (response.codSucess ) {
+                                    swal("Order Placed!", "Order Place Sucessfully!", "success")
+
+                                } else {
+                                    razorpayPayment(response)
+                                }
+                            }
+                        })
+
+                    } else {
+                        swal("Order not placed ");
+                    }
+                });
+
+
+
+        })
+
+        function razorpayPayment(order) {
+            var options = {
+                "key": "rzp_test_uftefogw9bnXE6", // Enter the Key ID generated from the Dashboard
+                "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Airchip",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response) {
+                    
+
+                    verifyPayment(response,order)
+
+                },
+                "prefill": {
+                    "name": "Gaurav Kumar",
+                    "email": "gaurav.kumar@example.com",
+                    "contact": "9999999999"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+             rzp1.open();
+        }
+
+
+    function verifyPayment(payment,order){
+        $.ajax({
+            url:'/verify-payment',
+            data:{
+                payment,
+                order
+            } ,
+            method:'post',
+            success:(response)=>{
+                if(response.status){
+                  swal("Order Placed!", "Order Place Sucessfully!", "success")  
+                }else{
+                   swal("payment failed ")  
+                }
+            }
+        })
+    }
+    </script>
+
+</body>

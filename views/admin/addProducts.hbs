@@ -62,7 +62,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Product Name</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="name" placeholder="">
+                                                <input type="text" class="form-control" name="name" placeholder="" required="">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -71,7 +71,7 @@
                                                 <select class="form-control" name="category"
                                                     id="inlineFormCustomSelect">
                                                     {{#each data}}
-                                                    <option selected>{{this.name}}</option>
+                                                    <option value="{{this._id}}" selected>{{this.name}}</option>
                                                     {{/each}}
                                                 </select>
                                             </div>
@@ -79,13 +79,13 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Product Id</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="id" placeholder="">
+                                                <input type="text" class="form-control" name="id" placeholder="" required="">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Price</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="price" placeholder="">
+                                                <input type="text" class="form-control" name="price" placeholder="" required="">
                                             </div>
                                         </div>
                                         <div class="form-group row">

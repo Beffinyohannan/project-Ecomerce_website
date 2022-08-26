@@ -43,15 +43,41 @@ module.exports = {
     /* ------------------------------ view products ----------------------------- */
     viewProducts :()=>{
         return new Promise(async(resolve,reject)=>{
-            let data = await db.get().collection(collection.productCollection).find().toArray()
+            let data = await db.get().collection(collection.productCollection).aggregate([
+                {
+                    $lookup:{
+                        from:collection.categoryCollection,
+                        localField:'category',
+                        foreignField:'_id',
+                        as:'category'
+                    }
+                },
+                {
+                    $project:{
+                        category:{ $arrayElemAt:['$category',0]},
+                        name:1,
+                        id:1,
+                        price:1,
+                        stock:1,
+                        offer:1,
+                        description:1,
+                        image:1
+                        
+                    }
+                }
+            ]).toArray()
             resolve(data)
+
+            console.log("data");
+            console.log(data);
+            console.log("data");
         })
     },
 
     /* ----------------------------- block the user ----------------------------- */
     blockUser:(Id)=>{
         return new  Promise(async(resolve,reject)=>{
-             await db.get().collection(collection.userCollection).updateOne({_id:ObjectId(Id)},{$set:{state:"blocked"}}).then((data)=>{
+             await db.get().collection(collection.userCollection).updateOne({_id:ObjectId(Id)},{$set:{state:false}}).then((data)=>{
                 // console.log(data);
                 resolve(data)
             })
@@ -61,7 +87,7 @@ module.exports = {
     /* ---------------------------- unblock the user ---------------------------- */
     unblockUser: (Id)=>{
         return new  Promise(async(resolve,reject)=>{
-             await db.get().collection(collection.userCollection).updateOne({_id:ObjectId(Id)},{$set:{state:"active"}}).then((data)=>{
+             await db.get().collection(collection.userCollection).updateOne({_id:ObjectId(Id)},{$set:{state:true}}).then((data)=>{
                 resolve(data)
             })
         })
@@ -150,12 +176,66 @@ module.exports = {
         })
     },
 
+    /* ------------------------------- view banner ------------------------------ */
     viewBanner :(banner)=>{
         return new Promise (async(reslove,reject)=>{
          let data =   await db.get().collection(collection.bannerCollection).find().toArray()
                 reslove(data)
             
         })
+    },
+
+    /* ---------------------------- view edit banner ---------------------------- */
+    viewEditBanner :(banId)=>{
+        // console.log(banId);
+        return new Promise(async(resolve,reject)=>{
+            let data = await db.get().collection(collection.bannerCollection).findOne({_id:ObjectId(banId)})
+            // console.log(data);
+            resolve(data)
+        })
+    },
+
+    /* ------------------------------- edit banner ------------------------------ */
+    editBanner :(banId,banner)=>{
+        return new Promise(async(reslove,reject)=>{
+            let data = await db.get().collection(collection.bannerCollection).updateOne({_id:ObjectId(banId)},
+            {$set:{
+                name:banner.name,
+                description:banner.description,
+                image:banner.image
+            }}).then((data)=>{
+                reslove(data)
+            })
+        })
+    },
+
+    /* ------------------------------ delete banner ----------------------------- */
+    deleteBanner :(banId)=>{
+        return new Promise(async(reslove,reject)=>{
+            let data = await db.get().collection(collection.bannerCollection).deleteOne({_id:ObjectId(banId)})
+            reslove(data)
+        })
+    },
+
+    /* ------------------------------- view order ------------------------------- */
+    getOrders:()=>{
+        return new Promise((resolve,reject)=>{
+            let orders= db.get().collection(collection.orderCollection).find().toArray()
+                resolve(orders)
+            
+           
+        })
+    },
+
+    /* ------------------------------ cancel orders ----------------------------- */
+    cancelOrder:(Id)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.orderCollection).updateOne({_id:ObjectId(Id)},{$set:{status:'cancelled'}}).then((data)=>{
+                resolve(data)
+            })
+        })
     }
+
+
 
 }

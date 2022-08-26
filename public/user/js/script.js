@@ -89,10 +89,10 @@ function validateNumber(){
         numberError.innerHTML = 'Mobile no should be 10 digits'
         return false;
     }
-    if(number==9656536132){
-        numberError.innerHTML = 'its my number you can\'t use this.'
-        return false;
-    }
+    // if(number==9656536132){
+    //     numberError.innerHTML = 'its my number you can\'t use this.'
+    //     return false;
+    // }
     if(!number.match(/^[0-9]{10}$/)){
         numberError.innerHTML = 'mobile number must be digit'
         return false;

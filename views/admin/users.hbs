@@ -67,11 +67,11 @@
                                     <table id="example3" class="display min-w850">
                                         <thead>
                                             <tr>
-                                                <th></th>
+                                                <th>S No.</th>
                                                 <th>Name</th>
                                                 <th>Mobile</th>
                                                 <th>Email</th>
-                                                <th>Status</th>
+                                                {{!-- <th>Status</th> --}}
                                                 <th>Joining Date</th>
                                                 <th>Action</th>
                                             </tr>
@@ -79,17 +79,20 @@
                                         <tbody>
                                             {{#each data}}
                                             <tr>
-                                                <td><img class="rounded-circle" width="35" src="/admin/images/profile/small/pic1.jpg" alt=""></td>
+                                                <td>{{inc @index}}</td>
                                                 <td>{{this.name}}</td>
                                                 <td><a href="javascript:void(0);"><strong class="text-black">{{this.number}}</strong></a></td>
                                                 <td><a href="javascript:void(0);"><strong class="text-black">{{this.email}}</strong></a></td>
-                                                <td>{{this.state}}</td>
-                                                <td>2022/04/25</td>
+                                                {{!-- <td>{{this.state}}</td> --}}
+                                                <td > <p class="d-inline-block text-truncate" style="max-width:190px ;">{{this.date}}</p></td>
                                                 <td>
                                                    
 													<div class="d-flex ">
-														<a href="/admin/users/{{this._id}}" class="btn btn-primary shadow btn-md sharp mr-1">Block</a>
-														<a href="/admin/user/{{this._id}}" class="btn btn-danger shadow btn-md sharp">Unblock</a>
+                                                        {{#if this.state}}
+														<a href="/admin/users/{{this._id}}" class="btn btn-primary shadow btn-md sharp mr-1" style="width: 95px;">Block</a>
+                                                        {{else}}
+														<a href="/admin/user/{{this._id}}" class="btn btn-info shadow btn-md sharp">Unblock</a>
+                                                        {{/if}}
 													</div>												
 												</td>												
                                             </tr>

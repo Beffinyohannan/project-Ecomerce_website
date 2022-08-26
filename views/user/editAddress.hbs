@@ -1,0 +1,120 @@
+<body>
+    {{>navbar}}
+
+    <!-- ...:::: Start Breadcrumb Section:::... -->
+    <div class="breadcrumb-section breadcrumb-bg-color--golden">
+        <div class="breadcrumb-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="breadcrumb-title"> Address</h3>
+                        <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                            <nav aria-label="breadcrumb">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="shop-grid-sidebar-left.html">Profile</a></li>
+                                    <li class="active" aria-current="page">Eidt  Address</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- ...:::: End Breadcrumb Section:::... -->
+
+    <div class="container mt-5">
+        <div class="checkout_form" data-aos="fade-up" data-aos-delay="400">
+            <div class="row">
+                <form action="/add-address" method="post" id="checkout-form">
+                    <div class="col-lg-12 col-md-6">
+
+                        <h3>Address Details</h3>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="default-form-box">
+                                    <label>Full Name <span>*</span></label>
+                                    <input type="text" name="name" value="name" required="">
+                                </div>
+                            </div>
+                            {{!-- <div class="col-lg-6">
+                                <div class="default-form-box">
+                                    <label>Last Name <span>*</span></label>
+                                    <input type="text" name="last-name">
+                                </div>
+                            </div> --}}
+                            {{!-- <div class="col-12">
+                                <div class="default-form-box">
+                                    <label>Company Name</label>
+                                    <input type="text" name="">
+                                </div>
+                            </div> --}}
+                           
+                            <div class="col-12">
+                                <div class="default-form-box">
+                                    <label>Address <span>*</span></label>
+                                    <input placeholder="House number and street name" value="address" name="address" type="text" required="">
+                                </div>
+                            </div>
+                             <div class="col-12">
+                                <div class="default-form-box">
+                                    <label>Pincode <span>*</span></label>
+                                    <input placeholder="Pincode " name="pincode" value="pincode" type="number" required="">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="default-form-box">
+                                     <label>Land Mark<span>*</span></label>
+                                    <input placeholder="Near by place/landmark" value="landMark" name="landMark" type="text" required="">
+                                </div>
+                            </div>
+                             <div class="col-12">
+                                <div class="default-form-box">
+                                    <label for="country">country <span>*</span></label>
+                                    <input placeholder="Counrty name" name="country" value="country" type="text" required="">
+
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="default-form-box">
+                                    <label> City <span>*</span></label>
+                                    <input type="text" name="city" value="city" required="">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="default-form-box">
+                                    <label>State <span>*</span></label>
+                                    <input type="text" name="state" value="state" required="">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="default-form-box">
+                                    <label>Phone<span>*</span></label>
+                                    <input type="number" name="number" value="number" required="">
+                                </div>
+                            </div>
+                            {{!-- <div class="col-lg-6">
+                                <div class="default-form-box">
+                                    <label> Email Address <span>*</span></label>
+                                    <input type="text" name="email">
+                                </div>
+                            </div> --}}
+                            {{!-- <input type="text" name="userId" value="{{user._id}}" hidden> --}}
+
+                        </div>
+
+                    </div>
+                     {{#if addErr}}
+                            <p class="error">Invalid Username or Password</p>
+                            {{/if}}
+                    <div class="order_button pt-3">
+                        <button class="btn btn-md btn-black-default-hover" type="submit">Edit Address
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {{>userfooter}}
+</body>
