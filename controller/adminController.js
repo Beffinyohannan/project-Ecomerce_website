@@ -117,10 +117,10 @@ const postEditProducts = (req, res) => {
 const blockusers = (req, res) => {
     let Id = req.params.id
     // console.log(Id);
-    adminHelpers.blockUser(Id).then((data) => {
+    adminHelpers.blockUser(Id).then((response) => {
         // res.redirect('/admin/users')
-        data.state=true;
-        res.json(data)
+        
+        res.json(response)
 
     })
 }

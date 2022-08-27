@@ -599,8 +599,29 @@ module.exports = {
             tempId.replace(/\s+/g, ' ').trim()
             // addressData._id =tempId
             let date =new Date()
-            let address = {
+            // let address = {
 
+            //         name: details.name,
+            //         address: details.address,
+            //         pincode: details.pincode,
+            //         number: details.number,
+            //         country: details.country,
+            //         state: details.state,
+            //         city: details.city,
+            //         landMark: details.landMark,
+            //         // id:""+date,
+            //         //address:addressData
+            //         id: tempId
+
+            // }
+
+            // db.get().collection(collection.userCollection).updateOne({ _id: ObjectID(userId) },
+            //     { $push: {  address } }).then((data) => {
+            //         resolve(data)
+            //     })
+           let address = db.get().collection(collection.addressCollection).insertOne({
+                    userId:userId,
+                    
                     name: details.name,
                     address: details.address,
                     pincode: details.pincode,
@@ -610,15 +631,9 @@ module.exports = {
                     city: details.city,
                     landMark: details.landMark,
                     // id:""+date,
-                    //address:addressData
                     id: tempId
-
-            }
-
-            db.get().collection(collection.userCollection).updateOne({ _id: ObjectID(userId) },
-                { $push: {  address } }).then((data) => {
-                    resolve(data)
-                })
+            })
+            resolve(address)
         })
 
        

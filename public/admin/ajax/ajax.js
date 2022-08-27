@@ -1,3 +1,5 @@
+/* ------------------------------- canel order ------------------------------ */
+
 function cancelOrder(proId) {
     event.preventDefault
    
@@ -41,7 +43,7 @@ function cancelOrder(proId) {
    
 }
 
-/* ------------------------------- block user ------------------------------- */
+/* ------------------------------- block and unblock user ------------------------------- */
 
 function blockUser(userId) {
     event.preventDefault
@@ -60,11 +62,14 @@ function blockUser(userId) {
                 method: 'get',
                 success: (response) => {
                    
-                    if(response){
-                        document.getElementById(userId).innerHTML = "unblock"
+                    if(response.status){
+                        document.getElementById(userId).innerHTML = "Unblock"
                         swal("order cancelled", "sucessfully", "success");
                         // location.reload()
                            
+                    }else{
+                        document.getElementById(userId).innerHTML = "Block"
+                        swal("order cancelled", "sucessfully", "success");
                     }
                             
                 }
@@ -77,37 +82,3 @@ function blockUser(userId) {
 }
 
 
-/* ------------------------------ unblock user ------------------------------ */
-
-function unblockUser(userId) {
-    event.preventDefault
-//    alert('ghdghdgl')
-    swal({
-        title: "Order cancel",
-        text: "Once cancel, the order get cancelled",
-        icon: "info",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-            $.ajax({
-                url: '/admin/user/' + userId,
-                method: 'get',
-                success: (response) => {
-                   
-                    if(response){
-                        document.getElementById(userId).innerHTML = "block"
-                        swal("order cancelled", "sucessfully", "success");
-                        // location.reload()
-                           
-                    }
-                            
-                }
-            })
-        } else {
-          swal("Your order safe");
-        }
-      })
- 
-}

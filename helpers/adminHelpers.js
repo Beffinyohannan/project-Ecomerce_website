@@ -77,10 +77,20 @@ module.exports = {
     /* ----------------------------- block the user ----------------------------- */
     blockUser:(Id)=>{
         return new  Promise(async(resolve,reject)=>{
-             await db.get().collection(collection.userCollection).updateOne({_id:ObjectId(Id)},{$set:{state:false}}).then((data)=>{
-                // console.log(data);
-                resolve(data)
-            })
+            let details = await db.get().collection(collection.userCollection).findOne({$and:[{_id:ObjectId(Id)},{state:true}]})
+
+            if(details){
+                await db.get().collection(collection.userCollection).updateOne({_id:ObjectId(Id)},{$set:{state:false}}).then((data)=>{
+                    // console.log(data);
+                    data.status=true;
+                    resolve(data)
+                })
+            }else{
+                await db.get().collection(collection.userCollection).updateOne({_id:ObjectId(Id)},{$set:{state:true}}).then((data)=>{
+                    resolve(data)
+                }) 
+            }
+             
         })
     },
 
