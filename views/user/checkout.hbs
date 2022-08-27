@@ -359,13 +359,27 @@
                                 <div class="panel-default">
                                     <label class="checkbox-default" for="currencyPaypal" data-bs-toggle="collapse"
                                         data-bs-target="#methodPaypal">
-                                        <input type="radio" id="currencyPaypal" value="Online" name="payment-method">
-                                        <span>Online Payment</span>
+                                        <input type="radio" id="currencyPaypal" value="RazorPay" name="payment-method">
+                                        <span>RazorPay Payment</span>
                                     </label>
                                     {{!-- <div id="methodPaypal" class="collapse " data-parent="#methodPaypal">
                                         <div class="card-body1">
                                             <p>Pay via PayPal; you can pay with your credit card if you don’t have a
                                                 PayPal account.</p>
+                                        </div>
+                                    </div> --}}
+                                </div>
+                                <div class="panel-default">
+                                    <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse"
+                                        data-bs-target="#methodCod">
+                                        <input type="radio" id="currencyCod" value="Paypal" name="payment-method">
+                                        <span>Paypal Payment</span>
+                                    </label>
+
+                                    {{!-- <div id="methodCod" class="collapse" data-parent="#methodCod">
+                                        <div class="card-body1">
+                                            <p>Please send a check to Store Name, Store Street, Store Town, Store State
+                                                / County, Store Postcode.</p>
                                         </div>
                                     </div> --}}
                                 </div>
@@ -626,11 +640,27 @@
                             data: $('#checkout-form').serialize(),
                             success: (response) => {
 
-                                if (response.codSucess ) {
+                                if (response.codSucess) {
                                     swal("Order Placed!", "Order Place Sucessfully!", "success")
 
-                                } else {
+                                } 
+                                 else if (response.razorPay) {
                                     razorpayPayment(response)
+                                } 
+                                else if (response.payPal) {
+                                    alert('payPal')
+                                    console.log("xfgdaghgh")
+                                    console.log(response.payPal)
+                                    for (let i = 0; i < response.links.length; i++) {
+
+                                        if (response.links[i].rel === "approval_url") {
+
+                                            location.href = response.links[i].href;
+
+                                        }
+
+
+                                    }
                                 }
                             }
                         })
@@ -654,9 +684,9 @@
                 "image": "https://example.com/your_logo",
                 "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                 "handler": function (response) {
-                    
 
-                    verifyPayment(response,order)
+
+                    verifyPayment(response, order)
 
                 },
                 "prefill": {
@@ -672,27 +702,27 @@
                 }
             };
             var rzp1 = new Razorpay(options);
-             rzp1.open();
+            rzp1.open();
         }
 
 
-    function verifyPayment(payment,order){
-        $.ajax({
-            url:'/verify-payment',
-            data:{
-                payment,
-                order
-            } ,
-            method:'post',
-            success:(response)=>{
-                if(response.status){
-                  swal("Order Placed!", "Order Place Sucessfully!", "success")  
-                }else{
-                   swal("payment failed ")  
+        function verifyPayment(payment, order) {
+            $.ajax({
+                url: '/verify-payment',
+                data: {
+                    payment,
+                    order
+                },
+                method: 'post',
+                success: (response) => {
+                    if (response.status) {
+                        swal("Order Placed!", "Order Place Sucessfully!", "success")
+                    } else {
+                        swal("payment failed ")
+                    }
                 }
-            }
-        })
-    }
+            })
+        }
     </script>
 
 </body>

@@ -1,5 +1,5 @@
 const express = require("express");
-const { getHomePage, getLogin, getSignup, getProducts, getProductSinglePage, postSignup, postLogin, getLogout, errorPage, getCart, addToCart, getOTP, getNumber, postNumber, postVerify, profile, cartItemDelete, productQuantityChange, getCheckout, placeOrder, viewOrderProduct, verifyPayment, getaddressAdd, getAddressAdd, postAddressAdd, getEditAddress } = require("../controller/userController");
+const { getHomePage, getLogin, getSignup, getProducts, getProductSinglePage, postSignup, postLogin, getLogout, errorPage, getCart, addToCart, getOTP, getNumber, postNumber, postVerify, profile, cartItemDelete, productQuantityChange, getCheckout, placeOrder, viewOrderProduct, verifyPayment, getaddressAdd, getAddressAdd, postAddressAdd, getEditAddress, orderCancelling } = require("../controller/userController");
 const verifyLogin = require("../middleware/verifyLogin");
 const router = express.Router();
 
@@ -10,7 +10,7 @@ router.get('/signup',getSignup)
 router.get('/products',getProducts)
 router.get('/product_view/:id',getProductSinglePage)
 router.post('/signup',postSignup)
-router.get('/profile',profile)
+router.get('/profile',verifyLogin,profile)
 router.post('/logins',postLogin)
 
 router.get('/otpNumber',getNumber)
@@ -34,5 +34,6 @@ router.post('/verify-payment',verifyPayment)
 router.get('/add-address',getAddressAdd)
 router.post('/add-address',postAddressAdd)
 router.get('/edit-address/:id',getEditAddress)
+router.get('/cancel-order/:id',orderCancelling)
 
 module.exports = router;

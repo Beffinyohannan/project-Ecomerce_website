@@ -118,7 +118,10 @@ const blockusers = (req, res) => {
     let Id = req.params.id
     // console.log(Id);
     adminHelpers.blockUser(Id).then((data) => {
-        res.redirect('/admin/users')
+        // res.redirect('/admin/users')
+        data.state=true;
+        res.json(data)
+
     })
 }
 
@@ -126,7 +129,8 @@ const blockusers = (req, res) => {
 const unblockusers = (req, res) => {
     let Id = req.params.id
     adminHelpers.unblockUser(Id).then((data) => {
-        res.redirect('/admin/users')
+        // res.redirect('/admin/users')
+        res.json(data)
     })
 }
 

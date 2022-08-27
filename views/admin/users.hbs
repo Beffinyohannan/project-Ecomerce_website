@@ -87,9 +87,10 @@
                                                 <td > <p class="d-inline-block text-truncate" style="max-width:190px ;">{{this.date}}</p></td>
                                                 <td>
                                                    
-													<div class="d-flex ">
+													<div class="d-flex " >
                                                         {{#if this.state}}
-														<a href="/admin/users/{{this._id}}" class="btn btn-primary shadow btn-md sharp mr-1" style="width: 95px;">Block</a>
+														{{!-- <a href="" onclick="blockUser('{{this._id}}')" class="btn btn-primary shadow btn-md sharp mr-1" style="width: 95px;"> Block</a> --}}
+                                                        <button  onclick="blockUser('{{this._id}}')" class="btn btn-primary shadow btn-md sharp mr-1" style="width: 95px;" id="{{this._id}}">Block</button>
                                                         {{else}}
 														<a href="/admin/user/{{this._id}}" class="btn btn-info shadow btn-md sharp">Unblock</a>
                                                         {{/if}}

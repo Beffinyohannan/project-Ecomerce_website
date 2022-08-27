@@ -209,9 +209,16 @@ const placeOrder=async(req,res)=>{
     userHelpers.orderPlace(req.body,products,totalPrice).then((orderId)=>{
         if(req.body['payment-method']==='COD'){
             res.json({codSucess:true})
-        }else{
+        }else if(req.body['payment-method']==='RazorPay'){
             userHelpers.generateRazorpay(orderId,totalPrice).then((response)=>{
+                response.razorPay= true;
               res.json(response)  
+            })
+        }else if(req.body['payment-method']==='Paypal'){
+            userHelpers.generatePayPal(orderId,totalPrice).then((response)=>{
+                console.log("payapal wrkng");
+                response.payPal = true;
+                res.json(response)
             })
         }
        
@@ -260,13 +267,24 @@ const postAddressAdd =(req,res)=>{
 }
 
 /* ------------------------------ edit address ------------------------------ */
-const getEditAddress =(req,res)=>{
-    let Id = req.query.id
-    console.log(Id);
-    userHelpers.getAddessEdit(Id).then((data)=>{
+const getEditAddress = (req,res)=>{
+    let id = req.params.id
+    console.log(id);
+    // console.log(req.session.user._id);
+    // res.render('user/editAddress')
+    userHelpers.getAddessEdit(id,req.session.user._id).then((data)=>{
         res.render('user/editAddress')
     })
    
+}
+
+/* ------------------------------ cancel order ------------------------------ */
+const orderCancelling=(req,res)=>{
+    console.log(req.params.id);
+    adminHelpers.cancelOrder(req.params.id).then((response)=>{
+        // res.redirect('/profile')
+        res.json(response)
+    })
 }
 
 
@@ -295,7 +313,8 @@ module.exports = {
      verifyPayment,
      getAddressAdd,
      postAddressAdd,
-     getEditAddress
+     getEditAddress,
+     orderCancelling
     
 
     }

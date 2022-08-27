@@ -150,13 +150,15 @@
                                         {{#each orders}}
                                         <tr>
                                             <td>{{inc @index}}</td>
-                                            <td>{{this.date}}</td>
+                                            <td >{{this.date}}</td>
                                             <td>{{this.deliveryDetails.address}}</td>
                                             <td>{{this.deliveryDetails.number}}</td>
                                             <td><span class="success">{{this.status}}</span></td>
                                             <td>{{this.totalAmount}}</td>
                                             <td>{{this.paymentMethod}}</td>
-                                            <td><a href="/view-order-products/{{this._id}}" class="view">view</a></td>
+                                            <td class="d-flex p-4" > <div> <a href="/view-order-products/{{this._id}}" class="view"><button class="btn-sm bg-success text-white">view</button> </a> </div>
+                                          <div class="ml-3"> <button class="btn-sm bg-warning"  onclick="cancelOrderUser('{{this._id}}')">Cancel </button> </div> 
+                                            </td>
                                         </tr>
                                         {{/each}}
                                     </tbody>
@@ -213,6 +215,7 @@
                                     <tbody>
                                        {{#each details}}
                                        
+                                       
                                         <tr>
                                             {{!-- {{#each this.address}} --}}
                                             <tr>
@@ -234,7 +237,11 @@
                                             {{this.address.number}} <br>
                                             </td>
                                            
-                                            <td><a href="/edit-addresss/{{this.address.number}}" class="view">Edit</a></td>
+                                            <td>
+                                                
+                                                <a href="/edit-address/{{this.address.id}}" class="view"> <button class="btn-sm bg-info "> Edit</button></a>
+                                                 <a href="/edit-address/{{this.address.id}}" class="view"> <button class="btn-sm bg-warning"> delete</button></a>
+                                            </td>
                                             </tr> 
                                             {{!-- {{/each}}  --}}
                                         </tr>

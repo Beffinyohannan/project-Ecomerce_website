@@ -2,14 +2,15 @@ const db = require('../config/connection')
 const collection = require('../config/collection')
 const bcrypt = require('bcrypt');
 const { ObjectID } = require('bson');
-const { response } = require('../app');
+// const { response } = require('../app');
 const verify = require('../config/verify')
 const client = require('twilio')(verify.accountId, verify.authToken);
 
 const Razorpay = require('razorpay');
-const { resolve } = require('path');
-const { keySecret } = require('../config/verify');
+// const { resolve } = require('path');
+// const { keySecret } = require('../config/verify');
 const moment = require("moment")
+const paypal = require('paypal-rest-sdk');
 
 
 
@@ -17,6 +18,12 @@ var instance = new Razorpay({
     key_id: verify.keyId,
     key_secret: verify.keySecret,
 });
+
+paypal.configure({
+    'mode': 'sandbox', //sandbox or live
+    'client_id': process.env.CLIENT_ID ,
+    'client_secret': process.env.CLIENT_SECRET
+  })
 
 
 module.exports = {
@@ -63,7 +70,7 @@ module.exports = {
 
             // console.log(user);
             if (user) {
-                console.log(user);
+                // console.log(user);
                 bcrypt.compare(userData.password, user.password).then((status) => {
                     //console.log(status);
                     if (status) {
@@ -392,6 +399,10 @@ module.exports = {
                 },
                 {
                     $project: {
+                        totalAmount:1,
+                        date:1,
+                        status:1,
+                        _id:1,
                         item: '$products.item',
                         quantity: '$products.quantity'
                     }
@@ -406,7 +417,7 @@ module.exports = {
                 },
                 {
                     $project: {
-                        item: 1, quantity: 1, product: { $arrayElemAt: ['$product', 0] }
+                     totalAmount:1,date:1,status:1,  _id:1,  item: 1, quantity: 1, product: { $arrayElemAt: ['$product', 0] }
                     }
                 }
             ]).toArray()
@@ -583,8 +594,9 @@ module.exports = {
 
 
         return new Promise((resolve, reject) => {
-            // let tempId = moment().format().toString()
+            let tempId = moment().format().toString()
             // tempId.replace(/ /g,'')
+            tempId.replace(/\s+/g, ' ').trim()
             // addressData._id =tempId
             let date =new Date()
             let address = {
@@ -597,8 +609,9 @@ module.exports = {
                     state: details.state,
                     city: details.city,
                     landMark: details.landMark,
-                    id:""+date,
+                    // id:""+date,
                     //address:addressData
+                    id: tempId
 
             }
 
@@ -641,12 +654,84 @@ viewAddress: (userId) => {
 },
 
     /* ---------------------------- get Edit address ---------------------------- */
-    getAddessEdit : (Id) => {
-        return new Promise((resolve, reject) => {
-            db.get().collection(collection.userCollection).find({ id: ObjectID(Id) }).then((data) => {
-                resolve(data)
-            })
+    getAddessEdit : (Id,userId) => {
+        return new Promise(async(resolve, reject) => {
+        let details=  await  db.get().collection(collection.userCollection)
+        .findOne([{_id:ObjectID(userId)},{address:{$elemMatch:{id:ObjectID(Id)}}}])
+        console.log(details)
+        resolve(details)
+        // .aggregate([
+        //     {
+        //         $match: { _id: ObjectID(userId) }
+        //     },
+        //     {
+        //         $unwind: '$address'
+        //     },
+        //     {
+        //         $project: {
+        //             address: 1
+
+        //         }
+        //     },
+        //     // {
+        //     //     $match:{address:{id:ObjectID(Id)}}
+        //     // }
+        //     // {
+        //     //     $match:{address:{$elemMatch:{id:ObjectID(Id)}}}
+        //     // },
+        //   ]).toArray()
+        //     console.log(details);
+        //         resolve(details)
+          
         })
-    }
+    },
+
+    /* ------------------------- paypal generate payment ------------------------ */
+    generatePayPal: (orderId, totalPrice) => {
+        console.log('paypal working');
+        return new Promise((resolve, reject) => {
+            const create_payment_json = {
+                "intent": "sale",
+                "payer": {
+                    "payment_method": "paypal"
+                },
+                "redirect_urls": {
+                    return_url: "http://localhost:3000/success",
+                    cancel_url: "http://localhost:3000/cancel"
+                },
+                "transactions": [
+                    {
+                        "item_list": {
+                            "items": [
+                                {
+                                    "name": "Red Sox Hat",
+                                    "sku": "001",
+                                    "price": totalPrice,
+                                    "currency": "USD",
+                                    "quantity": 1
+                                }
+                            ]
+                        },
+                        "amount": {
+                            "currency": "USD",
+                            "total": totalPrice
+                        },
+                        "description": "Hat for the best team ever"
+                    }
+                ]
+            };
+
+            paypal.payment.create(create_payment_json, function (error, payment) {
+                if (error) {
+                    console.log("paypal int. err stp ...4", error);
+                    throw error;
+
+                } else {
+                    console.log(payment, "****a");
+                    resolve(payment);
+                }
+            });
+        });
+    },
 }
 
