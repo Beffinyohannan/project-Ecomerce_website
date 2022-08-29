@@ -347,11 +347,12 @@ module.exports = {
 
             let status = order['payment-method'] === 'COD' ? 'placed' : 'pending'
             let orderObj = {
-                deliveryDetails: {
-                    name: order.firstName,
-                    number: order.number,
-                    address: order.address
-                },
+                deliveryDetails:  ObjectID( order ['payment-address']),
+                // {
+                    // name: order.name,
+                    //  number: order.number,
+                    //  address: order.address,
+                // },
                 userId: ObjectID(order.userId),
                 paymentMethod: order['payment-method'],
                 products: products,
@@ -364,6 +365,8 @@ module.exports = {
             db.get().collection(collection.orderCollection).insertOne(orderObj).then((response) => {
                 db.get().collection(collection.cartCollection).deleteOne({ user: ObjectID(order.userId) })
                 console.log(response);
+                console.log('printing insreted id');
+                console.log(response.insertedId);
                 resolve(response.insertedId)
             })
         })
@@ -379,11 +382,37 @@ module.exports = {
 
     },
 
-    /* ------------------------------- users order ------------------------------ */
+    /* -------------------------------view users order ------------------------------ */
     getUserOrders: (userId) => {
         return new Promise(async (resolve, reject) => {
-            let orders = await db.get().collection(collection.orderCollection).find({ userId: ObjectID(userId) }).toArray()
+            // let orders = await db.get().collection(collection.orderCollection).find({ userId: ObjectID(userId) }).toArray()
+            // resolve(orders)
+
+            let orders = await db.get().collection(collection.orderCollection).aggregate([
+               {
+                $match: { userId: ObjectID(userId) }
+                },
+                {
+                    $lookup:{
+                        from: collection.addressCollection,
+                        localField: 'deliveryDetails',
+                        foreignField: '_id',
+                        as: 'address'
+                    }
+                },
+                {
+                    $unwind: '$address'
+                },
+                // {
+                //     $project:{
+
+                //     }
+                // }
+
+            ]).toArray()
+            // console.log(orders);
             resolve(orders)
+
 
         })
     },
@@ -728,7 +757,7 @@ viewAddress: (userId) => {
                     landMark: details.landMark,
                 }
             })
-            console.log(data);
+            // console.log(data);
             resolve(data)
            
            } catch (error) {
@@ -759,7 +788,7 @@ viewAddress: (userId) => {
                     "payment_method": "paypal"
                 },
                 "redirect_urls": {
-                    return_url: "http://localhost:3000/success",
+                    return_url: "/order-success",
                     cancel_url: "http://localhost:3000/cancel"
                 },
                 "transactions": [

@@ -92,10 +92,11 @@ const postSignup = (req, res) => {
 }
 
 
+let user   // session of the user
 
 /* ---------------------------- get the homepage ---------------------------- */
 const getHomePage = async(req, res) => {
-    let user=req.session.user
+     user=req.session.user
     // console.log(user);
     let cartCount = null
     if(req.session.user){
@@ -126,7 +127,7 @@ const getProducts =async (req, res) => {
 const getProductSinglePage = (req, res) => {
     let Id = req.params.id
     userHelpers.singleProduct(Id).then((data)=>{
-        res.render('user/productSinglePage',{data,user: req.session.user})
+        res.render('user/productSinglePage',{data,user})
     })
    
 }
@@ -140,9 +141,9 @@ const getLogout = (req,res)=>{
 /* ------------------------------ profile page ------------------------------ */
 const profile = async(req,res)=>{
     // console.log(req.session.user._id);
-    let orders = await userHelpers.getUserOrders(req.session.user._id)      //view the order of the user
-    let details = await userHelpers.viewAddress(req.session.user._id)
-    res.render('user/profile',{user:req.session.user,orders,details,profile:true})
+    let orders = await userHelpers.getUserOrders(user._id)      //view the order of the user
+    let details = await userHelpers.viewAddress(user._id)
+    res.render('user/profile',{user,orders,details,profile:true})
 }
 
 /* -------------------------------- 404 page -------------------------------- */
@@ -154,12 +155,12 @@ const errorPage = (req,res)=>{
 const getCart = async (req,res)=>{
     let cartCount = null
     if(req.session.user){
-        cartCount = await userHelpers.getCartCount(req.session.user._id)
+        cartCount = await userHelpers.getCartCount(user._id)
     }
 
-    let products = await userHelpers.getCartProducts(req.session.user._id)
-    let totalValue = await userHelpers.getTotalAmount(req.session.user._id)
-    let productValue = await userHelpers.getCartProductTotal(req.session.user._id)
+    let products = await userHelpers.getCartProducts(user._id)
+    let totalValue = await userHelpers.getTotalAmount(user._id)
+    let productValue = await userHelpers.getCartProductTotal(user._id)
     for(var i=0;i<products.length;i++){
         products[i].productValue = productValue[i].total
     }
@@ -170,7 +171,7 @@ const getCart = async (req,res)=>{
 /* ------------------------------- add to cart ------------------------------ */
 const addToCart = (req,res)=>{
     console.log(req.params.id);
-    userHelpers.addCart(req.params.id,req.session.user._id).then(()=>{
+    userHelpers.addCart(req.params.id,user._id).then(()=>{
         res.redirect('/products')
         // res.json({status:true})
     })
@@ -198,8 +199,9 @@ const productQuantityChange = (req,res)=>{
 
 /* ------------------------------ checkout page ----------------------------- */
 const getCheckout =async (req,res)=>{
-    let total = await userHelpers.getTotalAmount(req.session.user._id)
-    res.render('user/checkout',{total,user:req.session.user})
+    let total = await userHelpers.getTotalAmount(user._id)
+    let address = await userHelpers.viewAddress(user._id)
+    res.render('user/checkout',{total,user,address})
 }
 
 /* ------------------------------- place order ------------------------------ */
@@ -231,7 +233,7 @@ const placeOrder=async(req,res)=>{
 const viewOrderProduct = async(req,res)=>{
     // console.log(req.params.id);
     let products = await userHelpers.getOrderProduct(req.params.id)
-    res.render('user/viewOrderProduct',{user:req.session.user,products})
+    res.render('user/viewOrderProduct',{user,products})
 }
 
 /* ----------------------- verfiy payment in razorpay ----------------------- */
@@ -257,7 +259,7 @@ const addressPage =(req,res)=>{
 /* ------------------------------- add address ------------------------------ */
 const getAddressAdd =(req,res)=>{
     
-    res.render('user/addUserAddress',{user:req.session.user})
+    res.render('user/addUserAddress',{user})
 }
 
 /* ---------------------------- post add address ---------------------------- */
@@ -266,7 +268,7 @@ const postAddressAdd =(req,res)=>{
     // console.log(req.body);
     // let date = new Date()
     // req.body.date
-    userHelpers.addAddress(req.session.user._id,req.body).then((data)=>{
+    userHelpers.addAddress(user._id,req.body).then((data)=>{
     res.redirect('/profile')
     })
 }
@@ -277,7 +279,7 @@ const getEditAddress = (req,res)=>{
     // console.log(id);
     // console.log(req.session.user._id);
     // res.render('user/editAddress')
-    userHelpers.getAddessEdit(id,req.session.user._id).then((data)=>{
+    userHelpers.getAddessEdit(id,user._id).then((data)=>{
         res.render('user/editAddress',{data})
     })
    
@@ -300,7 +302,7 @@ const postEditAddrress=(req,res)=>{
 const addressDelete = (req,res)=>{
     let id = req.params.id
 
-    userHelpers.deleteAddress(req.session.user._id,id).then((response)=>{
+    userHelpers.deleteAddress(user._id,id).then((response)=>{
         res.redirect('/profile')
     })
 }
@@ -317,6 +319,11 @@ const orderCancelling=(req,res)=>{
         // res.redirect('/profile')
         res.json(response)
     })
+}
+
+/* ------------------------------- sucess page ------------------------------ */
+const sucessPage = (req,res)=>{
+    res.render('user/successPage')
 }
 
 
@@ -350,7 +357,8 @@ module.exports = {
      postEditAddrress,
      addressDelete,
      getOrderPage,
-     addressPage
+     addressPage,
+     sucessPage
     
 
     }

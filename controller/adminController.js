@@ -232,6 +232,7 @@ const getOrder = (req, res) => {
     })
 }
 
+/* ------------------------------ cancel orders ----------------------------- */
 const orderCanel = (req, res) => {
     // console.log(req.params.id);
     adminHelpers.cancelOrder(req.params.id).then((response)=>{

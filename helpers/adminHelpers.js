@@ -229,10 +229,26 @@ module.exports = {
 
     /* ------------------------------- view order ------------------------------- */
     getOrders:()=>{
-        return new Promise((resolve,reject)=>{
-            let orders= db.get().collection(collection.orderCollection).find().toArray()
-                resolve(orders)
+        return new Promise(async(resolve,reject)=>{
+            // let orders= db.get().collection(collection.orderCollection).find().toArray()
+            //     resolve(orders)
             
+            let orders=await db.get().collection(collection.orderCollection).aggregate([
+                {
+                    $lookup:{
+                        from: collection.addressCollection,
+                        localField: 'deliveryDetails',
+                        foreignField: '_id',
+                        as: 'address'
+                    }
+                },
+               
+                {
+                    $unwind:'$address'
+                }
+            ]).toArray()
+            // console.log(orders);
+            resolve(orders)
            
         })
     },

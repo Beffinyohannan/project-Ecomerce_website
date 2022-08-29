@@ -1,5 +1,5 @@
 const express = require("express");
-const { getHomePage, getLogin, getSignup, getProducts, getProductSinglePage, postSignup, postLogin, getLogout, errorPage, getCart, addToCart, getOTP, getNumber, postNumber, postVerify, profile, cartItemDelete, productQuantityChange, getCheckout, placeOrder, viewOrderProduct, verifyPayment, getaddressAdd, getAddressAdd, postAddressAdd, getEditAddress, orderCancelling, postEditAddrress, addressDelete, getOrderPage, addressPage } = require("../controller/userController");
+const { getHomePage, getLogin, getSignup, getProducts, getProductSinglePage, postSignup, postLogin, getLogout, errorPage, getCart, addToCart, getOTP, getNumber, postNumber, postVerify, profile, cartItemDelete, productQuantityChange, getCheckout, placeOrder, viewOrderProduct, verifyPayment, getaddressAdd, getAddressAdd, postAddressAdd, getEditAddress, orderCancelling, postEditAddrress, addressDelete, getOrderPage, addressPage, sucessPage } = require("../controller/userController");
 const verifyLogin = require("../middleware/verifyLogin");
 const router = express.Router();
 
@@ -39,5 +39,7 @@ router.get('/edit-address/:id',getEditAddress)
 router.post('/edit-address',postEditAddrress)
 router.get('/cancel-order/:id',orderCancelling)
 router.get('/delete-address/:id',addressDelete)
+
+router.get('/order-success',sucessPage)
 
 module.exports = router;

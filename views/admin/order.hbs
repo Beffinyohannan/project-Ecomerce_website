@@ -82,8 +82,8 @@
                                             {{#each order}}
                                             <tr>
                                                 <td>{{inc @index}}</td>
-                                                <td>{{this.deliveryDetails.name}}</td>
-                                                <td><a href="javascript:void(0);">{{this.deliveryDetails.address}} <br> {{this.deliveryDetails.number}}</a></td>
+                                                <td>{{this.address.name}}</td>
+                                                <td><a href="javascript:void(0);">{{this.address.address}} <br> {{this.deliveryDetails.number}}</a></td>
                                                 <td>{{#each this.products}} <p>{{this.item}} </p>{{/each}}</td>
                                                 <td><a href="javascript:void(0);"><strong class="text-black">{{this.totalAmount}}</strong></a></td>
                                                 <td>{{this.paymentMethod}}</td>

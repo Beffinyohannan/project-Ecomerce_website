@@ -147,21 +147,24 @@
                                             <th class="text-white">Total</th>
                                             <th class="text-white">Payment</th>
                                             <th class="text-white">Actions</th>
+                                            <th class="text-white">View Products</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {{#each orders}}
                                         <tr>
                                             <td>{{inc @index}}</td>
-                                            <td >{{this.date}}</td>
-                                            <td>{{this.deliveryDetails.address}}</td>
-                                            <td>{{this.deliveryDetails.number}}</td>
-                                            <td><span class="success" id="{{this._id}}" >{{this.status}}</span></td>
+                                            <td > <p class="d-inline-block text-truncate" style="max-width:180px ;">{{this.date}}</p></td>
+                                            <td>{{this.address.name}} <br>{{this.address.address}}</td>
+                                            <td>{{this.address.number}}</td>
+                                            <td><span  id="{{this._id}}" >{{this.status}}</span></td>
                                             <td>{{this.totalAmount}}</td>
                                             <td>{{this.paymentMethod}}</td>
-                                            <td class="d-flex p-4" > <div> <a href="/view-order-products/{{this._id}}" class="view"><button class="btn-sm bg-success text-white">view</button> </a> </div>
-                                          <div class="ml-3"> <button class="btn-sm bg-warning"  onclick="cancelOrderUser('{{this._id}}')">Cancel </button> </div> 
+                                            <td >
+                                                 {{!-- <div> <a href="/view-order-products/{{this._id}}" class="view"><button class="btn-sm bg-success text-white">view</button> </a> </div> --}}
+                                          <button class="btn-sm bg-warning"  onclick="cancelOrderUser('{{this._id}}')">Cancel </button> 
                                             </td>
+                                            <td><a href="/view-order-products/{{this._id}}" class="view"><button class="btn-sm bg-success text-white">view</button> </a></td>
                                         </tr>
                                         {{/each}}
                                     </tbody>
@@ -323,7 +326,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
