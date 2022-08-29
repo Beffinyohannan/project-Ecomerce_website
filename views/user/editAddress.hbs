@@ -26,7 +26,7 @@
     <div class="container mt-5">
         <div class="checkout_form" data-aos="fade-up" data-aos-delay="400">
             <div class="row">
-                <form action="/add-address" method="post" id="checkout-form">
+                <form action="/edit-address" method="post" id="checkout-form">
                     <div class="col-lg-12 col-md-6">
 
                         <h3>Address Details</h3>
@@ -34,7 +34,7 @@
                             <div class="col-12">
                                 <div class="default-form-box">
                                     <label>Full Name <span>*</span></label>
-                                    <input type="text" name="name" value="name" required="">
+                                    <input type="text" name="name" value="{{data.name}}" required="">
                                 </div>
                             </div>
                             {{!-- <div class="col-lg-6">
@@ -53,44 +53,44 @@
                             <div class="col-12">
                                 <div class="default-form-box">
                                     <label>Address <span>*</span></label>
-                                    <input placeholder="House number and street name" value="address" name="address" type="text" required="">
+                                    <input placeholder="House number and street name" value="{{data.address}}" name="address" type="text" required="">
                                 </div>
                             </div>
                              <div class="col-12">
                                 <div class="default-form-box">
                                     <label>Pincode <span>*</span></label>
-                                    <input placeholder="Pincode " name="pincode" value="pincode" type="number" required="">
+                                    <input placeholder="Pincode " name="pincode" value="{{data.pincode}}" type="tel" required="">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="default-form-box">
                                      <label>Land Mark<span>*</span></label>
-                                    <input placeholder="Near by place/landmark" value="landMark" name="landMark" type="text" required="">
+                                    <input placeholder="Near by place/landmark" value="{{data.landMark}}" name="landMark" type="text" required="">
                                 </div>
                             </div>
                              <div class="col-12">
                                 <div class="default-form-box">
                                     <label for="country">country <span>*</span></label>
-                                    <input placeholder="Counrty name" name="country" value="country" type="text" required="">
+                                    <input placeholder="Counrty name" name="country" value="{{data.country}}" type="text" required="">
 
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="default-form-box">
                                     <label> City <span>*</span></label>
-                                    <input type="text" name="city" value="city" required="">
+                                    <input type="text" name="city" value="{{data.city}}" required="">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="default-form-box">
                                     <label>State <span>*</span></label>
-                                    <input type="text" name="state" value="state" required="">
+                                    <input type="text" name="state" value="{{data.state}}" required="">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="default-form-box">
                                     <label>Phone<span>*</span></label>
-                                    <input type="number" name="number" value="number" required="">
+                                    <input type="tel" name="number" value="{{data.number}}" required="">
                                 </div>
                             </div>
                             {{!-- <div class="col-lg-6">
@@ -99,7 +99,8 @@
                                     <input type="text" name="email">
                                 </div>
                             </div> --}}
-                            {{!-- <input type="text" name="userId" value="{{user._id}}" hidden> --}}
+                            <input type="text" name="id" value="{{data.id}}" hidden>
+                            <input type="text" name="user" value="{{data.user}}" hidden>
 
                         </div>
 

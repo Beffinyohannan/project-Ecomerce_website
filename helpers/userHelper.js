@@ -11,6 +11,7 @@ const Razorpay = require('razorpay');
 // const { keySecret } = require('../config/verify');
 const moment = require("moment")
 const paypal = require('paypal-rest-sdk');
+const { resolve } = require('path');
 
 
 
@@ -620,8 +621,8 @@ module.exports = {
             //         resolve(data)
             //     })
            let address = db.get().collection(collection.addressCollection).insertOne({
-                    userId:userId,
-                    
+                    // userId:userId,
+                    user: ObjectID(userId),
                     name: details.name,
                     address: details.address,
                     pincode: details.pincode,
@@ -642,26 +643,25 @@ module.exports = {
 /* ------------------------------ view address ------------------------------ */
 viewAddress: (userId) => {
     return new Promise(async (resolve, reject) => {
-        let address = await db.get().collection(collection.userCollection).aggregate([
-            {
-                $match: { _id: ObjectID(userId) }
-            },
-            {
-                $unwind: '$address'
-            },
-            {
-                $project: {
-                    address: 1
+        // let address = await db.get().collection(collection.userCollection).aggregate([
+        //     {
+        //         $match: { _id: ObjectID(userId) }
+        //     },
+        //     {
+        //         $unwind: '$address'
+        //     },
+        //     {
+        //         $project: {
+        //             address: 1
 
-                }
-            },
+        //         }
+        //     },
 
-            // {
-            //     $project: {
-            //       address: { $arrayElemAt: ['$address', 0] }
-            //     }
-            // }
-        ]).toArray()
+        // ]).toArray()
+        // //    console.log(address);
+        // resolve(address)
+
+        let address = await db.get().collection(collection.addressCollection).find({user:ObjectID(userId)}).toArray()
         //    console.log(address);
         resolve(address)
 
@@ -671,10 +671,11 @@ viewAddress: (userId) => {
     /* ---------------------------- get Edit address ---------------------------- */
     getAddessEdit : (Id,userId) => {
         return new Promise(async(resolve, reject) => {
-        let details=  await  db.get().collection(collection.userCollection)
-        .findOne([{_id:ObjectID(userId)},{address:{$elemMatch:{id:ObjectID(Id)}}}])
-        console.log(details)
-        resolve(details)
+        // let details=  await  db.get().collection(collection.userCollection)
+        // .findOne([{_id:ObjectID(userId)},{address:{$elemMatch:{id:ObjectID(Id)}}}])
+        // console.log(details)
+        // resolve(details)
+
         // .aggregate([
         //     {
         //         $match: { _id: ObjectID(userId) }
@@ -697,8 +698,55 @@ viewAddress: (userId) => {
         //   ]).toArray()
         //     console.log(details);
         //         resolve(details)
-          
+            // console.log(Id +"farfrf");
+        let data =await db.get().collection(collection.addressCollection).findOne({$and:[{user:ObjectID(userId)},{id:Id}]})
+       
+        //   console.log(data);
+        resolve(data)
         })
+
+
+    },
+
+    /* ---------------------------- post user address --------------------------- */
+    postAddressEdit :(details,user,id)=>{
+        console.log(user);
+        console.log(id);
+        return new Promise(async(resolve,reject)=>{
+           try {
+          let data=  await db.get().collection(collection.addressCollection).updateOne({user:ObjectID(user),id:id},
+            {
+                $set:
+                {
+                    name: details.name,
+                    address: details.address,
+                    pincode: details.pincode,
+                    number: details.number,
+                    country: details.country,
+                    state: details.state,
+                    city: details.city,
+                    landMark: details.landMark,
+                }
+            })
+            console.log(data);
+            resolve(data)
+           
+           } catch (error) {
+            console.log(error);
+           }
+           
+        })
+    },
+
+    /* ----------------------------- delete address ----------------------------- */
+    deleteAddress: (userId,Id)=>{
+        return new Promise(async(resolve,reject)=>{
+        await db.get().collection(collection.addressCollection).deleteOne({user:ObjectID(userId),id:Id})
+        .then((data)=>{
+            resolve(data)
+        })
+        })
+        
     },
 
     /* ------------------------- paypal generate payment ------------------------ */

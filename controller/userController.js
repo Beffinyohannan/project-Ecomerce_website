@@ -142,7 +142,7 @@ const profile = async(req,res)=>{
     // console.log(req.session.user._id);
     let orders = await userHelpers.getUserOrders(req.session.user._id)      //view the order of the user
     let details = await userHelpers.viewAddress(req.session.user._id)
-    res.render('user/profile',{user:req.session.user,orders,details})
+    res.render('user/profile',{user:req.session.user,orders,details,profile:true})
 }
 
 /* -------------------------------- 404 page -------------------------------- */
@@ -249,6 +249,11 @@ const verifyPayment=(req,res)=>{
     
 }
 
+/* ------------------------------- address page ------------------------------- */
+const addressPage =(req,res)=>{
+    res.render('user/profile',{address:true})
+}
+
 /* ------------------------------- add address ------------------------------ */
 const getAddressAdd =(req,res)=>{
     
@@ -269,13 +274,40 @@ const postAddressAdd =(req,res)=>{
 /* ------------------------------ edit address ------------------------------ */
 const getEditAddress = (req,res)=>{
     let id = req.params.id
-    console.log(id);
+    // console.log(id);
     // console.log(req.session.user._id);
     // res.render('user/editAddress')
     userHelpers.getAddessEdit(id,req.session.user._id).then((data)=>{
-        res.render('user/editAddress')
+        res.render('user/editAddress',{data})
     })
    
+}
+
+/* ---------------------------- post edit address --------------------------- */
+const postEditAddrress=(req,res)=>{
+    // console.log(req.body);
+    let userId = req.body.user;
+    let Id = req.body.id
+    userHelpers.postAddressEdit(req.body,userId,Id).then((response)=>{
+
+        res.redirect('/profile')
+    }).catch((err)=>{
+        console.log(err);
+    })
+}
+
+/* ----------------------------- delete address ----------------------------- */
+const addressDelete = (req,res)=>{
+    let id = req.params.id
+
+    userHelpers.deleteAddress(req.session.user._id,id).then((response)=>{
+        res.redirect('/profile')
+    })
+}
+
+/* ------------------------------- order page ------------------------------- */
+const getOrderPage =(req,res)=>{
+    res.render('user/profile',{order:true})
 }
 
 /* ------------------------------ cancel order ------------------------------ */
@@ -314,7 +346,11 @@ module.exports = {
      getAddressAdd,
      postAddressAdd,
      getEditAddress,
-     orderCancelling
+     orderCancelling,
+     postEditAddrress,
+     addressDelete,
+     getOrderPage,
+     addressPage
     
 
     }

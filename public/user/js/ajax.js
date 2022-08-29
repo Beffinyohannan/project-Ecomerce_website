@@ -130,7 +130,7 @@ function deleteItem(cartId, proId) {
 
 // })
 
-
+/* -------------------------- cancel order  -------------------------- */
 function cancelOrderUser(proId) {
     // event.preventDefault
     
@@ -150,7 +150,45 @@ function cancelOrderUser(proId) {
                 success: (response) => {
                    
                     if(response){
-                        //document.getElementById('result').innerHTML = "cancelled"
+                        document.getElementById(proId).innerHTML = "cancelled"
+                        swal("order cancelled", "sucessfully", "success");
+                      
+                        // location.reload()
+                    
+                    }
+                       
+        
+                
+                    
+                    
+                }
+            })
+        } else {
+          swal("Your order safe");
+        }
+      })
+
+}
+
+/* ----------------------------- delete address ----------------------------- */
+function deleteAddress(id){
+
+    swal({
+        title: "Order cancel",
+        text: "Once cancel, the order get cancelled",
+        icon: "info",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                url: '/delete-address/' + id,
+                method: 'get',
+                success: (response) => {
+                   
+                    if(response){
+                        // document.getElementById(proId).innerHTML = "cancelled"
                         swal("order cancelled", "sucessfully", "success");
                       
                         location.reload()
@@ -167,10 +205,4 @@ function cancelOrderUser(proId) {
           swal("Your order safe");
         }
       })
-
-
-
-   
-
-   
 }
