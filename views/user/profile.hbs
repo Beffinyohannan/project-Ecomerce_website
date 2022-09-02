@@ -43,14 +43,13 @@
                             {{!-- <li><a href="#account-details" data-bs-toggle="tab"
                                     class="nav-link btn btn-block btn-md btn-black-default-hover">Account details</a>
                             </li> --}}
-                            <li><a href=""
-                                    class="nav-link btn btn-block btn-md btn-black-default-hover">logout</a></li>
+                            <li><a href="" class="nav-link btn btn-block btn-md btn-black-default-hover">logout</a></li>
                         </ul>
                     </div>
                 </div>
-               
+
                 <div class="col-sm-12 col-md-9 col-lg-9">
-                     {{!-- {{#if profile}} --}}
+                    {{!-- {{#if profile}} --}}
                     <!-- Tab panes -->
                     <div class="tab-content dashboard_content" data-aos="fade-up" data-aos-delay="200">
                         <div class="tab-pane fade show active" id="dashboard">
@@ -110,15 +109,16 @@
                                         </div>
                                     </div>
                                     <hr> --}}
-                                    <div class="row">
+                                    {{!-- <div class="row">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Address</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
 
                                         </div>
-                                    </div>
-                                    <hr>
+                                    </div> --}}
+                                    {{!--
+                                    <hr> --}}
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <a class="btn-sm btn-info " target="__blank"
@@ -136,7 +136,7 @@
                             <h4>Orders</h4>
                             {{!-- table-responsive --}}
                             <div class="table_page ">
-                                <table>
+                                <table >
                                     <thead class="bg-dark">
                                         <tr>
                                             <th class="text-white">Order</th>
@@ -154,24 +154,32 @@
                                         {{#each orders}}
                                         <tr>
                                             <td>{{inc @index}}</td>
-                                            <td > <p class="d-inline-block text-truncate" style="max-width:180px ;">{{this.date}}</p></td>
+                                            <td>
+                                                <p class="d-inline-block text-truncate" style="max-width:180px ;">
+                                                    {{this.date}}</p>
+                                            </td>
                                             <td>{{this.address.name}} <br>{{this.address.address}}</td>
                                             <td>{{this.address.number}}</td>
-                                            <td><span  id="{{this._id}}" >{{this.status}}</span></td>
+                                            <td><span id="{{this._id}}">{{this.status}}</span></td>
                                             <td>{{this.totalAmount}}</td>
                                             <td>{{this.paymentMethod}}</td>
-                                            <td >
-                                                 {{!-- <div> <a href="/view-order-products/{{this._id}}" class="view"><button class="btn-sm bg-success text-white">view</button> </a> </div> --}}
-                                          <button class="btn-sm bg-warning"  onclick="cancelOrderUser('{{this._id}}')">Cancel </button> 
+                                            <td>
+                                                {{!-- <div> <a href="/view-order-products/{{this._id}}"
+                                                        class="view"><button
+                                                            class="btn-sm bg-success text-white">view</button> </a>
+                                                </div> --}}
+                                                <button class="btn-sm bg-warning"
+                                                    onclick="cancelOrderUser('{{this._id}}')">Cancel </button>
                                             </td>
-                                            <td><a href="/view-order-products/{{this._id}}" class="view"><button class="btn-sm bg-success text-white">view</button> </a></td>
+                                            <td><a href="/view-order-products/{{this._id}}" class="view"><button
+                                                        class="btn-sm bg-success text-white">view</button> </a></td>
                                         </tr>
                                         {{/each}}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        
+
 
                         <div class="tab-pane fade" id="downloads">
                             <h4>Downloads</h4>
@@ -205,66 +213,69 @@
 
                         {{!-- {{else if address}} --}}
                         <div class="tab-pane" id="address">
-                             {{!-- <h2><strong>{{user.name}}</strong></h2> --}}
+                            {{!-- <h2><strong>{{user.name}}</strong></h2> --}}
                             <p>The following addresses will be used on the checkout page by default.</p>
-                           
+
                             {{!-- <address>
                                 Address: Your address goes here.
                             </address> --}}
                             <h5 class="billing-address">Billing address</h5>
-                             <div class="table_page ">
-                                <a href="/add-address"><button class="btn btn-info mb-3" style="float:right;">Add Address</button></a>
-                                <table>
+                            <div class="table_page ">
+                                <a href="/add-address"><button class="btn btn-info mb-3" style="float:right;">Add
+                                        Address</button></a>
+                                <table id="example3"  class="display min-w850">
                                     <thead class="bg-dark">
-                                        <tr >
+                                        <tr>
                                             <th class="text-white">s no.</th>
                                             <th class="text-white">Address</th>
                                             <th class="text-white">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       {{#each details}}
-                                       
-                                       
+                                        {{#each details}}
+
+
                                         <tr>
                                             {{!-- {{#each this.address}} --}}
-                                            <tr>
+                                        <tr>
                                             <td>{{inc @index}}</td>
                                             {{!-- <td style="text-align: left;">
-                                                  <p>{{this.name}} <br>
-                                                  {{this.address}} <br>
-                                                  {{this.pincode}} <br>
-                                                  {{this.state}} <br>
-                                                  {{this.city}} <br>
-                                                  {{this.number}}</p>
+                                                <p>{{this.name}} <br>
+                                                    {{this.address}} <br>
+                                                    {{this.pincode}} <br>
+                                                    {{this.state}} <br>
+                                                    {{this.city}} <br>
+                                                    {{this.number}}</p>
                                             </td> --}}
                                             <td style="text-align: left;">
-                                            {{this.name}} <br>
-                                            {{this.address}} <br>
-                                            {{this.pincode}} <br>
-                                            {{this.state}} <br>
-                                            {{this.city}} <br>
-                                            {{this.number}} <br>
+                                                {{this.name}} <br>
+                                                {{this.address}} <br>
+                                                {{this.pincode}} <br>
+                                                {{this.state}} <br>
+                                                {{this.city}} <br>
+                                                {{this.number}} <br>
                                             </td>
-                                           
+
                                             <td>
-                                                
-                                                <a href="/edit-address/{{this.id}}" class="view"> <button class="btn-sm bg-info "> Edit</button></a>
-                                                 {{!-- <a href="/delete-address/{{this.id}}" class="view"> --}}
-                                                  <button class="btn-sm bg-warning" onclick="deleteAddress('{{this.id}}')"> delete</button>
-                                                  {{!-- </a> --}}
+
+                                                <a href="/edit-address/{{this.id}}" class="view"> <button
+                                                        class="btn-sm bg-info "> Edit</button></a>
+                                                {{!-- <a href="/delete-address/{{this.id}}" class="view"> --}}
+                                                    <button class="btn-sm bg-warning"
+                                                        onclick="deleteAddress('{{this.id}}')"> delete</button>
+                                                    {{!-- </a> --}}
                                             </td>
-                                            </tr> 
-                                            {{!-- {{/each}}  --}}
                                         </tr>
-                                       
+                                        {{!-- {{/each}} --}}
+                                        </tr>
+
                                         {{/each}}
                                     </tbody>
                                 </table>
                             </div>
                             {{!-- <a href="#" class="view">Edit</a> --}}
-                            
-                                
+
+
 
                         </div>
                         {{!-- {{/if}} --}}
@@ -338,9 +349,15 @@
     <!-- material-scrolltop button -->
     <button class="material-scrolltop" type="button"></button>
 
-   
+
 
     {{>userfooter}}
+
+    {{!-- <script>
+       $(function () {
+    $('#ordersTable').DataTable();
+} );
+    </script> --}}
 
 </body>
 

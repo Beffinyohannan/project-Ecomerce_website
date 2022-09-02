@@ -1,0 +1,392 @@
+{{!--
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Acara - Ticketing Bootstrap Admin Dashboard</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/admin/images/favicon.png">
+
+    <!-- Datatable -->
+    <link href="/admin/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    <link href="/admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="/admin/css/style.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+</head> --}}
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        {{>adminHeader}}
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <!-- Add Order -->
+
+                <div class="page-titles">
+                    <ol class="breadcrumb">
+
+                        <li class="breadcrumb-item active"><a href="">Sales Report</a></li>
+                    </ol>
+                </div>
+                <!-- row -->
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            {{#if salesReport}}
+                            <div class="card-header">
+                                <h4 class="card-title">Users Datatable</h4>
+
+
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <form action="/admin/daily-sales-report" method="post">
+                                                    <th scope="col">Select Day:</th>
+                                                    <th>
+                                                        <div class="dropdown"><input name="day" type="date"></div>
+                                                    </th>
+
+                                                    <th scope="col">
+                                                        <button type="submit" class="btn btn-primary m-2">View</button>
+                                                        </td>
+                                                    </th>
+                                                    <th scope="col"></th>
+                                                </form>
+                                            </tr>
+
+                                            <tr>
+                                                <form action="/admin/monthly-sales-report" method="post">
+                                                    <th scope="col">Select Month:</th>
+                                                    <th scope="col">
+                                                        <select name="month" id="cars">
+                                                            <option value="01">January</option>
+                                                            <option value="02">Feb</option>
+                                                            <option value="03">Mar</option>
+                                                            <option value="04">Apr</option>
+                                                            <option value="05">May</option>
+                                                            <option value="06">Jun</option>
+                                                            <option value="07">Jul</option>
+                                                            <option value="08">Aug</option>
+                                                            <option value="09">Sep</option>
+                                                            <option value="10">Oct</option>
+                                                            <option value="11">Nov</option>
+                                                            <option value="12">Dec</option>
+                                                        </select>
+
+                                                         <select name="year" id="cars">
+                                                            <option value="2022">2022</option>
+                                                            <option value="2021">2021</option>
+                                                            <option value="2020">2020</option>
+                                                            <option value="2019">2019</option>
+                                                            <option value="2018">2018</option>
+                                                            <option value="2017">2017</option>
+                                                            <option value="2016">2016</option>
+                                                            <option value="2015">2015</option>
+                                                            <option value="2014">2014</option>
+                                                            <option value="201">2013</option>
+                                                            <option value="2012">2012</option>
+                                                            <option value="2011">2011</option>
+                                                        </select>
+                                                    </th>
+                                                    
+                                                    <th scope="col">
+                                                        <button type="submit" class="btn btn-primary m-2">View</button>
+                                                        </td>
+                                                    </th>
+                                                    <th scope="col"></th>
+                                                </form>
+                                            </tr>
+                                            <tr>
+                                                <form action="/admin/yearly-sales-report" method="post">
+                                                    <th scope="col">Select Year:</th>
+                                                    <th scope="col">
+                                                        <select name="year" id="cars">
+                                                            <option value="2022">2022</option>
+                                                            <option value="2021">2021</option>
+                                                            <option value="2020">2020</option>
+                                                            <option value="2019">2019</option>
+                                                            <option value="2018">2018</option>
+                                                            <option value="2017">2017</option>
+                                                            <option value="2016">2016</option>
+                                                            <option value="2015">2015</option>
+                                                            <option value="2014">2014</option>
+                                                            <option value="201">2013</option>
+                                                            <option value="2012">2012</option>
+                                                            <option value="2011">2011</option>
+                                                        </select>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <button type="submit" class="btn btn-primary m-2">View</button>
+                                                        </td>
+
+                                                    </th>
+                                                    <th scope="col"></th>
+                                                </form>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                            {{!-- /* --------------------------- daily sales report --------------------------- */ --}}
+
+                            {{else if dailysalesReports}}
+                            <div class="card-header">
+                                <h4 class="card-title">Daily Sales Report</h4>
+
+
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    {{!-- <table id="example3" class="display min-w850"> --}}
+                                        <table id="example" class="display nowrap" style="width:100%">
+                                            <thead>
+                                               
+                                                <tr>
+                                                    <th>S No.</th>
+                                                    <th>Date</th>
+                                                    <th>Product Name</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                {{#each daily}}
+                                                <tr>
+
+                                                    <td>{{inc @index}}</td>
+                                                    <td>{{this.date}}</td>
+                                                    <td>{{this.name}}</td>
+                                                    <td>{{this.price}}</td>
+                                                    <td>{{this.quantity}}</td>
+                                                    <td>{{this.totalAmount}}</td>
+
+
+                                                </tr>
+                                                {{/each}}
+
+                                                <tr>
+                                                    <td>
+                                                        {{#each count}}
+                                                        <p><strong>Total Order: {{this.date}}</strong> </p>
+                                                        {{/each}}
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td> <strong>Total quantity: {{sum}}</strong> </td>
+                                                    <td> <strong> Total Amount: {{sumTotal}}</strong> </td>
+                                                </tr>
+
+                                            </tbody>
+
+
+                                        </table>
+
+
+                                </div>
+                            </div>
+
+                            {{!-- /* -------------------------- monthly sales report -------------------------- */ --}}
+
+                            {{else if monthlysalesReports}}
+                            <div class="card-header">
+                                <h4 class="card-title">Monthly Sales Report</h4>
+
+
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example3" class="display min-w850">
+                                        <thead>
+                                            <tr>
+                                                <th>S No.</th>
+                                                <th>Date</th>
+                                                <th>orders</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each monthly}}
+                                            <tr>
+                                                <td>{{inc @index}}</td>
+                                                <td>{{this._id}}</td>
+                                                <td>{{this.count}}</td>
+                                                <td>{{this.totalAmount}}</td>
+                                               
+
+
+                                            </tr>
+                                            {{/each}}
+
+                                             <tr>
+                                                   
+                                                    <td><strong>Total</strong></td>
+                                                    <td></td>
+                                                    <td> <strong>Total Orders: {{sum}}</strong> </td>
+                                                    <td> <strong> Total Amount: {{sumTotal}}</strong> </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+                            </div>
+
+                            {{!-- /* --------------------------- yearly sales report -------------------------- */ --}}
+
+                            {{else if yearlysalesReports}}
+                            <div class="card-header">
+                                <h4 class="card-title">Yearly Sales Report</h4>
+
+
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example3" class="display min-w850">
+                                        <thead>
+                                            <tr>
+                                                <th>S No.</th>
+                                                <th>Date</th>
+                                                <th>Order</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each yearly}}
+                                            <tr>
+                                                <td>{{inc @index}}</td>
+                                                <td>{{this._id}}</td>
+                                                <td>{{this.count}}</td>
+                                                <td>{{this.totalAmount}}</td>
+
+
+                                            </tr>
+                                            {{/each}}
+
+                                            <tr>
+                                                   
+                                                    <td><strong>Total</strong> </td>
+                                                    <td></td>
+                                                    <td> <strong>Total Orders: {{sum}}</strong> </td>
+                                                    <td> <strong> Total Amount: {{sumTotal}}</strong> </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+                            </div>
+
+
+
+                            {{/if}}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/"
+                        target="_blank">DexignZone</a>
+                    2021</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    {{!--
+    <script src="/admin/vendor/global/global.min.js"></script>
+    <script src="/admin/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="/admin/js/custom.min.js"></script>
+    <script src="/admin/js/deznav-init.js"></script>
+
+    <!-- Datatable -->
+    <script src="/admin/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="/admin/js/plugins-init/datatables.init.js"></script> --}}
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+    </script>
+
+</body>

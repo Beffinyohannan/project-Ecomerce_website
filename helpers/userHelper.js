@@ -14,12 +14,13 @@ const paypal = require('paypal-rest-sdk');
 const { resolve } = require('path');
 
 
-
+/* ------------------------------ razorPay keys ----------------------------- */
 var instance = new Razorpay({
     key_id: verify.keyId,
     key_secret: verify.keySecret,
 });
 
+/* ------------------------------- paypal keys ------------------------------ */
 paypal.configure({
     'mode': 'sandbox', //sandbox or live
     'client_id': process.env.CLIENT_ID ,
@@ -348,17 +349,15 @@ module.exports = {
             let status = order['payment-method'] === 'COD' ? 'placed' : 'pending'
             let orderObj = {
                 deliveryDetails:  ObjectID( order ['payment-address']),
-                // {
-                    // name: order.name,
-                    //  number: order.number,
-                    //  address: order.address,
-                // },
+               
                 userId: ObjectID(order.userId),
                 paymentMethod: order['payment-method'],
                 products: products,
                 totalAmount: total,
                 status: status,
                 date: new Date()
+                // date:moment().format("DD/MM/YYYY h:mm:ss a")
+                
 
             }
 
@@ -788,7 +787,7 @@ viewAddress: (userId) => {
                     "payment_method": "paypal"
                 },
                 "redirect_urls": {
-                    return_url: "/order-success",
+                    return_url: "http://localhost:5500/order-success",
                     cancel_url: "http://localhost:3000/cancel"
                 },
                 "transactions": [

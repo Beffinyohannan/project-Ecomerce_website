@@ -90,17 +90,13 @@
 
                             <h3>Billing Details</h3>
                             <div class="row">
+                                    
+
                                 {{#each address}}
                                 <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse"
                                     data-bs-target="#methodCod">
-                                    <input type="radio" id="currencyCod" value="{{this._id}}"
-                                        
-                                             {{!-- {{this.address}} ,
-                                            {{this.pincode}} ,
-                                            {{this.state}}, 
-                                            {{this.city}}, 
-                                            {{this.number}}]" --}}
-                                             name="payment-address">
+                                    <input type="radio" id="currencyCod" value="{{this._id}}" 
+                                        name="payment-address">
                                     <span>
                                         {{this.name}} <br>
                                         {{this.address}} <br>
@@ -109,16 +105,14 @@
                                         {{this.city}} <br>
                                         {{this.number}} <br>
                                     </span>
-                                    {{!-- <input type="text" name="name" value="{{this.name}}" hidden>
-                                    <input type="text" name="address" value="{{this.address}}" hidden>
-                                    <input type="text" name="number" value="{{this.number}}" hidden> --}}
                                     
+
                                 </label>
 
                                 {{/each}}
 
                                 <div>
-                                    <a href="/add-address" class="btn btn-info mb-3" style="float:right;">Add
+                                    <a href="/checkout/add-address" class="btn btn-info mb-3" style="float:right;">Add
                                         Address</a>
                                 </div>
 
@@ -199,12 +193,15 @@
                                         </div>
                                     </div>
                                 </div> --}}
+
+
+
                                 <div class="col-12">
-                                    <label class="checkbox-default" for="newShipping" data-bs-toggle="collapse"
+                                    {{!-- <label class="checkbox-default" for="newShipping" data-bs-toggle="collapse"
                                         data-bs-target="#anotherShipping">
                                         <input type="checkbox" id="newShipping">
                                         <span>Ship to a different address?</span>
-                                    </label>
+                                    </label> --}}
 
                                     <div id="anotherShipping" class="collapse mt-3" data-parent="#anotherShipping">
                                         <div class="row">
@@ -345,11 +342,11 @@
                                     <tfoot>
                                         <tr>
                                             <th>Cart Subtotal</th>
-                                            <td>$215.00</td>
+                                            <td>₹215.00</td>
                                         </tr>
                                         <tr>
                                             <th>Shipping</th>
-                                            <td><strong>$5.00</strong></td>
+                                            <td><strong>₹5.00</strong></td>
                                         </tr>
                                         <tr class="order_total">
                                             <th>Order Total</th>
@@ -359,7 +356,7 @@
                                 </table>
                             </div>
                             <div class="payment_method">
-                                <p>Please select your payment method:</p>
+                                <h3>Please select your payment method:</h3>
                                 {{!-- <input type="radio" id="COD" name="payment-method" value="COD">
                                 <label for="html">Cash On Delivery</label><br>
                                 <input type="radio" id="Online" name="payment-method" value="Online">
@@ -426,54 +423,7 @@
     <!-- material-scrolltop button -->
     <button class="material-scrolltop" type="button"></button>
 
-    <!-- Start Modal Add cart -->
-    <div class="modal fade" id="modalAddcart" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col text-right">
-                                <button type="button" class="close modal-close" data-bs-dismiss="modal"
-                                    aria-label="Close">
-                                    <span aria-hidden="true"> <i class="fa fa-times"></i></span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="modal-add-cart-product-img">
-                                            <img class="img-fluid"
-                                                src="assets/images/product/default/home-1/default-1.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="modal-add-cart-info"><i class="fa fa-check-square"></i>Added to cart
-                                            successfully!</div>
-                                        <div class="modal-add-cart-product-cart-buttons">
-                                            <a href="cart.html">View Cart</a>
-                                            <a href="checkout.html">Checkout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-5 modal-border">
-                                <ul class="modal-add-cart-product-shipping-info">
-                                    <li> <strong><i class="icon-shopping-cart"></i> There Are 5 Items In Your
-                                            Cart.</strong></li>
-                                    <li> <strong>TOTAL PRICE: </strong> <span>$187.00</span></li>
-                                    <li class="modal-continue-button"><a href="#" data-bs-dismiss="modal">CONTINUE
-                                            SHOPPING</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> <!-- End Modal Add cart -->
+  
 
 
 
@@ -501,9 +451,9 @@
                             success: (response) => {
 
                                 if (response.codSucess) {
-                                     swal("Order Placed!", "Order Place Sucessfully!", "success")
+                                    swal("Order Placed!", "Order Place Sucessfully!", "success")
 
-                                      location.href = "/order-success"
+                                    location.href = "/order-success"
 
                                 }
                                 else if (response.razorPay) {
@@ -579,7 +529,7 @@
                 success: (response) => {
                     if (response.status) {
                         swal("Order Placed!", "Order Place Sucessfully!", "success")
-                                location.href = "/order-success"
+                        location.href = "/order-success"
 
                     } else {
                         swal("payment failed ")

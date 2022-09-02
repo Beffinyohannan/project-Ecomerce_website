@@ -110,9 +110,15 @@
 
                                         <div class="Image-upload">
                                             <img src="" alt="" style="width: 100px; height:auto" id="imgView">
+                                            <img src="" alt="" style="width: 100px; height:auto" id="imgView1">
+                                            <img src="" alt="" style="width: 100px; height:auto" id="imgView2">
+                                            <img src="" alt="" style="width: 100px; height:auto" id="imgView3">
+                                            <img src="" alt="" style="width: 100px; height:auto" id="imgView4">
+                                            <img src="" alt="" style="width: 100px; height:auto" id="imgView5">
                                             {{!-- <span class="image-option-close">&times;</span> --}}
                                             <label for="product_images">Upload Image </label>
                                             <img src="" id="image" class="h-100" alt="">
+                                           
                                             <input type="file" multiple id="product_images[]" accept="image/*"
                                                 name="image" onchange="viewImage(event)">
                                         </div> <br>
@@ -209,6 +215,11 @@
     <script>
         function viewImage(event) {
             document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
+            document.getElementById('imgView1').src = URL.createObjectURL(event.target.files[1])
+            document.getElementById('imgView2').src = URL.createObjectURL(event.target.files[2])
+            document.getElementById('imgView3').src = URL.createObjectURL(event.target.files[3])
+            document.getElementById('imgView4').src = URL.createObjectURL(event.target.files[4])
+            document.getElementById('imgView5').src = URL.createObjectURL(event.target.files[5])
         }
     </script>
 

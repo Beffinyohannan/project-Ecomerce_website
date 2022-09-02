@@ -15,15 +15,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set("view engine", "hbs");
 
-// app.engine('hbs',hbs.engine({
-//     extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/layouts/',partialsDir:__dirname+'/views/partials/',helpers: {
-//       inc: function (value, options) {
-//         return parseInt(value) + 1;
-//       }
-//     }
-//   }))
-
-
 
 /* --------------------- connecting layout and partials --------------------- */
 app.engine('hbs', hbs.engine({ extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layout/', partialsDir: __dirname + '/views/partials',

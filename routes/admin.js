@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAdminLogin, getAdminDasboard, getUser, getProducts, getAddProduct, postAddProduct, blockusers, unblockusers, deleteProduct, getCategory, postAddCategory, deleteCategory, getEditProducts, postEditProducts, postAdminLogin, adminLogout, getBanner, postAddBanner, getEditBanner, bannerDelete, postEditBanner, getOrder, orderCanel} = require("../controller/adminController");
+const { getAdminLogin, getAdminDasboard, getUser, getProducts, getAddProduct, postAddProduct, blockusers, unblockusers, deleteProduct, getCategory, postAddCategory, deleteCategory, getEditProducts, postEditProducts, postAdminLogin, adminLogout, getBanner, postAddBanner, getEditBanner, bannerDelete, postEditBanner, getOrder, orderCanel, salesReport, dailySalesReport, montlySalesReport, yearlySalesReport, getSalesReport} = require("../controller/adminController");
 
 const router = express.Router();
 const multer = require('../helpers/multer')
@@ -27,5 +27,11 @@ router.post('/edit-banner/:id',multer.array('image',2),postEditBanner)
 router.get('/delete-banner/:id',bannerDelete)
 router.get('/orders',getOrder)
 router.post('/cancel-order/:id',orderCanel)
+
+router.get('/sales-report',getSalesReport)
+router.post('/daily-sales-report',dailySalesReport)
+router.post('/monthly-sales-report',montlySalesReport)
+router.post('/yearly-sales-report',yearlySalesReport)
+
 
 module.exports = router;

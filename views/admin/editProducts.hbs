@@ -66,8 +66,9 @@
                                             <label class="col-sm-3 col-form-label">Category</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="category" id="inlineFormCustomSelect">
+                                                    <option hidden selected value="{{datas.category._id}}">{{datas.category.name}}</option>
                                                     {{#each data}}
-                                                    <option selected >{{this.name}}</option>
+                                                    <option   value="{{this._id}}">{{this.name}}</option>
                                                     {{!-- <option value="{{this.category}}">One</option> --}}
                                                     {{/each}}
                                                 </select>

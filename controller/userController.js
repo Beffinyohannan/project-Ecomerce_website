@@ -98,7 +98,7 @@ let user   // session of the user
 const getHomePage = async(req, res) => {
      user=req.session.user
     // console.log(user);
-    let cartCount = null
+    var cartCount 
     if(req.session.user){
         cartCount = await userHelpers.getCartCount(req.session.user._id)
     }
@@ -114,6 +114,7 @@ const getHomePage = async(req, res) => {
 /* ------------------------------ get products ------------------------------ */
 const getProducts =async (req, res) => {
     let cartCount = null
+    // var cartCount 
     if(req.session.user){
         cartCount = await userHelpers.getCartCount(req.session.user._id)
     }
@@ -143,7 +144,7 @@ const profile = async(req,res)=>{
     // console.log(req.session.user._id);
     let orders = await userHelpers.getUserOrders(user._id)      //view the order of the user
     let details = await userHelpers.viewAddress(user._id)
-    res.render('user/profile',{user,orders,details,profile:true})
+    res.render('user/profile',{user,orders,details})
 }
 
 /* -------------------------------- 404 page -------------------------------- */
@@ -252,8 +253,9 @@ const verifyPayment=(req,res)=>{
 }
 
 /* ------------------------------- address page ------------------------------- */
-const addressPage =(req,res)=>{
-    res.render('user/profile',{address:true})
+const addressPage =async(req,res)=>{
+    let details = await userHelpers.viewAddress(user._id)
+    res.render('user/addressPage',{details,user})
 }
 
 /* ------------------------------- add address ------------------------------ */
@@ -307,9 +309,29 @@ const addressDelete = (req,res)=>{
     })
 }
 
+
+
+/* -------------------------------checkout add address ------------------------------ */
+const getCheckAddressAdd =(req,res)=>{
+    
+    res.render('user/addCheckoutAddress',{user})
+}
+
+/* ----------------------------chekout post add address ---------------------------- */
+const postCheckAddressAdd =(req,res)=>{
+    // console.log(req.session.user._id);
+    // console.log(req.body);
+    // let date = new Date()
+    // req.body.date
+    userHelpers.addAddress(user._id,req.body).then((data)=>{
+    res.redirect('/checkout')
+    })
+}
+
+
 /* ------------------------------- order page ------------------------------- */
 const getOrderPage =(req,res)=>{
-    res.render('user/profile',{order:true})
+    res.render('user/ordersPage')
 }
 
 /* ------------------------------ cancel order ------------------------------ */
@@ -358,7 +380,9 @@ module.exports = {
      addressDelete,
      getOrderPage,
      addressPage,
-     sucessPage
+     sucessPage,
+     getCheckAddressAdd,
+     postCheckAddressAdd
     
 
     }

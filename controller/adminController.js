@@ -34,9 +34,16 @@ const adminLogout = (rq, res) => {
 }
 
 /* --------------------------- get admin dashboard -------------------------- */
-const getAdminDasboard = (req, res) => {
-    // res.send('hi')
-    res.render('admin/adminDashboard', { admin: true })
+const getAdminDasboard =async (req, res) => {
+    
+   let paymentGraph=await adminHelpers.paymentGraph()
+   let sales= await adminHelpers.salesGraph()
+   let monthlySales = await adminHelpers.salesMonthlyGraph()
+   let yearlysales = await adminHelpers.salesyearlyGraph()
+        // console.log(paymentGraph);
+        res.render('admin/adminDashboard', { admin: true,paymentGraph,sales,monthlySales,yearlysales}) 
+    
+   
 }
 
 /* ------------------------------- view users ------------------------------- */
@@ -228,6 +235,8 @@ const bannerDelete = (req, res) => {
 /* ---------------------------- order management ---------------------------- */
 const getOrder = (req, res) => {
     adminHelpers.getOrders().then((order) => {
+        
+        
         res.render('admin/order', { order, admin: true })
     })
 }
@@ -240,12 +249,77 @@ const orderCanel = (req, res) => {
         res.json(response)
    
     })
-        // res.redirect('/admin/orders')
-       
-
-
 }
 
+/* ---------------------------- sales report page --------------------------- */
+const getSalesReport =(req,res)=>{
+    res.render('admin/salesReport',{admin:true,salesReport:true})
+}
+
+
+
+/* ------------------------- daily sales report page ------------------------ */
+const dailySalesReport =async(req,res)=>{
+  let  dt = req.body.day
+    
+    // console.log(req.query.day);
+    // console.log(dt);
+  let daily= await adminHelpers.dailyReport(dt)
+        let sum=0;
+        for(var i=0;i<daily.length;i++){
+            sum=sum+daily[i].quantity
+        }
+        
+        let sumTotal = 0;
+        for(var i=0;i<daily.length;i++){
+            sumTotal = sumTotal+daily[i].totalAmount
+        }
+        // console.log(sum);
+        // console.log(sumTotal);
+        // console.log(daily);
+       let count=await adminHelpers.orderCount(dt)
+    //  console.log(count);
+        
+        res.render('admin/salesReport',{admin:true,dailysalesReports:true,daily,sum,sumTotal,count})
+   
+  
+    
+}
+
+/* ------------------------- monthly sales report page ------------------------ */
+const montlySalesReport =async(req,res)=>{
+   let dt= req.body.year+"-"+req.body.month
+    console.log(dt);
+    let monthly =await adminHelpers.monthlyReport(dt)
+    let sum=0;
+    for(var i=0;i<monthly.length;i++){
+        sum=sum+monthly[i].count
+    }
+    
+    let sumTotal = 0;
+    for(var i=0;i<monthly.length;i++){
+        sumTotal = sumTotal+monthly[i].totalAmount
+    }
+   
+    res.render('admin/salesReport',{admin:true,monthlysalesReports:true,monthly,sum,sumTotal})
+}
+
+/* ------------------------- yearly sales report page ------------------------ */
+const yearlySalesReport =async(req,res)=>{
+    let dt = req.body.year
+    let yearly = await adminHelpers.yearlyReport(dt)
+    let sum=0;
+    for(var i=0;i<yearly.length;i++){
+        sum=sum+yearly[i].count
+    }
+    
+    let sumTotal = 0;
+    for(var i=0;i<yearly.length;i++){
+        sumTotal = sumTotal+yearly[i].totalAmount
+    }
+
+    res.render('admin/salesReport',{admin:true,yearlysalesReports:true,yearly,sum,sumTotal})
+}
 
 module.exports = {
     getAdminLogin,
@@ -270,7 +344,12 @@ module.exports = {
     postEditBanner,
     bannerDelete,
     getOrder,
-    orderCanel
+    orderCanel,
+    getSalesReport,
+    dailySalesReport,
+    montlySalesReport,
+    yearlySalesReport
+
 
 
 }

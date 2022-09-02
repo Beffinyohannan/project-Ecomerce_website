@@ -129,20 +129,22 @@
                                     <span class="item-count">3</span>
                                 </a>
                             </li>
-                            {{#if user}}
+                            {{!-- {{#if user}} --}}
                             <li>
                                 <a href="#offcanvas-add-cart" class="offcanvas-toggle">
                                     <i class="icon-bag"></i>
+                                     {{#if user}}
                                     <span class="item-count" id="cart-count">{{cartCount}}</span>
+                                    {{/if}}
                                 </a>
                             </li>
-                            {{else}}
-                            <li>
+                            {{!-- {{else}} --}}
+                            {{!-- <li>
                                 <a href="/cart" class="">
                                     <i class="icon-bag"></i>
                                 </a>
-                            </li>
-                            {{/if}}
+                            </li> --}}
+                            {{!-- {{/if}} --}}
                             <li>
                                 <a href="#search">
                                     <i class="icon-magnifier"></i>

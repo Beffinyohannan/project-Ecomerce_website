@@ -9,6 +9,7 @@ function addToCart(proId) {
         url: '/add-to-cart/' + proId,
         method: 'get',
         success: (response) => {
+            console.log('success ajax');
             if (response.status) {
                 let count = $('#cart-count').html()
                 count = parseInt(count) + 1
