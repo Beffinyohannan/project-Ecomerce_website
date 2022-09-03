@@ -243,11 +243,19 @@ module.exports = {
     /* ------------------------------- edit banner ------------------------------ */
     editBanner: (banId, banner) => {
         return new Promise(async (reslove, reject) => {
+
+            let img = await db.get().collection(collection.bannerCollection).findOne({ _id: ObjectId(banId) })
+            if (banner.image.length == 0) {
+                banner.image = img.image
+            }
+
             let data = await db.get().collection(collection.bannerCollection).updateOne({ _id: ObjectId(banId) },
                 {
                     $set: {
                         name: banner.name,
-                        description: banner.description,
+                        firstHeading: banner.firstHeading,
+                        secondHeading: banner.secondHeading,
+                        thirdHeading: banner.thirdHeading,
                         image: banner.image
                     }
                 }).then((data) => {
@@ -294,10 +302,11 @@ module.exports = {
         })
     },
 
-    /* ------------------------------ cancel orders ----------------------------- */
-    cancelOrder: (Id) => {
+    /* ------------------------------ change status of order shipped,delivered,cancel orders----------------------------- */
+    cancelOrder: (Id,state) => {
         return new Promise((resolve, reject) => {
-            db.get().collection(collection.orderCollection).updateOne({ _id: ObjectId(Id) }, { $set: { status: 'cancelled' } }).then((data) => {
+            db.get().collection(collection.orderCollection).updateOne({ _id: ObjectId(Id) }, { $set: { status: state } }).then((data) => {
+        
                 resolve(data)
             })
         })

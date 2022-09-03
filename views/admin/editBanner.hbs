@@ -67,9 +67,21 @@
                                         </div>
                             
                                          <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Description</label>
+                                            <label class="col-sm-3 col-form-label">First Heading</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="{{data.description}}" name="description" placeholder="" required="">
+                                                <input type="text" class="form-control" value="{{data.firstHeading}}" name="firstHeading" placeholder="" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Second Heading</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{data.secondHeading}}" name="secondHeading" placeholder="" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Third Heading</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{data.thirdHeading}}" name="thirdHeading" placeholder="" required="">
                                             </div>
                                         </div>
                                          <img src="/product-images/{{data.image.[0]}}" alt="" style="width: 100px; height:auto" id="imgView" >
@@ -89,7 +101,7 @@
                                            {{!-- <span class="image-option-close">&times;</span> --}}
                                             <label for="product_images">Upload Image </label>
                                              <img src="" id="image"  class="h-100" alt=""  >
-                                               <input type="file"  multiple id="product_images[]" accept="image/*" name="image"  onchange="viewImage(event)" required="">
+                                               <input type="file"  multiple id="product_images[]" accept="image/*" name="image"  onchange="viewImage(event)" >
                                               </div> <br>
                                        
                                         <div class="form-group row">

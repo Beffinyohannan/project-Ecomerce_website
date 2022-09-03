@@ -64,9 +64,21 @@
                                         </div>
                             
                                          <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Description</label>
+                                            <label class="col-sm-3 col-form-label">First Heading</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control"  name="description" placeholder="" required="" >
+                                                <input type="text" class="form-control"  name="firstHeading" placeholder="" required="" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Second Heading</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control"  name="secondHeading" placeholder="" required="" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Third Heading</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control"  name="thirdHeading" placeholder="" required="" >
                                             </div>
                                         </div>
                                          {{!-- <img src="/product-images/{{datas.image.[0]}}" alt="" style="width: 100px; height:auto"> --}}
@@ -149,7 +161,9 @@
                                             <tr>
                                                 <th></th>
                                                 <th>Banner Name</th>
-                                                <th>Description</th>
+                                                <th>First Heading</th>
+                                                <th>First Heading</th>
+                                                <th>First Heading</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -160,7 +174,9 @@
                                                 {{!-- <img class="rounded" width="100" src="/product-images/{{this.image.[1]}}" alt=""> --}}
                                                 </td>
                                                 <td>{{this.name}}</td>
-                                                <td>{{this.description}}</td>
+                                                <td>{{this.firstHeading}}</td>
+                                                <td>{{this.secondHeading}}</td>
+                                                <td>{{this.thirdHeading}}</td>
                                                 <td>
 													<div class="d-flex">
 														<a href="/admin/edit-banner/{{this._id}}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>

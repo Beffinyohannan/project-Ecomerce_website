@@ -104,6 +104,11 @@ const getHomePage = async(req, res) => {
     }
     userHelpers.viewProducts().then((data)=>{
         adminHelpers.viewBanner().then((datas)=>{
+            // let dataa={};
+            // for(var i=0;i<4;i++){
+            //     dataa=data[i]
+            // }
+            // console.log(dataa);
             res.render('user/homePage',{user,data,cartCount,datas})      // passing session,products,cartcount,banner
 
         })
@@ -337,8 +342,10 @@ const getOrderPage =(req,res)=>{
 /* ------------------------------ cancel order ------------------------------ */
 const orderCancelling=(req,res)=>{
     console.log(req.params.id);
-    adminHelpers.cancelOrder(req.params.id).then((response)=>{
+   let state='Cancelled'
+    adminHelpers.cancelOrder(req.params.id,state).then((response)=>{
         // res.redirect('/profile')
+        response.cancelled=true
         res.json(response)
     })
 }

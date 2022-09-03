@@ -241,12 +241,24 @@ const getOrder = (req, res) => {
     })
 }
 
-/* ------------------------------ cancel orders ----------------------------- */
+/* ------------------------------change ststus of order shipped,delivered,cancel orders ----------------------------- */
 const orderCanel = (req, res) => {
     // console.log(req.params.id);
-    adminHelpers.cancelOrder(req.params.id).then((response)=>{
-        console.log(response);
-        res.json(response)
+    // console.log(req.body.state);
+    let state = req.body.state
+    adminHelpers.cancelOrder(req.params.id,state).then((response)=>{
+        // console.log(response);
+        if(state=='Shipped'){
+            response.shipped=true;
+            res.json(response)
+        }else if(state=='Delivered'){
+            response.delivered=true;
+            res.json(response)
+        }else if(state=='Cancelled'){
+            response.cancelled=true;
+            res.json(response)
+        }
+        // res.json(response)
    
     })
 }
@@ -261,8 +273,6 @@ const getSalesReport =(req,res)=>{
 /* ------------------------- daily sales report page ------------------------ */
 const dailySalesReport =async(req,res)=>{
   let  dt = req.body.day
-    
-    // console.log(req.query.day);
     // console.log(dt);
   let daily= await adminHelpers.dailyReport(dt)
         let sum=0;
@@ -289,7 +299,7 @@ const dailySalesReport =async(req,res)=>{
 /* ------------------------- monthly sales report page ------------------------ */
 const montlySalesReport =async(req,res)=>{
    let dt= req.body.year+"-"+req.body.month
-    console.log(dt);
+    // console.log(dt);
     let monthly =await adminHelpers.monthlyReport(dt)
     let sum=0;
     for(var i=0;i<monthly.length;i++){

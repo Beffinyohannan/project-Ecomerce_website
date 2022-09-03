@@ -2,7 +2,10 @@
 
 function cancelOrder(proId) {
     event.preventDefault
-   
+// console.log(document.getElementById('a' +proId).value);
+//    console.log(sts);
+let state = document.getElementById('a' +proId).value
+//    alert(document.getElementById('a' +proId).value)
     swal({
         title: "Order cancel",
         text: "Once cancel, the order get cancelled",
@@ -14,20 +17,22 @@ function cancelOrder(proId) {
         if (willDelete) {
             $.ajax({
                 url: '/admin/cancel-order/' + proId,
+                data:{
+                    state:state
+                },
                 method: 'post',
                 success: (response) => {
                    
-                    if(response){
-                        document.getElementById(proId).innerHTML = "cancelled"
+                    if(response.shipped){
+                        document.getElementById(proId).innerHTML = "Shipped"
                         swal("order cancelled", "sucessfully", "success");
-                      
-
-                    
+                    } else if(response.delivered){
+                        document.getElementById(proId).innerHTML = "Delivered"
+                        swal("order cancelled", "sucessfully", "success");
+                    } else if(response.cancelled){
+                        document.getElementById(proId).innerHTML = "Cancelled"
+                        swal("order cancelled", "sucessfully", "success");
                     }
-                       
-        
-                
-                    
                     
                 }
             })

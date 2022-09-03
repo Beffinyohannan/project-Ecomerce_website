@@ -95,8 +95,24 @@
                                                 <td id="{{this._id}}">{{this.status}}</td>
                                                 <td> {{this.date}} </td>
                                                 <td>
+                                                  {{!-- <form action=""  method="post"> --}}
+                                                      <select  name="state" id="a{{this._id}}">
+                                                        <option hidden  value="{{this.status}}">{{this.status}}</option>
+                                                        <option value="Shipped">Shipped</option>
+                                                        <option value="Delivered">Delivered</option>
+                                                        <option value="Cancelled">Cancel</option>
+                                                    </select>
+                                                    <input type="text" value="{{this._id}}" name="proId" hidden>
+                                                    <button class="btn btn-primary shadow btn-md sharp mr-1b-2 mt-2" type="submit"
+                                                        style="width: 110px; padding-top: 10px; "
+                                                        onclick="cancelOrder('{{this._id}}')"
+                                                        > 
+                                                        Change
+                                                    </button>
+                                                  {{!-- </form> --}}
 
-                                                    <div class="d-flex ">
+
+                                                    {{!-- <div class="d-flex ">
                                                         <div class="basic-dropdown">
                                                             <div class="dropdown">
                                                                 <button type="button"
@@ -105,8 +121,9 @@
                                                                     Status
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                    {{!-- <a class="dropdown-item" href="#">Link 1</a> --}}
-                                                                     <button
+                                                                 <a class="dropdown-item" href="#">Link 1</a>
+                                                                
+                                                                    <button
                                                                         class="btn btn-primary shadow btn-md sharp mr-1b-2"
                                                                         style="width: 110px; padding-top: 10px; "
                                                                         onclick="">Shipped
@@ -123,7 +140,7 @@
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                         {{!-- {{#if this.state}} --}}
                                                         {{!-- <a href="/admin/cancel-order/{{this._id}}"
                                                             class="btn btn-primary shadow btn-md sharp mr-1"
@@ -194,5 +211,47 @@
     <!-- Datatable -->
     <script src="/admin/vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="/admin/js/plugins-init/datatables.init.js"></script> --}}
+
+    {{!-- <script>
+         $("#change-status").submit((e) => {
+           // console.log(proId)
+            e.preventDefault()
+
+             swal({
+        title: "Order cancel",
+        text: "Once cancel, the order get cancelled",
+        icon: "info",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                url: '/admin/cancel-order/' + proId,
+                method: 'post',
+                success: (response) => {
+                   
+                    if(response){
+                        document.getElementById(proId).innerHTML = "cancelled"
+                        swal("order cancelled", "sucessfully", "success");
+                      
+
+                    
+                    }
+                       
+        
+                
+                    
+                    
+                }
+            })
+        } else {
+          swal("Your order safe");
+        }
+      })
+
+
+         })
+    </script> --}}
 
 </body>
