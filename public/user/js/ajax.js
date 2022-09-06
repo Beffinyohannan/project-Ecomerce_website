@@ -207,3 +207,27 @@ function deleteAddress(id){
         }
       })
 }
+
+
+
+
+/* --------------------------- whishlist add and product count --------------------------- */
+function addWhishlist(proId) {
+
+    alert('hai')
+    alert(proId)
+    $.ajax({
+        url: '/add-wishlist/' + proId,
+        method: 'get',
+        success: (response) => {
+            console.log('success ajax');
+            if (response.status) {
+                let count = $('#cart-count').html()
+                count = parseInt(count) + 1
+                $('#cart-count').html(count)
+            }
+            // alert(response)
+            swal("Product added to cart", "sucessfully", "success");
+        }
+    })
+}

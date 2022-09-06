@@ -176,7 +176,7 @@ const getCart = async (req,res)=>{
 
 /* ------------------------------- add to cart ------------------------------ */
 const addToCart = (req,res)=>{
-    console.log(req.params.id);
+    // console.log(req.params.id);
     userHelpers.addCart(req.params.id,user._id).then(()=>{
         res.redirect('/products')
         // res.json({status:true})
@@ -296,7 +296,7 @@ const getEditAddress = (req,res)=>{
 const postEditAddrress=(req,res)=>{
     // console.log(req.body);
     let userId = req.body.user;
-    let Id = req.body.id
+    let Id = req.body._id
     userHelpers.postAddressEdit(req.body,userId,Id).then((response)=>{
 
         res.redirect('/profile')
@@ -355,6 +355,20 @@ const sucessPage = (req,res)=>{
     res.render('user/successPage')
 }
 
+/* ------------------------------ wishlist page ----------------------------- */
+const getWishlist = (req,res)=>{
+    res.render('user/wishlist')
+}
+
+/* ------------------------------ add wishlist ------------------------------ */
+const wishlistAdd =(req,res)=>{
+    console.log(req.params.id);
+    let proId = req.params.id
+    userHelpers.addWishlist(proId,user._id).then(()=>{
+        res.redirect('/homePage')
+    })
+}
+
 
 module.exports = {
      getHomePage,
@@ -389,7 +403,9 @@ module.exports = {
      addressPage,
      sucessPage,
      getCheckAddressAdd,
-     postCheckAddressAdd
+     postCheckAddressAdd,
+     getWishlist,
+     wishlistAdd
     
 
     }

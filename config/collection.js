@@ -5,5 +5,6 @@ module.exports={
     bannerCollection :"banner",
     cartCollection:"cart",
     orderCollection:"order",
-    addressCollection:"address"
+    addressCollection:"address",
+    wishlistCollection:"wishlist"
 }

@@ -12,6 +12,7 @@ const Razorpay = require('razorpay');
 const moment = require("moment")
 const paypal = require('paypal-rest-sdk');
 const { resolve } = require('path');
+const { response } = require('../app');
 
 
 /* ------------------------------ razorPay keys ----------------------------- */
@@ -406,12 +407,9 @@ module.exports = {
                     $project:{
                         date: { $dateToString: { format: "%d-%m-%Y", date: "$date" } },totalAmount:1,products:1,paymentMethod:1,address:1,status:1
                     }
-                }
-                // {
-                //     $project:{
-
-                //     }
-                // }
+                },
+                { $sort: { date: -1 } }
+               
 
             ]).toArray()
             // console.log(orders);
@@ -732,7 +730,7 @@ viewAddress: (userId) => {
         //     console.log(details);
         //         resolve(details)
             // console.log(Id +"farfrf");
-        let data =await db.get().collection(collection.addressCollection).findOne({$and:[{user:ObjectID(userId)},{id:Id}]})
+        let data =await db.get().collection(collection.addressCollection).findOne({$and:[{user:ObjectID(userId)},{_id:ObjectID(Id)}]})
        
         //   console.log(data);
         resolve(data)
@@ -747,7 +745,7 @@ viewAddress: (userId) => {
         console.log(id);
         return new Promise(async(resolve,reject)=>{
            try {
-          let data=  await db.get().collection(collection.addressCollection).updateOne({user:ObjectID(user),id:id},
+          let data=  await db.get().collection(collection.addressCollection).updateOne({user:ObjectID(user),_id:ObjectID(id)},
             {
                 $set:
                 {
@@ -774,7 +772,7 @@ viewAddress: (userId) => {
     /* ----------------------------- delete address ----------------------------- */
     deleteAddress: (userId,Id)=>{
         return new Promise(async(resolve,reject)=>{
-        await db.get().collection(collection.addressCollection).deleteOne({user:ObjectID(userId),id:Id})
+        await db.get().collection(collection.addressCollection).deleteOne({user:ObjectID(userId),_id:ObjectID(Id)})
         .then((data)=>{
             resolve(data)
         })
@@ -829,5 +827,30 @@ viewAddress: (userId) => {
             });
         });
     },
+    
+
+    /* ------------------------------ wishlist page ----------------------------- */
+    addWishlist:(proId,userId)=>{
+        console.log('fgfgdggdgdgd'+proId);
+        console.log(userId);
+        return new Promise(async(resolve,reject)=>{
+            let userWishlist = await  db.get().collection(collection.wishlistCollection).findOne({user:ObjectID(userId)})
+
+            if(userWishlist){
+                db.get().collection(collection.wishlistCollection).updateOne({user:ObjectID(userId)},
+                   { $push:{products:proId}} ).then((response)=>{
+                    resolve()
+                   })
+            }else{
+                let wishObj ={
+                    user:ObjectID(userId),
+                    products:[proId]
+                }
+                db.get().collection(collection.wishlistCollection).insertOne(wishObj).then((response)=>{
+                    resolve()
+                })
+            }
+        })
+    }
 }
 

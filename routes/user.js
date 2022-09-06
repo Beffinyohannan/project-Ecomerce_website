@@ -1,5 +1,5 @@
 const express = require("express");
-const { getHomePage, getLogin, getSignup, getProducts, getProductSinglePage, postSignup, postLogin, getLogout, errorPage, getCart, addToCart, getOTP, getNumber, postNumber, postVerify, profile, cartItemDelete, productQuantityChange, getCheckout, placeOrder, viewOrderProduct, verifyPayment, getaddressAdd, getAddressAdd, postAddressAdd, getEditAddress, orderCancelling, postEditAddrress, addressDelete, getOrderPage, addressPage, sucessPage, getCheckAddressAdd, postCheckAddressAdd } = require("../controller/userController");
+const { getHomePage, getLogin, getSignup, getProducts, getProductSinglePage, postSignup, postLogin, getLogout, errorPage, getCart, addToCart, getOTP, getNumber, postNumber, postVerify, profile, cartItemDelete, productQuantityChange, getCheckout, placeOrder, viewOrderProduct, verifyPayment, getaddressAdd, getAddressAdd, postAddressAdd, getEditAddress, orderCancelling, postEditAddrress, addressDelete, getOrderPage, addressPage, sucessPage, getCheckAddressAdd, postCheckAddressAdd, getWishlist, wishlistAdd } = require("../controller/userController");
 const verifyLogin = require("../middleware/verifyLogin");
 const router = express.Router();
 
@@ -44,5 +44,8 @@ router.get('/checkout/add-address',getCheckAddressAdd)
 router.post('/checkout/add-address',postCheckAddressAdd)
 
 router.get('/order-success',sucessPage)
+
+router.get('/wishlist',getWishlist)
+router.get('/add-wishlist/:id',wishlistAdd)
 
 module.exports = router;

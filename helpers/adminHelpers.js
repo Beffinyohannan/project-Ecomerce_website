@@ -294,7 +294,8 @@ module.exports = {
                     $project:{
                         date: { $dateToString: { format: "%d-%m-%Y", date: "$date" } },totalAmount:1,products:1,paymentMethod:1,address:1,status:1
                     }
-                }
+                },
+                { $sort: { date: -1 } }
             ]).toArray()
             // console.log(orders);
             resolve(orders)
