@@ -1,4 +1,5 @@
 
+const { resolveInclude } = require("ejs");
 const session = require("express-session");
 const { response } = require("../app");
 const app = require("../app");
@@ -140,7 +141,8 @@ const getProductSinglePage = (req, res) => {
 
 /* ----------------------------- logout of user ----------------------------- */
 const getLogout = (req,res)=>{
-    req.session.destroy()
+    req.session.loggedIn=false
+    req.session.user=null
     res.redirect("/")
 }
 
@@ -149,7 +151,8 @@ const profile = async(req,res)=>{
     // console.log(req.session.user._id);
     let orders = await userHelpers.getUserOrders(user._id)      //view the order of the user
     let details = await userHelpers.viewAddress(user._id)
-    res.render('user/profile',{user,orders,details})
+    let coupon = await adminHelpers.viewCoupons()                  // view coupon in user profile
+    res.render('user/profile',{user,orders,details,coupon})
 }
 
 /* -------------------------------- 404 page -------------------------------- */
@@ -167,11 +170,12 @@ const getCart = async (req,res)=>{
     let products = await userHelpers.getCartProducts(user._id)
     let totalValue = await userHelpers.getTotalAmount(user._id)
     let productValue = await userHelpers.getCartProductTotal(user._id)
+    let wishlist = await userHelpers.getWishProducts(user._id)
     for(var i=0;i<products.length;i++){
         products[i].productValue = productValue[i].total
     }
     // console.log(productValue);
-    res.render('user/cart',{products,user: req.session.user,cartCount,totalValue})
+    res.render('user/cart',{products,user: req.session.user,cartCount,totalValue,wishlist})
 }
 
 /* ------------------------------- add to cart ------------------------------ */
@@ -214,24 +218,57 @@ const getCheckout =async (req,res)=>{
 const placeOrder=async(req,res)=>{
     let products = await userHelpers.getCartProductList(req.body.userId)
     let totalPrice = await userHelpers.getTotalAmount(req.body.userId)
-    userHelpers.orderPlace(req.body,products,totalPrice).then((orderId)=>{
-        if(req.body['payment-method']==='COD'){
-            res.json({codSucess:true})
-        }else if(req.body['payment-method']==='RazorPay'){
-            userHelpers.generateRazorpay(orderId,totalPrice).then((response)=>{
-                response.razorPay= true;
-              res.json(response)  
-            })
-        }else if(req.body['payment-method']==='Paypal'){
-            userHelpers.generatePayPal(orderId,totalPrice).then((response)=>{
-                console.log("payapal wrkng");
-                response.payPal = true;
-                res.json(response)
-            })
-        }
-       
+    // console.log(req.body.couponCode);
 
-    })
+    let couponVerify = await userHelpers.couponPlaceOrder(req.body.couponCode)
+
+    if(couponVerify){
+        let discountAmount = (totalPrice * parseInt(couponVerify.offer)) / 100
+        let amount = totalPrice - discountAmount
+
+        userHelpers.orderPlace(req.body,products,amount).then((orderId)=>{
+            if(req.body['payment-method']==='COD'){
+                res.json({codSucess:true})
+            }else if(req.body['payment-method']==='RazorPay'){
+                userHelpers.generateRazorpay(orderId,amount).then((response)=>{
+                    response.razorPay= true;
+                  res.json(response)  
+                })
+            }else if(req.body['payment-method']==='Paypal'){
+                userHelpers.generatePayPal(orderId,amount).then((response)=>{
+                    console.log("payapal wrkng");
+                    response.payPal = true;
+                    res.json(response)
+                })
+            }
+           
+    
+        })
+
+    }else{
+
+        userHelpers.orderPlace(req.body,products,totalPrice).then((orderId)=>{
+            if(req.body['payment-method']==='COD'){
+                res.json({codSucess:true})
+            }else if(req.body['payment-method']==='RazorPay'){
+                userHelpers.generateRazorpay(orderId,totalPrice).then((response)=>{
+                    response.razorPay= true;
+                  res.json(response)  
+                })
+            }else if(req.body['payment-method']==='Paypal'){
+                userHelpers.generatePayPal(orderId,totalPrice).then((response)=>{
+                    console.log("payapal wrkng");
+                    response.payPal = true;
+                    res.json(response)
+                })
+            }
+           
+    
+        })
+    }
+
+
+   
     // console.log(req.body);
 }
 
@@ -356,19 +393,77 @@ const sucessPage = (req,res)=>{
 }
 
 /* ------------------------------ wishlist page ----------------------------- */
-const getWishlist = (req,res)=>{
-    res.render('user/wishlist')
+const getWishlist =async (req,res)=>{
+  let wishlist = await userHelpers.getWishProducts(user._id)
+//   console.log(wishlist);
+    res.render('user/wishlist',{wishlist})
 }
 
 /* ------------------------------ add wishlist ------------------------------ */
 const wishlistAdd =(req,res)=>{
     console.log(req.params.id);
     let proId = req.params.id
-    userHelpers.addWishlist(proId,user._id).then(()=>{
-        res.redirect('/homePage')
+    userHelpers.addWishlist(proId,user._id).then((response)=>{
+        res.json(response)
+        // res.redirect('/homePage')
     })
 }
 
+/* ---------------------- post delete wishlist product ---------------------- */
+const deleteWishProduct=(req,res)=>{
+    console.log(req.body);
+    // console.log(req.body.proudct);
+
+    userHelpers.removeFromWishlist(req.body).then((response)=>{
+      
+      res.json(response)
+    })
+  }
+
+  /* ---------------------------- post apply coupon --------------------------- */
+  const postApplyCoupon=async (req,res)=>{
+    let user = req.session.user._id
+    let totalAmount = await userHelpers.getTotalAmount(user)
+  
+    // req.body.total=totalAmount
+    const date = new Date()
+    // console.log(req.body);
+  let  Total=totalAmount
+
+    if(req.body.coupon==''){
+        res.json({noCoupon:true,Total})
+    }else{
+        let couponResponse = await userHelpers.applyCoupon(req.body,user,date,totalAmount)
+        if(couponResponse.verify){
+           let discountAmount = (totalAmount * parseInt(couponResponse.couponData.offer))/100
+           let amount = totalAmount-discountAmount
+           couponResponse.discountAmount= Math.round(discountAmount)
+           couponResponse.amount= Math.round(amount)
+        //    console.log(amount);
+           res.json(couponResponse) 
+        }else{
+            couponResponse.Total=totalAmount
+            // console.log(couponResponse.Total);
+            res.json(couponResponse)
+        }
+    }
+  }
+
+  const removeCoupon=async(req,res)=>{
+    // console.log('remove coupon');
+    user=req.session.user._id
+     await userHelpers.getTotalAmount(user).then((response)=>{
+        // console.log(response);
+        
+        // let  Total=response
+    //    response.removeCoupon=true
+        res.json(response)
+     })
+    
+    
+  }
+
+ 
 
 module.exports = {
      getHomePage,
@@ -405,7 +500,12 @@ module.exports = {
      getCheckAddressAdd,
      postCheckAddressAdd,
      getWishlist,
-     wishlistAdd
+     wishlistAdd,
+     deleteWishProduct,
+     postApplyCoupon,
+     removeCoupon
+    
+     
     
 
     }

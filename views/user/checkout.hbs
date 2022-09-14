@@ -85,8 +85,8 @@
             <!-- Start User Details Checkout Form -->
             <div class="checkout_form" data-aos="fade-up" data-aos-delay="400">
                 <div class="row">
-                    <form action="" id="checkout-form">
-                        <div class="col-lg-6 col-md-6">
+                    <form action="" id="checkout-form" >
+                        <div class="col-lg-6 col-md-6 " >
 
                             <h3>Billing Details</h3>
                             <div class="row">
@@ -96,7 +96,7 @@
                                 <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse"
                                     data-bs-target="#methodCod">
                                     <input type="radio" id="currencyCod" value="{{this._id}}" 
-                                        name="payment-address">
+                                        name="payment-address" required="">
                                     <span>
                                         {{this.name}} <br>
                                         {{this.address}} <br>
@@ -110,89 +110,19 @@
                                 </label>
 
                                 {{/each}}
+                                
 
                                 <div>
-                                    <a href="/checkout/add-address" class="btn btn-info mb-3" style="float:right;">Add
-                                        Address</a>
+                                    <br>
+                                    <a href="/checkout/add-address" class="btn btn-info mb-3" 
+                                    {{!-- style="float:right;" --}}
+                                    >Add Address</a>
                                 </div>
 
 
 
-                                {{!-- <div class="col-lg-6">
-                                    <div class="default-form-box">
-                                        <label>First Name <span>*</span></label>
-                                        <input type="text" name="firstName">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="default-form-box">
-                                        <label>Last Name <span>*</span></label>
-                                        <input type="text" name="last-name">
-                                    </div>
-                                </div> --}}
-                                {{!-- <div class="col-12">
-                                    <div class="default-form-box">
-                                        <label>Company Name</label>
-                                        <input type="text" name="">
-                                    </div>
-                                </div> --}}
-                                {{!-- <div class="col-12">
-                                    <div class="default-form-box">
-                                        <label for="country">country <span>*</span></label>
-                                        <input placeholder="Counrty name" name="country" type="text">
-
-                                    </div>
-                                </div> --}}
-                                {{!-- <div class="col-12">
-                                    <div class="default-form-box">
-                                        <label>Street address <span>*</span></label>
-                                        <input placeholder="House number and street name" name="address" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="default-form-box">
-                                        <input placeholder="Apartment, suite, unit etc. (optional)" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="default-form-box">
-                                        <label>Town / City <span>*</span></label>
-                                        <input type="text" name="city">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="default-form-box">
-                                        <label>State / County <span>*</span></label>
-                                        <input type="text" name="state">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="default-form-box">
-                                        <label>Phone<span>*</span></label>
-                                        <input type="text" name="number">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="default-form-box">
-                                        <label> Email Address <span>*</span></label>
-                                        <input type="text" name="email">
-                                    </div>
-                                </div> --}}
                                 <input type="text" name="userId" value="{{user._id}}" hidden>
-                                {{!-- <div class="col-12">
-                                    <label class="checkbox-default" for="newAccount" data-bs-toggle="collapse"
-                                        data-bs-target="#newAccountPassword">
-                                        <input type="checkbox" id="newAccount">
-                                        <span>Create an account?</span>
-                                    </label>
-                                    <div id="newAccountPassword" class="collapse mt-3"
-                                        data-parent="#newAccountPassword">
-                                        <div class="card-body1 default-form-box">
-                                            <label> Account password <span>*</span></label>
-                                            <input placeholder="password" type="password">
-                                        </div>
-                                    </div>
-                                </div> --}}
+                                
 
 
 
@@ -280,81 +210,66 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{!-- <div class="col-12 mt-3">
-                                    <div class="order-notes">
-                                        <label for="order_note">Order Notes</label>
-                                        <textarea id="order_note"
-                                            placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                    </div>
-                                </div> --}}
+                                
                             </div>
 
                         </div>
 
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-lg-6 col-md-6 " >
 
 
 
-                            {{!-- <div class="col-lg-6 col-md-6"> --}}
+                          
                                 <div class="coupon_code left" data-aos="fade-up" data-aos-delay="200">
                                     <h3>Coupon</h3>
+                                    <p id="error" class="text-danger"></p>
                                     <div class="coupon_inner">
                                         <p>Enter your coupon code if you have one.</p>
-                                        <input class="mb-2" placeholder="Coupon code" type="text">
-                                        <button type="submit" class="btn btn-md btn-golden">Apply coupon</button>
+                                        <input class="mb-2" id="couponName" value="" name="couponCode" placeholder="Coupon code" type="text">
+                                        <button  onclick="applyCoupon(event)" id="applybutton" class="btn btn-md btn-golden">Apply coupon</button>
+                                        <button  onclick="removeCoupon(event)" id="deletebutton" class="btn btn-md btn-golden" hidden>Remove coupon</button>
+                                    </div>
                                     </div>
                                 </div>
-                                {{!--
-                            </div> --}}
+                                </div>
+                               
                             <br>
 
 
 
 
-
+                            <div class="col-lg-6 col-md-6 " >
                             <h3>Your order</h3>
                             <div class="order_table table-responsive">
                                 <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Product</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    {{!-- <tbody>
-                                        <tr>
-                                            <td> Handbag fringilla <strong> × 2</strong></td>
-                                            <td> $165.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Handbag justo <strong> × 2</strong></td>
-                                            <td> $50.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Handbag elit <strong> × 2</strong></td>
-                                            <td> $50.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Handbag Rutrum <strong> × 1</strong></td>
-                                            <td> $50.00</td>
-                                        </tr>
-                                    </tbody> --}}
+                                   
                                     <tfoot>
                                         <tr>
                                             <th>Cart Subtotal</th>
-                                            <td>₹215.00</td>
+                                            <td>₹ {{total}}</td>
                                         </tr>
                                         <tr>
                                             <th>Shipping</th>
-                                            <td><strong>₹5.00</strong></td>
+                                            <td><strong>Free Shipping</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Discount Percentage</th>
+                                           <td id="percentage"><strong>0</strong></td>
+                                        </tr>
+                                         <tr>
+                                            <th>Discount Amount</th>
+                                           <td id="discount"><strong>0</strong></td>
                                         </tr>
                                         <tr class="order_total">
                                             <th>Order Total</th>
-                                            <td><strong>₹ {{total}}</strong></td>
+                                            <td id="totall" ><strong >₹ {{total}}</strong></td>
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 " >
                             <div class="payment_method">
                                 <h3>Please select your payment method:</h3>
                                 {{!-- <input type="radio" id="COD" name="payment-method" value="COD">
@@ -367,7 +282,7 @@
                                 <div class="panel-default">
                                     <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse"
                                         data-bs-target="#methodCod">
-                                        <input type="radio" id="currencyCod" value="COD" name="payment-method">
+                                        <input type="radio" id="currencyCod" value="COD" name="payment-method" required="">
                                         <span>Cash on Delivery</span>
                                     </label>
 
@@ -381,7 +296,7 @@
                                 <div class="panel-default">
                                     <label class="checkbox-default" for="currencyPaypal" data-bs-toggle="collapse"
                                         data-bs-target="#methodPaypal">
-                                        <input type="radio" id="currencyPaypal" value="RazorPay" name="payment-method">
+                                        <input type="radio" id="currencyPaypal" value="RazorPay" name="payment-method" required="">
                                         <span>RazorPay Payment</span>
                                     </label>
                                     {{!-- <div id="methodPaypal" class="collapse " data-parent="#methodPaypal">
@@ -394,7 +309,7 @@
                                 <div class="panel-default">
                                     <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse"
                                         data-bs-target="#methodCod">
-                                        <input type="radio" id="currencyCod" value="Paypal" name="payment-method">
+                                        <input type="radio" id="currencyCod" value="Paypal" name="payment-method" required="">
                                         <span>Paypal Payment</span>
                                     </label>
 
@@ -409,6 +324,8 @@
                                     <button class="btn btn-md btn-black-default-hover" type="submit">Place order
                                     </button>
                                 </div>
+                            </div>
+
                             </div>
 
                         </div>
@@ -434,6 +351,7 @@
     <script>
         $("#checkout-form").submit((e) => {
             e.preventDefault()
+           
 
             swal({
                 title: "Please confirm your order",

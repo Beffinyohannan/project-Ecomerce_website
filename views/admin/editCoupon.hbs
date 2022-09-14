@@ -1,0 +1,132 @@
+
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        {{>adminHeader}}
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+
+
+
+                <div class="row">
+                    <div class="col-xl-6 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Edit Coupon</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <form action="/admin/edit-coupon" method="POST" >
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Coupon Name</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{coupon.name}}" name="name" placeholder="" required="">
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Coupon Code</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{coupon.code}}" name="code" placeholder="" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Minimum Amount</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{coupon.minAmount}}" name="minAmount" placeholder="" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Maximum Amount</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{coupon.maxAmount}}" name="maxAmount" placeholder="" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Offer</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{coupon.offer}}" name="offer" placeholder="" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Ending Date</label>
+                                            <div class="col-sm-9">
+                                                <input type="date" class="form-control" value="{{coupon.validity}}" name="validity"
+                                                    placeholder="" required="">
+                                                     <input type="text" value="{{coupon._id}}" name="id" hidden>
+                                            </div>
+                                        </div>
+
+                                      
+                                        
+
+
+                                        <div class="form-group row">
+                                            <div class="col-sm-10">
+                                                <button type="submit" class="btn btn-primary">Edit Coupon</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/"
+                        target="_blank">DexignZone</a> 2021</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+
+    </div>
+   
+
+</body>
+
+</html>

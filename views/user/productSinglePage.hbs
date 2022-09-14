@@ -108,7 +108,15 @@
                                 </ul>
                                 <a href="#" class="customer-review ml-2">(customer review )</a>
                             </div>
-                            <div class="price">₹  {{data.price}}</div>
+                           
+                            <div class="price">
+                                {{#if data.originalPrice}}
+                                <del>₹  {{data.originalPrice}}</del> -₹  {{data.price}} <br>
+                                {{data.offerPercentage}}%
+                                {{else}}
+                               ₹ {{data.price}}
+                                 {{/if}}
+                                </div>
                             <p>{{data.description}}</p>
                         </div> <!-- End  Product Details Text Area-->
                         <!-- Start Product Variable Area -->

@@ -1,3 +1,58 @@
+<head>
+    <style>
+        .cards {
+
+            width: 280px;
+            border: none;
+            height: 320px;
+            border-radius: 15px;
+            padding: 20px;
+            background-color: #D50000;
+        }
+
+        .percent {
+
+            font-size: 56px;
+            color: #fff;
+        }
+
+        .discount {
+
+            font-size: 27px;
+            color: #fff;
+        }
+
+
+        .line {
+
+            color: #fff;
+        }
+
+
+
+        .form-check-input:checked {
+            background-color: #F44336;
+            border-color: #F44336;
+        }
+
+
+        .form-check-input:focus {
+            border-color: #d50000;
+            outline: 0;
+            box-shadow: none;
+        }
+
+
+        .form-check {
+            display: block;
+            min-height: 1.5rem;
+            padding-left: 1.75em;
+            margin-bottom: -5px;
+        }
+    </style>
+</head>
+
+
 <body>
     {{>navbar}}
 
@@ -40,9 +95,9 @@
                                     class="nav-link btn btn-block btn-md btn-black-default-hover">Downloads</a></li>
                             <li><a href="#address" data-bs-toggle="tab"
                                     class="nav-link btn btn-block btn-md btn-black-default-hover">Addresses</a></li>
-                            {{!-- <li><a href="#account-details" data-bs-toggle="tab"
-                                    class="nav-link btn btn-block btn-md btn-black-default-hover">Account details</a>
-                            </li> --}}
+                            <li><a href="#account-details" data-bs-toggle="tab"
+                                    class="nav-link btn btn-block btn-md btn-black-default-hover">Coupons</a>
+                            </li>
                             <li><a href="" class="nav-link btn btn-block btn-md btn-black-default-hover">logout</a></li>
                         </ul>
                     </div>
@@ -136,7 +191,7 @@
                             <h4>Orders</h4>
                             {{!-- table-responsive --}}
                             <div class="table_page ">
-                                <table >
+                                <table>
                                     <thead class="bg-dark">
                                         <tr>
                                             <th class="text-white">Order</th>
@@ -184,6 +239,7 @@
                         <div class="tab-pane fade" id="downloads">
                             <h4>Downloads</h4>
                             <div class="table_page table-responsive">
+
                                 <table>
                                     <thead>
                                         <tr>
@@ -223,7 +279,7 @@
                             <div class="table_page ">
                                 <a href="/add-address"><button class="btn btn-info mb-3" style="float:right;">Add
                                         Address</button></a>
-                                <table id="example3"  class="display min-w850">
+                                <table id="example3" class="display min-w850">
                                     <thead class="bg-dark">
                                         <tr>
                                             <th class="text-white">s no.</th>
@@ -281,67 +337,79 @@
                         {{!-- {{/if}} --}}
 
                         <div class="tab-pane fade" id="account-details">
-                            <h3>Account details </h3>
-                            <div class="login">
-                                <div class="login_form_container">
+                            <h3>coupons </h3>
+                            <div class="login ">
+
+                                <div class="login_form_container ">
+
+
                                     <div class="account_login_form">
-                                        <form action="#">
-                                            <p>Already have an account? <a href="#">Log in instead!</a></p>
-                                            <div class="input-radio">
-                                                <span class="custom-radio"><input type="radio" value="1"
-                                                        name="id_gender"> Mr.</span>
-                                                <span class="custom-radio"><input type="radio" value="1"
-                                                        name="id_gender"> Mrs.</span>
-                                            </div> <br>
-                                            <div class="default-form-box mb-20">
-                                                <label>First Name</label>
-                                                <input type="text" name="first-name">
+                                        <div style="display:flex ; flex-wrap: wrap; ">
+                                            {{#each coupon}}
+                                            <div class="cards mt-3 ml-1">
+
+
+                                                <div class="text-center">
+
+                                                    <div class="d-flex flex-row text-center">
+
+                                                        <img src="https://i.imgur.com/bIgSEvT.png" width="70">
+
+                                                        <div class="d-flex flex-column ml-1">
+
+                                                            <h1 class="mb-0 percent">{{this.offer}} %</h1>
+                                                            <span class="discount">Discount</span>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <hr class="line">
+
+                                                <span class="text-white">{{this.name}}</span> <br>
+                                                <span class="text-white">Purchase Minimum for
+                                                    ₹{{this.minAmount}}</span><br>
+                                                <span class="text-white">Purchase Maximum for
+                                                    ₹{{this.maxAmount}}</span><br>
+                                                <span class="text-white"> Coupon valide till
+                                                    {{this.validity}}</span><br>
+
+                                                <div class="d-flex justify-content-between align-items-center mt-4">
+
+                                                    <span class="text-white bg-dark"
+                                                        id="p1{{this._id}}">{{this.code}}</span>
+
+                                                    <div class="form-check form-switch">
+                                                        {{!-- <input class="form-check-input" type="checkbox"
+                                                            id="flexSwitchCheckChecked" checked> --}}
+                                                        <button class="btn-sm"
+                                                            onclick="copyToClipboard('#p1{{this._id}}')">copy</button>
+
+                                                    </div>
+
+                                                </div>
+
+
                                             </div>
-                                            <div class="default-form-box mb-20">
-                                                <label>Last Name</label>
-                                                <input type="text" name="last-name">
-                                            </div>
-                                            <div class="default-form-box mb-20">
-                                                <label>Email</label>
-                                                <input type="text" name="email-name">
-                                            </div>
-                                            <div class="default-form-box mb-20">
-                                                <label>Password</label>
-                                                <input type="password" name="user-password">
-                                            </div>
-                                            <div class="default-form-box mb-20">
-                                                <label>Birthdate</label>
-                                                <input type="date" name="birthday">
-                                            </div>
-                                            <span class="example">
-                                                (E.g.: 05/31/1970)
-                                            </span>
-                                            <br>
-                                            <label class="checkbox-default" for="offer">
-                                                <input type="checkbox" id="offer">
-                                                <span>Receive offers from our partners</span>
-                                            </label>
-                                            <br>
-                                            <label class="checkbox-default checkbox-default-more-text" for="newsletter">
-                                                <input type="checkbox" id="newsletter">
-                                                <span>Sign up for our newsletter<br><em>You may unsubscribe at any
-                                                        moment. For that purpose, please find our contact info in the
-                                                        legal notice.</em></span>
-                                            </label>
-                                            <div class="save_button mt-3">
-                                                <button class="btn btn-md btn-black-default-hover"
-                                                    type="submit">Save</button>
-                                            </div>
-                                        </form>
+                                            
+                                            {{/each}}
+                                        </div>
                                     </div>
+
+
+
+
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
     </div> <!-- ...:::: End Account Dashboard Section:::... -->
 
 
@@ -353,11 +421,22 @@
 
     {{>userfooter}}
 
-    {{!-- <script>
-       $(function () {
-    $('#ordersTable').DataTable();
-} );
+    {{!--
+    <script>
+        $(function () {
+            $('#ordersTable').DataTable();
+        });
     </script> --}}
+
+    <script>
+        function copyToClipboard(element, Id) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+    </script>
 
 </body>
 

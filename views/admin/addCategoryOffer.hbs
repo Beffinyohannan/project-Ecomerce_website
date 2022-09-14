@@ -1,0 +1,123 @@
+
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        {{>adminHeader}}
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+
+
+
+                <div class="row">
+                    <div class="col-xl-6 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Add Category Offer</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <form action="/admin/category-offer" method="POST" >
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Offer Name</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="name" placeholder="" required="">
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Offer Id</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="OfferId" placeholder="" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Percentage</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="catOffer" placeholder="" required="">
+                                            </div>
+                                        </div>
+                                         <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Category</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" name="category"
+                                                    id="inlineFormCustomSelect">
+                                                    {{#each data}}
+                                                    <option value="{{this._id}}" selected>{{this.name}}</option>
+                                                    {{/each}}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                      
+                                        
+
+
+                                        <div class="form-group row">
+                                            <div class="col-sm-10">
+                                                <button type="submit" class="btn btn-primary">Add Offer</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/"
+                        target="_blank">DexignZone</a> 2021</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+
+    </div>
+   
+
+</body>
+
+</html>

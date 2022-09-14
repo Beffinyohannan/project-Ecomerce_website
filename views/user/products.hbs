@@ -115,7 +115,11 @@
                                                                         data-bs-target="#modalQuickview"><i
                                                                             class="icon-magnifier"></i></a> --}}
                                                                     {{!-- <a href="/add-wishlist/{{this._id}}"><i class="icon-heart"></i></a> --}}
-                                                                    <button class="btn-sm text-white"onclick="addWhishlist('{{this._id}}')" ><i class="icon-heart"></i></button>
+                                                                    <button class="btn-sm text-white"onclick="addWhishlist('{{this._id}}')" id="heart" ><i class="icon-heart"></i></button>
+                                                                    <button class="btn-sm text-white"onclick="addWhishlist('{{this._id}}')" id="whishlistHeart" hidden>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                                             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                                                                </svg></button>
                                                                     {{!-- <a href="compare.html"><i
                                                                             class="icon-shuffle"></i></a> --}}
                                                                 </div>
@@ -139,7 +143,12 @@
                                                                 </ul>
                                                             </div>
                                                             <div class="content-right ">
-                                                                <span class="price ">₹{{this.price}}</span>
+                                                                {{#if this.originalPrice}}
+                                                                <span class="price "> <del>₹{{this.originalPrice}}</del></span>
+                                                                {{/if}}
+                                                                <br>
+                                                                <span class="price text-success"><strong>₹{{this.price}}</strong></span>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>

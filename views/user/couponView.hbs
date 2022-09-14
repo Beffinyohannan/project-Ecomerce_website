@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+
+            background-color: #ff52529c;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .card {
+
+            width: 300px;
+            border: none;
+            height: 320px;
+            border-radius: 15px;
+            padding: 20px;
+            background-color: #D50000;
+        }
+
+        .percent {
+
+            font-size: 56px;
+            color: #fff;
+        }
+
+        .discount {
+
+            font-size: 27px;
+            color: #fff;
+        }
+
+
+        .line {
+
+            color: #fff;
+        }
+
+
+
+        .form-check-input:checked {
+            background-color: #F44336;
+            border-color: #F44336;
+        }
+
+
+        .form-check-input:focus {
+            border-color: #d50000;
+            outline: 0;
+            box-shadow: none;
+        }
+
+
+        .form-check {
+            display: block;
+            min-height: 1.5rem;
+            padding-left: 1.75em;
+            margin-bottom: -5px;
+        }
+    </style>
+</head>
+
+
+<body>
+    {{>navbar}}
+
+    <!-- ...:::: Start Breadcrumb Section:::... -->
+    <div class="breadcrumb-section breadcrumb-bg-color--golden">
+        <div class="breadcrumb-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="breadcrumb-title">My Account</h3>
+                        <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                            <nav aria-label="breadcrumb">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="shop-grid-sidebar-left.html">Shop</a></li>
+                                    <li class="active" aria-current="page">My Account</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- ...:::: End Breadcrumb Section:::... -->
+
+    <!-- ...:::: Start Account Dashboard Section:::... -->
+    <div class="account-dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <!-- Nav tabs -->
+                    <div class="dashboard_tab_button" data-aos="fade-up" data-aos-delay="0">
+                        <ul role="tablist" class="nav flex-column dashboard-list">
+                            <li><a href="#dashboard" data-bs-toggle="tab"
+                                    class="nav-link btn btn-block btn-md btn-black-default-hover active">Profile</a>
+                            </li>
+                            <li> <a href="#orders" data-bs-toggle="tab"
+                                    class="nav-link btn btn-block btn-md btn-black-default-hover">Orders</a></li>
+                            <li><a href="#downloads" data-bs-toggle="tab"
+                                    class="nav-link btn btn-block btn-md btn-black-default-hover">Downloads</a></li>
+                            <li><a href="#address" data-bs-toggle="tab"
+                                    class="nav-link btn btn-block btn-md btn-black-default-hover">Addresses</a></li>
+                            {{!-- <li><a href="#account-details" data-bs-toggle="tab"
+                                    class="nav-link btn btn-block btn-md btn-black-default-hover">Account details</a>
+                            </li> --}}
+                            <li><a href="" class="nav-link btn btn-block btn-md btn-black-default-hover">logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+
+
+                    <div class="text-center">
+
+                        <div class="d-flex flex-row text-center">
+
+                            <img src="https://i.imgur.com/bIgSEvT.png" width="70">
+
+                            <div class="d-flex flex-column ml-1">
+
+                                <h1 class="mb-0 percent">20%</h1>
+                                <span class="discount">Discount</span>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr class="line">
+
+                    <span class="text-white">Ultimate discount for all customers across all country on all products at
+                        bbbootstrap.com</span>
+
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+
+                        <span class="text-white">Active</span>
+
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

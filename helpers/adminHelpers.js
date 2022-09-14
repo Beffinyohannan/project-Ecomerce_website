@@ -4,6 +4,8 @@ const { resolveInclude } = require('ejs')
 const { ObjectId } = require('mongodb')
 const { categoryCollection } = require('../config/collection')
 const { ReservationList } = require('twilio/lib/rest/taskrouter/v1/workspace/task/reservation')
+const { FleetPage } = require('twilio/lib/rest/preview/deployed_devices/fleet')
+const { couponAdd } = require('../controller/adminController')
 
 
 module.exports = {
@@ -20,12 +22,32 @@ module.exports = {
                 response.status = true
                 resolve(response)
             } else {
-                product.category = ObjectId(product.category)
-                db.get().collection(collection.productCollection).insertOne(product).then((data) => {
-                    // console.log(data)
-                    resolve(data)
-                })
-                resolve({ status: false })
+
+                if (product.offerPercentage) {
+                    newprice = Math.round((product.price) * ((100 - product.offerPercentage) / 100))
+
+                    // console.log(newprice, "********");
+
+
+                    product.originalPrice = product.price
+                    product.price = newprice
+
+                    product.category = ObjectId(product.category)
+                    db.get().collection(collection.productCollection).insertOne(product).then((data) => {
+                        // console.log(data)
+                        resolve(data)
+                    })
+                    resolve({ status: false })
+                }else{
+
+                    product.category = ObjectId(product.category)
+                    db.get().collection(collection.productCollection).insertOne(product).then((data) => {
+                        // console.log(data)
+                        resolve(data)
+                    })
+                    resolve({ status: false })
+                }
+
             }
         })
 
@@ -61,7 +83,8 @@ module.exports = {
                         stock: 1,
                         offer: 1,
                         description: 1,
-                        image: 1
+                        image: 1,
+                        offerPercentage: 1
 
                     }
                 }
@@ -290,9 +313,9 @@ module.exports = {
 
                 {
                     $unwind: '$address'
-                },{
-                    $project:{
-                        date: { $dateToString: { format: "%d-%m-%Y", date: "$date" } },totalAmount:1,products:1,paymentMethod:1,address:1,status:1
+                }, {
+                    $project: {
+                        date: { $dateToString: { format: "%d-%m-%Y", date: "$date" } }, totalAmount: 1, products: 1, paymentMethod: 1, address: 1, status: 1
                     }
                 },
                 { $sort: { date: -1 } }
@@ -304,10 +327,10 @@ module.exports = {
     },
 
     /* ------------------------------ change status of order shipped,delivered,cancel orders----------------------------- */
-    cancelOrder: (Id,state) => {
+    cancelOrder: (Id, state) => {
         return new Promise((resolve, reject) => {
             db.get().collection(collection.orderCollection).updateOne({ _id: ObjectId(Id) }, { $set: { status: state } }).then((data) => {
-        
+
                 resolve(data)
             })
         })
@@ -365,7 +388,7 @@ module.exports = {
         })
     },
 
-    /* ------------------------------ weekly sales graph ------------------------------ */
+    /* ------------------------------ monthly sales graph ------------------------------ */
     salesMonthlyGraph: () => {
         return new Promise(async (resolve, reject) => {
             let sales = await db.get().collection(collection.orderCollection).aggregate([
@@ -507,15 +530,15 @@ module.exports = {
 
     /* --------------------------- montly sales report -------------------------- */
     monthlyReport: (dt) => {
-        return new Promise(async(resolve, reject) => {
-            let sales =await db.get().collection(collection.orderCollection).aggregate([
+        return new Promise(async (resolve, reject) => {
+            let sales = await db.get().collection(collection.orderCollection).aggregate([
                 {
                     $match: {
                         status: { $nin: ['cancelled'] }
                     }
                 },
                 {
-                    $project: { dates: { $dateToString: { format: "%Y-%m", date: "$date" } }, totalAmount: 1, date: { $dateToString: { format: "%d-%m-%Y", date: "$date" } }}
+                    $project: { dates: { $dateToString: { format: "%Y-%m", date: "$date" } }, totalAmount: 1, date: { $dateToString: { format: "%d-%m-%Y", date: "$date" } } }
                 },
                 {
                     $match: {
@@ -530,7 +553,7 @@ module.exports = {
                         count: { $sum: 1 }
                     }
                 },
-                
+
                 { $sort: { _id: 1 } }
 
             ]).toArray()
@@ -540,17 +563,17 @@ module.exports = {
         })
     },
 
-     /* --------------------------- yearly sales report -------------------------- */
-     yearlyReport: (dt) => {
-        return new Promise(async(resolve, reject) => {
-            let sales =await db.get().collection(collection.orderCollection).aggregate([
+    /* --------------------------- yearly sales report -------------------------- */
+    yearlyReport: (dt) => {
+        return new Promise(async (resolve, reject) => {
+            let sales = await db.get().collection(collection.orderCollection).aggregate([
                 {
                     $match: {
                         status: { $nin: ['cancelled'] }
                     }
                 },
                 {
-                    $project: { dates: { $dateToString: { format: "%Y", date: "$date" } }, totalAmount: 1, date: { $dateToString: { format: "%m-%Y", date: "$date" } }}
+                    $project: { dates: { $dateToString: { format: "%Y", date: "$date" } }, totalAmount: 1, date: { $dateToString: { format: "%m-%Y", date: "$date" } } }
                 },
                 {
                     $match: {
@@ -565,7 +588,7 @@ module.exports = {
                         count: { $sum: 1 }
                     }
                 },
-                
+
                 { $sort: { _id: 1 } }
 
             ]).toArray()
@@ -575,7 +598,120 @@ module.exports = {
         })
     },
 
-    
+    /* ------------------------------- coupon add ------------------------------- */
+    addCoupon: (details) => {
+
+        let response = {}
+
+        return new Promise(async (resolve, reject) => {
+            let id = await db.get().collection(collection.couponCollection).findOne({ code: details.code })
+            // console.log(id);
+            if (id) {
+
+                response.status = true
+                response.message = "Coupon With this Code Already Exist"
+                resolve(response)
+            } else {
+                details.state = true
+                db.get().collection(collection.couponCollection).insertOne(details).then((data) => {
+                    // console.log(data)
+                    response.message = 'Coupon Added successfully'
+                    response.status = false
+                    resolve(data)
+                })
+                resolve({ status: false })
+            }
+        })
+    },
+
+    /* ------------------------------ view coupons ----------------------------- */
+    viewCoupons: () => {
+        return new Promise(async (resolve, reject) => {
+            let data = await db.get().collection(collection.couponCollection).find().toArray()
+            // console.log(data);
+            resolve(data)
+
+
+        })
+    },
+
+    /* -------------------------------post edit coupon ------------------------------ */
+    editCoupon: (details) => {
+        // console.log(details);
+        return new Promise(async (resolve, reject) => {
+            let data = await db.get().collection(collection.couponCollection).updateOne({ _id: ObjectId(details.id) },
+                {
+                    $set: {
+                        name: details.name,
+                        code: details.code,
+                        offer: details.offer,
+                        validity: details.validity,
+                        minAmount: details.minAmount,
+                        maxAmount: details.maxAmount
+                    }
+
+                })
+            // console.log(data);
+            resolve(data)
+        })
+    },
+
+    /* ----------------------------- get edit coupon ---------------------------- */
+    editCouponGet: (couponId) => {
+        return new Promise(async (resolve, reject) => {
+            let coupon = await db.get().collection(collection.couponCollection).findOne({ _id: ObjectId(couponId) })
+            // console.log(coupon);
+            resolve(coupon)
+        })
+    },
+
+    /* ------------------------------ delete coupon ----------------------------- */
+    deleteCoupon: (couponId) => {
+        return new Promise((resolve, reject) => {
+            let removeCoupon = db.get().collection(collection.couponCollection).deleteOne({ _id: ObjectId(couponId) })
+            resolve(removeCoupon)
+        })
+    },
+
+
+    /* -------------------------- view category product ------------------------- */
+    viewCategoryProducts: (catId) => {
+        return new Promise(async (resolve, reject) => {
+            let product = await db.get().collection(collection.productCollection).find({ category: ObjectId(catId) }).toArray()
+
+            resolve(product)
+        })
+    },
+
+    /* --------------------------- add category offer --------------------------- */
+    addCategoryOffer: (proId, offPrice, offer) => {
+        console.log(offPrice);
+        return new Promise(async (resolve, reject) => {
+            let productData = await db.get().collection(collection.productCollection).findOne({ _id: ObjectId(proId) })
+
+            let price
+
+            if (productData.originalPrice) {
+                price = productData.originalPrice
+            } else {
+                price = productData.price
+            }
+
+            let product = await db.get().collection(collection.productCollection).updateOne({
+                _id: ObjectId(proId)
+            },
+                {
+                    $set: {
+                        originalPrice: price,
+                        price: "" + offPrice,
+                        offerPercentage: "" + offer
+                    }
+                })
+
+            resolve(product)
+        })
+    }
+
 
 
 

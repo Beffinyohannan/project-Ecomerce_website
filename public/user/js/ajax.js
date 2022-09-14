@@ -1,6 +1,7 @@
 
 
 
+
 /* --------------------------- cart product count --------------------------- */
 function addToCart(proId) {
 
@@ -214,20 +215,131 @@ function deleteAddress(id){
 /* --------------------------- whishlist add and product count --------------------------- */
 function addWhishlist(proId) {
 
-    alert('hai')
-    alert(proId)
     $.ajax({
         url: '/add-wishlist/' + proId,
         method: 'get',
         success: (response) => {
+            swal("Product added to wishlist", "sucessfully", "success");
             console.log('success ajax');
-            if (response.status) {
-                let count = $('#cart-count').html()
-                count = parseInt(count) + 1
-                $('#cart-count').html(count)
-            }
-            // alert(response)
-            swal("Product added to cart", "sucessfully", "success");
+
+            document.getElementById("heart").hidden = true
+            document.getElementById("wishlistHeart").hidden = false
+           
+           
         }
     })
+}
+
+
+/* ---------------------- REMOVE PRODUCT FROM WISHLIST ---------------------- */
+
+function removeFromWishlist(wishlistId,proId){
+    // console.log(wishlistId,proId,'data');
+    // alert(proId)
+    // alert(wishlistId)
+
+    swal({
+        title:"Remove Product!",
+        text:'Press Ok to confirm',
+        icon:'warning',
+        buttons: ["Cancel", "Ok"],
+       dangerMode:'Ok'
+    }).then(
+    function(isConfirm){
+        if(isConfirm){
+    $.ajax({
+        url:'/wishlist/remove-product',
+        data:{
+            wishlist:wishlistId,
+            product:proId
+        },
+        method:'post',
+        success:(response)=>{
+            // alert('delete')
+            location.reload()
+        }
+    })
+}else{
+    swal("Your product not removed");
+}
+    })
+}
+
+
+/* ------------------------------ apply coupons ----------------------------- */
+function applyCoupon(event){
+event.preventDefault()
+// alert('hai')
+let coupon=document.getElementById('couponName').value
+// console.log(coupon);
+// alert(coupon)
+$.ajax({
+   
+    url:'/apply-coupon',
+    data:{coupon},
+    method:'post',
+    success:(response)=>{
+        console.log(response);
+        if(response.verify){
+
+            document.getElementById('discount').innerHTML="₹"+response.discountAmount
+            document.getElementById('totall').innerHTML= "₹"+response.amount
+            document.getElementById('percentage').innerHTML=response.couponData.offer+'%'
+            document.getElementById('error').innerHTML = ''
+            document.getElementById("applybutton").hidden = true
+            document.getElementById("deletebutton").hidden = false
+
+        }else{
+              
+            document.getElementById('discount').innerHTML= "₹" +0
+            document.getElementById('totall').innerHTML= "₹"+response.Total
+            document.getElementById('percentage').innerHTML= 0 + "%"
+
+            if(response.used){
+                document.getElementById('error').innerHTML = response.used
+               }else if(response.minAmount){
+                document.getElementById('error').innerHTML = response.minAmountMsg
+               }else if(response.maxAmount){
+                document.getElementById('error').innerHTML = response.maxAmountMsg
+               }else if(response.invalidDate){
+                document.getElementById('error').innerHTML = response.invalidDateMsg
+               }else if(response.invalidCoupon){
+                document.getElementById('error').innerHTML = response.invalidCouponMsg
+               }else if(response.noCoupon){
+                document.getElementById('error').innerHTML = 'Invalid Coupon Details'
+               }
+        }
+    }
+})
+
+}
+
+/* ------------------------------ remove coupon ----------------------------- */
+function removeCoupon(event){
+    event.preventDefault
+    // alert('hi')
+    $.ajax({
+
+        url:'/remove-coupon',
+        
+        method:'get',
+
+       success:(response)=>{
+        // alert(response)
+        // console.log(response);
+        if(response){
+        document.getElementById('discount').innerHTML= "₹" +0
+        document.getElementById('totall').innerHTML= "₹"+response
+        document.getElementById('percentage').innerHTML= 0 + "%"
+        document.getElementById('couponName').value = ' '
+
+        document.getElementById("applybutton").hidden = false
+        document.getElementById("deletebutton").hidden = true
+        }
+        
+       }
+    
+    })
+   
+
 }

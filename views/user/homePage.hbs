@@ -212,7 +212,11 @@
                                                 </ul>
                                             </div>
                                             <div class="content-right">
-                                                <span class="price">{{this.price}}</span>
+                                                 {{#if this.originalPrice}}
+                                                 <span class="price "> <del>₹{{this.originalPrice}}</del></span>
+                                                  {{/if}}
+                                                  <br>
+                                                <span class="price">₹ {{this.price}}</span>
                                             </div>
 
                                         </div>

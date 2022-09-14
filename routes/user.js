@@ -1,5 +1,6 @@
 const express = require("express");
-const { getHomePage, getLogin, getSignup, getProducts, getProductSinglePage, postSignup, postLogin, getLogout, errorPage, getCart, addToCart, getOTP, getNumber, postNumber, postVerify, profile, cartItemDelete, productQuantityChange, getCheckout, placeOrder, viewOrderProduct, verifyPayment, getaddressAdd, getAddressAdd, postAddressAdd, getEditAddress, orderCancelling, postEditAddrress, addressDelete, getOrderPage, addressPage, sucessPage, getCheckAddressAdd, postCheckAddressAdd, getWishlist, wishlistAdd } = require("../controller/userController");
+const { deleteProduct } = require("../controller/adminController");
+const { getHomePage, getLogin, getSignup, getProducts, getProductSinglePage, postSignup, postLogin, getLogout, errorPage, getCart, addToCart, getOTP, getNumber, postNumber, postVerify, profile, cartItemDelete, productQuantityChange, getCheckout, placeOrder, viewOrderProduct, verifyPayment, getAddressAdd, postAddressAdd, getEditAddress, orderCancelling, postEditAddrress, addressDelete, getOrderPage, addressPage, sucessPage, getCheckAddressAdd, postCheckAddressAdd, getWishlist, wishlistAdd, deleteWishProduct, couponView, postApplyCoupon, removeCoupon } = require("../controller/userController");
 const verifyLogin = require("../middleware/verifyLogin");
 const router = express.Router();
 
@@ -45,7 +46,12 @@ router.post('/checkout/add-address',postCheckAddressAdd)
 
 router.get('/order-success',sucessPage)
 
-router.get('/wishlist',getWishlist)
+router.get('/wishlist',verifyLogin,getWishlist)
 router.get('/add-wishlist/:id',wishlistAdd)
+router.post('/wishlist/remove-product',deleteWishProduct)
+
+router.post('/apply-coupon',postApplyCoupon)
+router.get('/remove-coupon',removeCoupon)
+
 
 module.exports = router;

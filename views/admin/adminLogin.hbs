@@ -23,6 +23,9 @@
                     <h2 class="fw-bold mb-2 text-uppercase  text-center">Admin Login</h2>
                     <div class="card bg-glass">
                         <div class="card-body px-4 py-5 px-md-5">
+                             {{#if loginErr}}
+                            <p class="error text-center">Invalid Username or Password</p>
+                            {{/if}}
                             <form action="/admin/login" method="post">
 
                                 <!-- Email input -->
