@@ -13,7 +13,7 @@
                             <ul class="footer-nav">
                                 <li><a href="#">Delivery Information</a></li>
                                 <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="contact-us.html">Contact</a></li>
+                                <li><a href="">Contact</a></li>
                                 <li><a href="#">Returns</a></li>
                             </ul>
                         </div>
@@ -25,11 +25,11 @@
                             data-aos-delay="200">
                             <h5 class="title">MY ACCOUNT</h5>
                             <ul class="footer-nav">
-                                <li><a href="my-account.html">My account</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                                <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                <li><a href="faq.html">Frequently Questions</a></li>
-                                <li><a href="#">Order History</a></li>
+                                <li><a href="/profile">My account</a></li>
+                                <li><a href="/wishlist">Wishlist</a></li>
+                                <li><a href="/cart">Cart</a></li>
+                                <li><a href="">Privacy Policy</a></li>
+                                <li><a href="/profile">Order History</a></li>
                             </ul>
                         </div>
                         <!-- End Footer Single Item -->
@@ -40,11 +40,10 @@
                             data-aos-delay="400">
                             <h5 class="title">CATEGORIES</h5>
                             <ul class="footer-nav">
-                                <li><a href="#">Decorative</a></li>
-                                <li><a href="#">Kitchen utensils</a></li>
-                                <li><a href="#">Chair & Bar stools</a></li>
-                                <li><a href="#">Sofas and Armchairs</a></li>
-                                <li><a href="#">Interior lighting</a></li>
+                                 {{#each category}}
+                                <li><a href="/category-products/{{this._id}}">{{this.name}}</a></li>
+                                {{/each}}
+                                
                             </ul>
                         </div>
                         <!-- End Footer Single Item -->

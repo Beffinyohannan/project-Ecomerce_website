@@ -10,11 +10,14 @@ function addToCart(proId) {
         url: '/add-to-cart/' + proId,
         method: 'get',
         success: (response) => {
-            console.log('success ajax');
+            console.log('success ajax',response);
             if (response.status) {
                 let count = $('#cart-count').html()
                 count = parseInt(count) + 1
+                // alert(count)
                 $('#cart-count').html(count)
+           
+
             }
             // alert(response)
             swal("Product added to cart", "sucessfully", "success");
@@ -331,7 +334,7 @@ function removeCoupon(event){
         document.getElementById('discount').innerHTML= "₹" +0
         document.getElementById('totall').innerHTML= "₹"+response
         document.getElementById('percentage').innerHTML= 0 + "%"
-        document.getElementById('couponName').value = ' '
+        document.getElementById('couponName').value = ''
 
         document.getElementById("applybutton").hidden = false
         document.getElementById("deletebutton").hidden = true

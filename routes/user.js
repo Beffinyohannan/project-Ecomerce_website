@@ -1,6 +1,6 @@
 const express = require("express");
 const { deleteProduct } = require("../controller/adminController");
-const { getHomePage, getLogin, getSignup, getProducts, getProductSinglePage, postSignup, postLogin, getLogout, errorPage, getCart, addToCart, getOTP, getNumber, postNumber, postVerify, profile, cartItemDelete, productQuantityChange, getCheckout, placeOrder, viewOrderProduct, verifyPayment, getAddressAdd, postAddressAdd, getEditAddress, orderCancelling, postEditAddrress, addressDelete, getOrderPage, addressPage, sucessPage, getCheckAddressAdd, postCheckAddressAdd, getWishlist, wishlistAdd, deleteWishProduct, couponView, postApplyCoupon, removeCoupon } = require("../controller/userController");
+const { getHomePage, getLogin, getSignup, getProducts, getProductSinglePage, postSignup, postLogin, getLogout, errorPage, getCart, addToCart, getOTP, getNumber, postNumber, postVerify, profile, cartItemDelete, productQuantityChange, getCheckout, placeOrder, viewOrderProduct, verifyPayment, getAddressAdd, postAddressAdd, getEditAddress, orderCancelling, postEditAddrress, addressDelete, getOrderPage, addressPage, sucessPage, getCheckAddressAdd, postCheckAddressAdd, getWishlist, wishlistAdd, deleteWishProduct, couponView, postApplyCoupon, removeCoupon, categoryProduct } = require("../controller/userController");
 const verifyLogin = require("../middleware/verifyLogin");
 const router = express.Router();
 
@@ -52,6 +52,8 @@ router.post('/wishlist/remove-product',deleteWishProduct)
 
 router.post('/apply-coupon',postApplyCoupon)
 router.get('/remove-coupon',removeCoupon)
+
+router.get('/category-products/:id',categoryProduct)
 
 
 module.exports = router;

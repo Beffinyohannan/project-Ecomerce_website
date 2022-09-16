@@ -29,84 +29,32 @@
                                         </ul> --}}
                                     </li>
                                     <li class="has-dropdown has-megaitem">
-                                        <a href="product-details-default.html">Category <i
-                                                class="fa fa-angle-down"></i></a>
+                                        <a href="">Category <i class="fa fa-angle-down"></i></a>
                                         <!-- Mega Menu -->
                                         <div class="mega-menu">
                                             <ul class="mega-menu-inner">
                                                 <!-- Mega Menu Sub Link -->
+                                                {{#each category}}
                                                 <li class="mega-menu-item">
-                                                    <a href="#" class="mega-menu-item-title">Brands</a>
-                                                    <ul class="mega-menu-sub">
-                                                        {{!-- <li><a href="shop-grid-sidebar-left.html">Mac</a></li>
-                                                        <li><a href="shop-grid-sidebar-left.html">Asus</a></li>
-                                                        <li><a href="shop-grid-sidebar-left.html">HP</a></li>
-                                                        <li><a href="shop-grid-sidebar-left.html">Lenova</a></li>
-                                                        <li><a href="shop-grid-sidebar-left.html">Acer</a></li>
-                                                        <li><a href="shop-grid-sidebar-left.html">Redmi</a></li>
-                                                        <li><a href="shop-grid-sidebar-left.html">Dell</a></li> --}}
+                                                    <a href="/category-products/{{this._id}}"
+                                                        class="mega-menu-item-title">{{this.name}}</a>
 
+                                                </li>
+                                                {{/each}}
 
-                                                    </ul>
-                                                </li>
-                                                <!-- Mega Menu Sub Link -->
-                                                <li class="mega-menu-item">
-                                                    <a href="#" class="mega-menu-item-title">Business Use</a>
-                                                    {{!-- <ul class="mega-menu-sub">
-                                                        <li><a href="cart.html">Business </a></li>
-
-                                                    </ul> --}}
-                                                </li>
-                                                <!-- Mega Menu Sub Link -->
-                                                <li class="mega-menu-item">
-                                                    <a href="#" class="mega-menu-item-title">Multipurpose</a>
-                                                    {{!-- <ul class="mega-menu-sub">
-                                                        <li><a href="product-details-default.html">multipurpose </a>
-                                                        </li>
-                                                    </ul> --}}
-                                                </li>
-                                                <!-- Mega Menu Sub Link -->
-                                                <li class="mega-menu-item">
-                                                    <a href="#" class="mega-menu-item-title">Gaming</a>
-                                                    {{!-- <ul class="mega-menu-sub">
-                                                        <li><a href="product-details-tab-left.html">Gaming </a></li>
-
-                                                    </ul> --}}
-                                                </li>
-                                                <!-- Mega Menu Sub Link -->
-                                                <li class="mega-menu-item">
-                                                    <a href="#" class="mega-menu-item-title">Students</a>
-                                                    {{!-- <ul class="mega-menu-sub">
-                                                        <li><a href="product-details-tab-left.html">Students use </a>
-                                                        </li>
-
-                                                    </ul> --}}
-                                                </li>
                                             </ul>
-                                            {{!-- <div class="menu-banner">
+                                            <div class="menu-banner">
                                                 <a href="#" class="menu-banner-link">
                                                     <img class="menu-banner-img"
-                                                        src="/user/images/banner/menu-banner.jpg" alt="">
+                                                        src="/user/images/C7WSOETERFDN3MM66JDBRYCT2Y.jpg" alt="">
                                                 </a>
-                                            </div> --}}
+                                            </div>
                                         </div>
                                     </li>
-                                    <li class="has-dropdown">
-                                        <a href="blog-single-sidebar-left.html">offers</a>
-                                        <!-- Sub Menu -->
-                                        {{!-- <ul class="sub-menu">
-                                            <li><a href="blog-grid-sidebar-left.html"> special offer </a>
-                                            </li>
 
-                                        </ul> --}}
-                                    </li>
                                     <li class="has-dropdown">
                                         <a href="/products">All products</a>
-                                        <!-- Sub Menu -->
-                                        {{!-- <ul class="sub-menu">
-                                            <li><a href="faq.html">new ones</a></li>
 
-                                        </ul> --}}
                                     </li>
                                     {{!-- <li>
                                         <a href="about-us.html">About Us</a>
@@ -122,21 +70,21 @@
                         <!-- Start Header Action Link -->
                         <ul class="header-action-link action-color--white action-hover-color--pink">
                             <li>
-                                <a href="#offcanvas-wishlish" class="offcanvas-toggle">
+                                <a href="/wishlist">
                                     <i class="icon-heart"></i>
                                     {{!-- <span class="item-count">3</span> --}}
                                 </a>
                             </li>
                             {{!-- {{#if user}} --}}
                             <li>
-                                <a href="#offcanvas-add-cart" class="offcanvas-toggle">
+                                <a href="/cart">
                                     <i class="icon-bag"></i>
-                                     {{#if user}}
+                                    {{#if user }}
                                     <span class="item-count" id="cart-count">{{cartCount}}</span>
                                     {{/if}}
                                 </a>
                             </li>
-                            
+
                             <li>
                                 <a href="#search">
                                     <i class="icon-magnifier"></i>
@@ -144,13 +92,13 @@
                                 </a>
                             </li>
 
-                           
+
                             <li>
                                 <div class="dropdown">
-                                   
+
                                     <button onclick="myFunction()" class="dropbtn">
-                                         {{!-- <img src="/admin/images/profile/17.jpg" width="25" class="rounded-circle"
-                                        alt="" /> --}}
+                                        {{!-- <img src="/admin/images/profile/17.jpg" width="25" class="rounded-circle"
+                                            alt="" /> --}}
                                         {{# if user}}
                                         {{user.name}}
                                         {{else}}
@@ -198,9 +146,9 @@
                 <div class="mobile-header-left">
                     <ul class="mobile-menu-logo">
                         <li>
-                           <h2> <a href="/">
-                               Airchip
-                            </a></h2>
+                            <h2> <a href="/">
+                                    Airchip
+                                </a></h2>
                         </li>
                     </ul>
                 </div>
@@ -215,17 +163,17 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#offcanvas-wishlish" class="offcanvas-toggle">
+                            <a href="/wishlist">
                                 <i class="icon-heart"></i>
                                 {{!-- <span class="item-count">3</span> --}}
                             </a>
                         </li>
                         <li>
-                            <a href="#offcanvas-add-cart" class="offcanvas-toggle">
+                            <a href="/cart">
                                 <i class="icon-bag"></i>
-                                 {{#if user}}
-                                    <span class="item-count" id="cart-count">{{cartCount}}</span>
-                                    {{/if}}
+                                {{#if user}}
+                                <span class="item-count" id="cart-count">{{cartCount}}</span>
+                                {{/if}}
                             </a>
                         </li>
                         <li>
@@ -258,70 +206,27 @@
                 <ul>
                     <li>
                         <a href="#"><span>Home</span></a>
-                        {{!-- <ul class="mobile-sub-menu">
-                            <li><a href="index.html">Home 1</a></li>
 
-                        </ul> --}}
                     </li>
                     <li>
                         <a href="#"><span>Category</span></a>
-                        <ul class="mobile-sub-menu">
-                            <li>
-                                <a href="#">Brand</a>
-                                <ul class="mobile-sub-menu">
-                                    <li><a href="shop-grid-sidebar-left.html">Mac</a></li>
-                                    <li><a href="shop-grid-sidebar-right.html">Asus</a></li>
-                                    <li><a href="shop-full-width.html">Hp</a></li>
-                                    <li><a href="shop-list-sidebar-left.html">Acer</a></li>
-                                    <li><a href="shop-list-sidebar-right.html">Lenovo</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <ul class="mobile-sub-menu">
-                            <li>
-                                <a href="#">Business</a>
-                                <ul class="mobile-sub-menu">
-                                    <li><a href="cart.html">Business use</a></li>
 
-                                </ul>
-                            </li>
-                        </ul>
                         <ul class="mobile-sub-menu">
+                            {{#each category}}
                             <li>
-                                <a href="#">Multipurpose</a>
-                                <ul class="mobile-sub-menu">
-                                    <li><a href="product-details-default.html">multipurpose</a></li>
+                                <a href="/category-products/{{this._id}}">{{this.name}}</a>
 
-                                </ul>
                             </li>
+                            {{/each}}
                         </ul>
+
                     </li>
-                    <li>
-                        <a href="#"><span>offers</span></a>
-                        <ul class="mobile-sub-menu">
-                            <li>
-                                <a href="#">offers</a>
-                                {{!-- <ul class="mobile-sub-menu">
-                                    <li><a href="blog-grid-sidebar-left.html">Blog Grid Sidebar left</a></li>
+                  
+                    <li class="mobile-sub-menu">
+                        <a href="/products">All products</a>
 
-                                </ul> --}}
-                            </li>
-
-                        </ul>
                     </li>
-                     <li class="mobile-sub-menu">
-                                        <a href="/products">All products</a>
-                                        
-                                    </li>
-                    {{!-- <li>
-                        <a href="#"><span>New arrivals</span></a>
-                        <ul class="mobile-sub-menu">
-                            <li><a href="faq.html">New ones</a></li>
 
-                        </ul>
-                    </li>
-                    <li><a href="about-us.html">About Us</a></li>
-                    <li><a href="contact-us.html">Contact Us</a></li> --}}
                 </ul>
             </div> <!-- End Mobile Menu Nav -->
         </div> <!-- End Mobile Menu -->
@@ -394,7 +299,7 @@
 </div> <!-- ...:::: End Offcanvas Mobile Menu Section:::... -->
 
 <!-- Start Offcanvas Addcart Section -->
-<div id="offcanvas-add-cart" class="offcanvas offcanvas-rightside offcanvas-add-cart-section">
+{{!-- <div id="offcanvas-add-cart" class="offcanvas offcanvas-rightside offcanvas-add-cart-section">
     <!-- Start Offcanvas Header -->
     <div class="offcanvas-header text-right">
         <button class="offcanvas-close"><i class="ion-android-close"></i></button>
@@ -402,80 +307,18 @@
 
     <!-- Start  Offcanvas Addcart Wrapper -->
     <div class="offcanvas-add-cart-wrapper">
-        <h4 class="offcanvas-title">Shopping Cart</h4>
-        <ul class="offcanvas-cart">
-            <li class="offcanvas-cart-item-single">
-                <div class="offcanvas-cart-item-block">
-                    <a href="#" class="offcanvas-cart-item-image-link">
-                        <img src="/user/images/product/default/home-3/default-1.jpg" alt=""
-                            class="offcanvas-cart-image">
-                    </a>
-                    <div class="offcanvas-cart-item-content">
-                        <a href="#" class="offcanvas-cart-item-link">Car Wheel</a>
-                        <div class="offcanvas-cart-item-details">
-                            <span class="offcanvas-cart-item-details-quantity">1 x </span>
-                            <span class="offcanvas-cart-item-details-price">₹ 49.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="offcanvas-cart-item-delete text-right">
-                    <a href="#" class="offcanvas-cart-item-delete"><i class="fa fa-trash-o"></i></a>
-                </div>
-            </li>
-           
-          
-        </ul>
-        {{!-- <div class="offcanvas-cart-total-price">
-            <span class="offcanvas-cart-total-price-text">Subtotal:</span>
-            <span class="offcanvas-cart-total-price-value">₹ 170.00</span>
-        </div> --}}
+
+
         <ul class="offcanvas-cart-action-button">
             <li><a href="/cart" class="btn btn-block btn-pink">View Cart</a></li>
             <li><a href="/checkout" class=" btn btn-block btn-pink mt-5">Checkout</a></li>
         </ul>
     </div> <!-- End  Offcanvas Addcart Wrapper -->
 
-</div> <!-- End  Offcanvas Addcart Section -->
+</div> --}}
+<!-- End  Offcanvas Addcart Section -->
 
-<!-- Start Offcanvas Mobile Menu Section -->
-<div id="offcanvas-wishlish" class="offcanvas offcanvas-rightside offcanvas-add-cart-section">
-    <!-- Start Offcanvas Header -->
-    <div class="offcanvas-header text-right">
-        <button class="offcanvas-close"><i class="ion-android-close"></i></button>
-    </div> <!-- ENd Offcanvas Header -->
 
-    <!-- Start Offcanvas Mobile Menu Wrapper -->
-    <div class="offcanvas-wishlist-wrapper">
-        <h4 class="offcanvas-title">Wishlist</h4>
-        <ul class="offcanvas-wishlist">
-
-            <li class="offcanvas-wishlist-item-single">
-                <div class="offcanvas-wishlist-item-block">
-                    <a href="#" class="offcanvas-wishlist-item-image-link">
-                        <img src="/user/images/product/default/home-3/default-1.jpg" alt=""
-                            class="offcanvas-wishlist-image">
-                    </a>
-                    <div class="offcanvas-wishlist-item-content">
-                        <a href="#" class="offcanvas-wishlist-item-link">Car Wheel</a>
-                        <div class="offcanvas-wishlist-item-details">
-                            <span class="offcanvas-wishlist-item-details-quantity">1 x </span>
-                            <span class="offcanvas-wishlist-item-details-price">₹ 49.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="offcanvas-wishlist-item-delete text-right">
-                    <a href="#" class="offcanvas-wishlist-item-delete"><i class="fa fa-trash-o"></i></a>
-                </div>
-            </li>
-           
-           
-        </ul>
-        <ul class="offcanvas-wishlist-action-button">
-            <li><a href="/wishlist" class="btn btn-block btn-pink">View wishlist</a></li>
-        </ul>
-    </div> <!-- End Offcanvas Mobile Menu Wrapper -->
-
-</div> <!-- End Offcanvas Mobile Menu Section -->
 
 <!-- Start Offcanvas Search Bar Section -->
 <div id="search" class="search-modal">

@@ -175,7 +175,8 @@ const postAddCategory = (req, res) => {
         if (response.status) {
             res.redirect('/admin/category')
         } else {
-            res.send('Category added')
+            // res.send('Category added')
+            res.redirect('/admin/category')
 
 
         }

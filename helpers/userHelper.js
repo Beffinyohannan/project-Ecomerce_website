@@ -129,12 +129,12 @@ module.exports = {
                         .updateOne({ user: ObjectID(userId), 'products.item': ObjectID(proId) },
                             { $inc: { 'products.$.quantity': 1 } }
                         ).then((data) => {
-                            resolve()
+                            resolve({status:false})
                         })
                 } else {
                     db.get().collection(collection.cartCollection).updateOne({ user: ObjectID(userId) },
                         { $push: { products: proObj } }).then((respone) => {
-                            resolve()
+                            resolve({status:true})
                         })
                 }
             } else {
@@ -144,7 +144,7 @@ module.exports = {
                 }
 
                 db.get().collection(collection.cartCollection).insertOne(cartobj).then((response) => {
-                    resolve()
+                    resolve({status:true})
                 })
             }
         })

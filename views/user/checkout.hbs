@@ -26,77 +26,22 @@
     <!-- ...:::: Start Checkout Section:::... -->
     <div class="checkout-section">
         <div class="container">
-            <div class="row">
-                <!-- User Quick Action Form -->
-                {{!-- <div class="col-12">
-                    <div class="user-actions accordion" data-aos="fade-up" data-aos-delay="0">
-                        <h3>
-                            <i class="fa fa-file-o" aria-hidden="true"></i>
-                            Returning customer?
-                            <a class="Returning" href="#" data-bs-toggle="collapse" data-bs-target="#checkout_login"
-                                aria-expanded="true">Click here to login</a>
-                        </h3>
-                        <div id="checkout_login" class="collapse" data-parent="#checkout_login">
-                            <div class="checkout_info">
-                                <p>If you have shopped with us before, please enter your details in the boxes below. If
-                                    you are a new customer please proceed to the Billing &amp; Shipping section.</p>
-                                <form action="#">
-                                    <div class="form_group default-form-box">
-                                        <label>Username or email <span>*</span></label>
-                                        <input type="text">
-                                    </div>
-                                    <div class="form_group default-form-box">
-                                        <label>Password <span>*</span></label>
-                                        <input type="password">
-                                    </div>
-                                    <div class="form_group group_3 default-form-box">
-                                        <button class="btn btn-md btn-black-default-hover" type="submit">Login</button>
-                                        <label class="checkbox-default">
-                                            <input type="checkbox">
-                                            <span>Remember me</span>
-                                        </label>
-                                    </div>
-                                    <a href="#">Lost your password?</a>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="user-actions accordion" data-aos="fade-up" data-aos-delay="200">
-                        <h3>
-                            <i class="fa fa-file-o" aria-hidden="true"></i>
-                            Returning customer?
-                            <a class="Returning" href="#" data-bs-toggle="collapse" data-bs-target="#checkout_coupon"
-                                aria-expanded="true">Click here to enter your code</a>
 
-                        </h3>
-                        <div id="checkout_coupon" class="collapse checkout_coupon" data-parent="#checkout_coupon">
-                            <div class="checkout_info">
-                                <form action="#">
-                                    <input placeholder="Coupon code" type="text">
-                                    <button class="btn btn-md btn-black-default-hover" type="submit">Apply
-                                        coupon</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-                <!-- User Quick Action Form -->
-            </div>
             <!-- Start User Details Checkout Form -->
             <div class="checkout_form" data-aos="fade-up" data-aos-delay="400">
-                <div class="row">
-                    <form action="" id="checkout-form" >
-                        <div class="col-lg-6 col-md-6 " >
+                <div class="row ">
+                    <form action="" id="checkout-form" style="display: flex; flex-wrap: wrap;">
+                        <div class="col-lg-6 col-md-6 " style="margin-top: 61px;">
 
                             <h3>Billing Details</h3>
                             <div class="row">
-                                    
+
 
                                 {{#each address}}
                                 <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse"
                                     data-bs-target="#methodCod">
-                                    <input type="radio" id="currencyCod" value="{{this._id}}" 
-                                        name="payment-address" required="">
+                                    <input type="radio" id="currencyCod" value="{{this._id}}" name="payment-address"
+                                        required="">
                                     <span>
                                         {{this.name}} <br>
                                         {{this.address}} <br>
@@ -105,24 +50,23 @@
                                         {{this.city}} <br>
                                         {{this.number}} <br>
                                     </span>
-                                    
+
 
                                 </label>
 
                                 {{/each}}
-                                
+
 
                                 <div>
                                     <br>
-                                    <a href="/checkout/add-address" class="btn btn-info mb-3" 
-                                    {{!-- style="float:right;" --}}
-                                    >Add Address</a>
+                                    <a href="/checkout/add-address" class="btn btn-info mb-3" {{!-- style="float:right;"
+                                        --}}>Add Address</a>
                                 </div>
 
 
 
                                 <input type="text" name="userId" value="{{user._id}}" hidden>
-                                
+
 
 
 
@@ -210,129 +154,148 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
 
                         </div>
 
-                        <div class="col-lg-6 col-md-6 " >
+                        <div class="col-lg-6 col-md-6 pl-3">
+
+                            {{!-- <div class="col-lg-6 col-md-6 "> --}}
 
 
 
-                          
+
                                 <div class="coupon_code left" data-aos="fade-up" data-aos-delay="200">
                                     <h3>Coupon</h3>
                                     <p id="error" class="text-danger"></p>
                                     <div class="coupon_inner">
                                         <p>Enter your coupon code if you have one.</p>
-                                        <input class="mb-2" id="couponName" value="" name="couponCode" placeholder="Coupon code" type="text">
-                                        <button  onclick="applyCoupon(event)" id="applybutton" class="btn btn-md btn-golden">Apply coupon</button>
-                                        <button  onclick="removeCoupon(event)" id="deletebutton" class="btn btn-md btn-golden" hidden>Remove coupon</button>
+                                        <input class="mb-2" id="couponName" value="" name="couponCode"
+                                            placeholder="Coupon code" type="text">
+                                        <button onclick="applyCoupon(event)" id="applybutton"
+                                            class="btn btn-md btn-golden">Apply coupon</button>
+                                        <button onclick="removeCoupon(event)" id="deletebutton"
+                                            class="btn btn-md btn-golden" hidden>Remove coupon</button>
                                     </div>
+                                </div>
+                            {{!-- </div> --}}
+
+
+                            {{!-- <div class="col-lg-6 col-md-6 "> --}}
+                                <h3>Your order</h3>
+                                <div class="order_table table-responsive">
+                                    <table>
+
+                                        <tfoot>
+                                            <tr>
+                                                <th>Cart Subtotal</th>
+                                                <td>₹ {{total}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Shipping</th>
+                                                <td><strong>Free Shipping</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Discount Percentage</th>
+                                                <td id="percentage"><strong>0</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Discount Amount</th>
+                                                <td id="discount"><strong>0</strong></td>
+                                            </tr>
+                                            <tr class="order_total">
+                                                <th>Order Total</th>
+                                                <td id="totall"><strong>₹ {{total}}</strong></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            {{!-- </div> --}}
+
+
+                            {{!-- <div class="col-lg-6 col-md-6 "> --}}
+                                <div class="payment_method">
+                                    <h3>Please select your payment method:</h3>
+                                    {{!-- <input type="radio" id="COD" name="payment-method" value="COD">
+                                    <label for="html">Cash On Delivery</label><br>
+                                    <input type="radio" id="Online" name="payment-method" value="Online">
+                                    <label for="css">Online Payment</label><br>
+                                    <input type="radio" id="UPI" name="payment-method" value="UPI">
+                                    <label for="javascript">UPI</label> --}}
+
+                                    <div class="panel-default">
+                                        <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse"
+                                            data-bs-target="#methodCod">
+                                            <input type="radio" id="currencyCod" value="COD" name="payment-method"
+                                                required="">
+                                            <span>Cash on Delivery</span>
+                                        </label>
+
+                                        {{!-- <div id="methodCod" class="collapse" data-parent="#methodCod">
+                                            <div class="card-body1">
+                                                <p>Please send a check to Store Name, Store Street, Store Town, Store
+                                                    State
+                                                    / County, Store Postcode.</p>
+                                            </div>
+                                        </div> --}}
+                                    </div>
+                                    <div class="panel-default">
+                                        <label class="checkbox-default" for="currencyPaypal" data-bs-toggle="collapse"
+                                            data-bs-target="#methodPaypal">
+                                            <input type="radio" id="currencyPaypal" value="RazorPay"
+                                                name="payment-method" required="">
+                                            <span>RazorPay Payment</span>
+                                        </label>
+                                        {{!-- <div id="methodPaypal" class="collapse " data-parent="#methodPaypal">
+                                            <div class="card-body1">
+                                                <p>Pay via PayPal; you can pay with your credit card if you don’t have a
+                                                    PayPal account.</p>
+                                            </div>
+                                        </div> --}}
+                                    </div>
+                                    <div class="panel-default">
+                                        <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse"
+                                            data-bs-target="#methodCod">
+                                            <input type="radio" id="currencyCod" value="Paypal" name="payment-method"
+                                                required="">
+                                            <span>Paypal Payment</span>
+                                        </label>
+
+                                        {{!-- <div id="methodCod" class="collapse" data-parent="#methodCod">
+                                            <div class="card-body1">
+                                                <p>Please send a check to Store Name, Store Street, Store Town, Store
+                                                    State
+                                                    / County, Store Postcode.</p>
+                                            </div>
+                                        </div> --}}
+                                    </div>
+                                    <div class="order_button pt-3">
+                                        <button class="btn btn-md btn-black-default-hover" type="submit">Place order
+                                        </button>
                                     </div>
                                 </div>
-                                </div>
-                               
-                            <br>
 
-
-
-
-                            <div class="col-lg-6 col-md-6 " >
-                            <h3>Your order</h3>
-                            <div class="order_table table-responsive">
-                                <table>
-                                   
-                                    <tfoot>
-                                        <tr>
-                                            <th>Cart Subtotal</th>
-                                            <td>₹ {{total}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Shipping</th>
-                                            <td><strong>Free Shipping</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Discount Percentage</th>
-                                           <td id="percentage"><strong>0</strong></td>
-                                        </tr>
-                                         <tr>
-                                            <th>Discount Amount</th>
-                                           <td id="discount"><strong>0</strong></td>
-                                        </tr>
-                                        <tr class="order_total">
-                                            <th>Order Total</th>
-                                            <td id="totall" ><strong >₹ {{total}}</strong></td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 " >
-                            <div class="payment_method">
-                                <h3>Please select your payment method:</h3>
-                                {{!-- <input type="radio" id="COD" name="payment-method" value="COD">
-                                <label for="html">Cash On Delivery</label><br>
-                                <input type="radio" id="Online" name="payment-method" value="Online">
-                                <label for="css">Online Payment</label><br>
-                                <input type="radio" id="UPI" name="payment-method" value="UPI">
-                                <label for="javascript">UPI</label> --}}
-
-                                <div class="panel-default">
-                                    <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse"
-                                        data-bs-target="#methodCod">
-                                        <input type="radio" id="currencyCod" value="COD" name="payment-method" required="">
-                                        <span>Cash on Delivery</span>
-                                    </label>
-
-                                    {{!-- <div id="methodCod" class="collapse" data-parent="#methodCod">
-                                        <div class="card-body1">
-                                            <p>Please send a check to Store Name, Store Street, Store Town, Store State
-                                                / County, Store Postcode.</p>
-                                        </div>
-                                    </div> --}}
-                                </div>
-                                <div class="panel-default">
-                                    <label class="checkbox-default" for="currencyPaypal" data-bs-toggle="collapse"
-                                        data-bs-target="#methodPaypal">
-                                        <input type="radio" id="currencyPaypal" value="RazorPay" name="payment-method" required="">
-                                        <span>RazorPay Payment</span>
-                                    </label>
-                                    {{!-- <div id="methodPaypal" class="collapse " data-parent="#methodPaypal">
-                                        <div class="card-body1">
-                                            <p>Pay via PayPal; you can pay with your credit card if you don’t have a
-                                                PayPal account.</p>
-                                        </div>
-                                    </div> --}}
-                                </div>
-                                <div class="panel-default">
-                                    <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse"
-                                        data-bs-target="#methodCod">
-                                        <input type="radio" id="currencyCod" value="Paypal" name="payment-method" required="">
-                                        <span>Paypal Payment</span>
-                                    </label>
-
-                                    {{!-- <div id="methodCod" class="collapse" data-parent="#methodCod">
-                                        <div class="card-body1">
-                                            <p>Please send a check to Store Name, Store Street, Store Town, Store State
-                                                / County, Store Postcode.</p>
-                                        </div>
-                                    </div> --}}
-                                </div>
-                                <div class="order_button pt-3">
-                                    <button class="btn btn-md btn-black-default-hover" type="submit">Place order
-                                    </button>
-                                </div>
-                            </div>
-
-                            </div>
+                                
+                            {{!-- </div>  --}}
 
                         </div>
+
+
+
+
+
+
+
+
                     </form>
                 </div>
-            </div> <!-- Start User Details Checkout Form -->
+            </div>
+
         </div>
+    </div>
+    <!-- Start User Details Checkout Form -->
+    </div>
     </div><!-- ...:::: End Checkout Section:::... -->
 
 
@@ -340,7 +303,7 @@
     <!-- material-scrolltop button -->
     <button class="material-scrolltop" type="button"></button>
 
-  
+
 
 
 
@@ -351,7 +314,7 @@
     <script>
         $("#checkout-form").submit((e) => {
             e.preventDefault()
-           
+
 
             swal({
                 title: "Please confirm your order",

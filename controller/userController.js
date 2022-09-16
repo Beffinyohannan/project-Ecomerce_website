@@ -94,23 +94,28 @@ const postSignup = (req, res) => {
 
 
 let user   // session of the user
+let category   //category
+let cartCount  //cart count
 
 /* ---------------------------- get the homepage ---------------------------- */
 const getHomePage = async(req, res) => {
      user=req.session.user
     // console.log(user);
-    var cartCount 
+    // var cartCount 
     if(req.session.user){
         cartCount = await userHelpers.getCartCount(req.session.user._id)
     }
-    userHelpers.viewProducts().then((data)=>{
+
+     category = await adminHelpers.viewCategory()
+    userHelpers.viewProducts().then((dataa)=>{
+
+        let data=[]
+        for(var i=0;i<10;i++){
+            data[i]=dataa[i]
+        }
         adminHelpers.viewBanner().then((datas)=>{
-            // let dataa={};
-            // for(var i=0;i<4;i++){
-            //     dataa=data[i]
-            // }
-            // console.log(dataa);
-            res.render('user/homePage',{user,data,cartCount,datas})      // passing session,products,cartcount,banner
+            
+            res.render('user/homePage',{user,data,datas,category,cartCount})      // passing session,products,cartcount,banner
 
         })
     })
@@ -119,22 +124,40 @@ const getHomePage = async(req, res) => {
 
 /* ------------------------------ get products ------------------------------ */
 const getProducts =async (req, res) => {
-    let cartCount = null
-    // var cartCount 
+
     if(req.session.user){
         cartCount = await userHelpers.getCartCount(req.session.user._id)
     }
+    
     userHelpers.viewProducts().then((data)=>{
-        res.render('user/products',{data,user: req.session.user,cartCount})
+        res.render('user/products',{data,user: req.session.user,category,cartCount})
     })
     
 }
 
+/* ---------------------------- category product ---------------------------- */
+const categoryProduct=async(req,res)=>{
+
+    if(req.session.user){
+        cartCount = await userHelpers.getCartCount(req.session.user._id)
+    }
+    let id=req.params.id
+   await adminHelpers.viewCategoryProducts(id).then((products)=>{
+    // console.log(products);
+
+        res.render('user/categoryProduct',{products,user,cartCount})
+    })
+   
+}
+
 /* ----------------------------- get single page  of products---------------------------- */
-const getProductSinglePage = (req, res) => {
+const getProductSinglePage = async(req, res) => {
     let Id = req.params.id
-    userHelpers.singleProduct(Id).then((data)=>{
-        res.render('user/productSinglePage',{data,user})
+  await  userHelpers.singleProduct(Id).then(async(data)=>{
+        let catProduct=await adminHelpers.viewCategoryProducts(data.category)
+
+        // console.log(catProduct);
+        res.render('user/productSinglePage',{data,user,catProduct,category,cartCount})
     })
    
 }
@@ -152,7 +175,7 @@ const profile = async(req,res)=>{
     let orders = await userHelpers.getUserOrders(user._id)      //view the order of the user
     let details = await userHelpers.viewAddress(user._id)
     let coupon = await adminHelpers.viewCoupons()                  // view coupon in user profile
-    res.render('user/profile',{user,orders,details,coupon})
+    res.render('user/profile',{user,orders,details,coupon,category,cartCount})
 }
 
 /* -------------------------------- 404 page -------------------------------- */
@@ -162,9 +185,9 @@ const errorPage = (req,res)=>{
 
 /* ------------------------------ get cart page ----------------------------- */
 const getCart = async (req,res)=>{
-    let cartCount = null
+    
     if(req.session.user){
-        cartCount = await userHelpers.getCartCount(user._id)
+        cartCount = await userHelpers.getCartCount(req.session.user._id)
     }
 
     let products = await userHelpers.getCartProducts(user._id)
@@ -175,15 +198,16 @@ const getCart = async (req,res)=>{
         products[i].productValue = productValue[i].total
     }
     // console.log(productValue);
-    res.render('user/cart',{products,user: req.session.user,cartCount,totalValue,wishlist})
+    res.render('user/cart',{products,user: req.session.user,totalValue,wishlist,category,cartCount})
 }
 
 /* ------------------------------- add to cart ------------------------------ */
 const addToCart = (req,res)=>{
     // console.log(req.params.id);
-    userHelpers.addCart(req.params.id,user._id).then(()=>{
-        res.redirect('/products')
-        // res.json({status:true})
+    userHelpers.addCart(req.params.id,user._id).then((response)=>{
+        // res.redirect('/products')
+        // console.log(response);
+        res.json(response)
     })
 }
 
@@ -211,7 +235,7 @@ const productQuantityChange = (req,res)=>{
 const getCheckout =async (req,res)=>{
     let total = await userHelpers.getTotalAmount(user._id)
     let address = await userHelpers.viewAddress(user._id)
-    res.render('user/checkout',{total,user,address})
+    res.render('user/checkout',{total,user,address,category,cartCount})
 }
 
 /* ------------------------------- place order ------------------------------ */
@@ -276,7 +300,7 @@ const placeOrder=async(req,res)=>{
 const viewOrderProduct = async(req,res)=>{
     // console.log(req.params.id);
     let products = await userHelpers.getOrderProduct(req.params.id)
-    res.render('user/viewOrderProduct',{user,products})
+    res.render('user/viewOrderProduct',{user,products,category,cartCount})
 }
 
 /* ----------------------- verfiy payment in razorpay ----------------------- */
@@ -297,13 +321,13 @@ const verifyPayment=(req,res)=>{
 /* ------------------------------- address page ------------------------------- */
 const addressPage =async(req,res)=>{
     let details = await userHelpers.viewAddress(user._id)
-    res.render('user/addressPage',{details,user})
+    res.render('user/addressPage',{details,user,category,cartCount})
 }
 
 /* ------------------------------- add address ------------------------------ */
 const getAddressAdd =(req,res)=>{
     
-    res.render('user/addUserAddress',{user})
+    res.render('user/addUserAddress',{user,cartCount})
 }
 
 /* ---------------------------- post add address ---------------------------- */
@@ -324,7 +348,7 @@ const getEditAddress = (req,res)=>{
     // console.log(req.session.user._id);
     // res.render('user/editAddress')
     userHelpers.getAddessEdit(id,user._id).then((data)=>{
-        res.render('user/editAddress',{data})
+        res.render('user/editAddress',{data,category,cartCount})
     })
    
 }
@@ -356,7 +380,7 @@ const addressDelete = (req,res)=>{
 /* -------------------------------checkout add address ------------------------------ */
 const getCheckAddressAdd =(req,res)=>{
     
-    res.render('user/addCheckoutAddress',{user})
+    res.render('user/addCheckoutAddress',{user,category,cartCount})
 }
 
 /* ----------------------------chekout post add address ---------------------------- */
@@ -373,7 +397,7 @@ const postCheckAddressAdd =(req,res)=>{
 
 /* ------------------------------- order page ------------------------------- */
 const getOrderPage =(req,res)=>{
-    res.render('user/ordersPage')
+    res.render('user/ordersPage',{category,cartCount})
 }
 
 /* ------------------------------ cancel order ------------------------------ */
@@ -389,14 +413,14 @@ const orderCancelling=(req,res)=>{
 
 /* ------------------------------- sucess page ------------------------------ */
 const sucessPage = (req,res)=>{
-    res.render('user/successPage')
+    res.render('user/successPage',{category,cartCount})
 }
 
 /* ------------------------------ wishlist page ----------------------------- */
 const getWishlist =async (req,res)=>{
   let wishlist = await userHelpers.getWishProducts(user._id)
 //   console.log(wishlist);
-    res.render('user/wishlist',{wishlist})
+    res.render('user/wishlist',{wishlist,category,cartCount,user})
 }
 
 /* ------------------------------ add wishlist ------------------------------ */
@@ -470,6 +494,7 @@ module.exports = {
      getLogin,
      getSignup,
      getProducts, 
+     categoryProduct,
      getProductSinglePage,
      postSignup,
      postLogin,
