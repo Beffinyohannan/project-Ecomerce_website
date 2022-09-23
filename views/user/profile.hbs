@@ -140,7 +140,7 @@
 
                                                         <div class="mt-5 text-center">
 
-                                                            <h4 class="mb-0 pr-3">₹ 400  </h4>
+                                                            <h4 class="mb-0 pr-3">₹ 400 </h4>
 
                                                         </div>
                                                     </div>
@@ -221,8 +221,8 @@
                         <div class="tab-pane fade" id="orders">
                             <h4>Orders</h4>
                             {{!-- table-responsive --}}
-                            <div class="table_page ">
-                                <table>
+                            <div class="table_page table-responsive ">
+                                <table id="example" >
                                     <thead class="bg-dark">
                                         <tr>
                                             <th class="text-white">Order</th>
@@ -310,7 +310,7 @@
                             <div class="table_page ">
                                 <a href="/add-address"><button class="btn btn-info mb-3" style="float:right;">Add
                                         Address</button></a>
-                                <table id="example3" class="display min-w850">
+                                <table id="myTable" class="display min-w850">
                                     <thead class="bg-dark">
                                         <tr>
                                             <th class="text-white">s no.</th>
@@ -451,6 +451,12 @@
 
 
     {{>userfooter}}
+
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
 
     {{!--
     <script>
