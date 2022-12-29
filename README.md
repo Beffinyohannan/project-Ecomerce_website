@@ -5,7 +5,6 @@ Airchip is an e-commere website based on a laptop selling site .by using this ap
 
 
 
-
 #### Get HomePage
 
 http
@@ -78,7 +77,58 @@ Start the server
 bash
   npm run start
 
+## Features
+Interactive User Interface with Responsive Design
 
+Sign in with Otp verification
+
+Wishlist and cart
+
+Wallet, Offers and Coupons
+
+Referral system
+
+Api integration of payment gateways of Paypal and Razorpay
+
+Custom admin panel with sales report, chart & graph, product
+and order management
+
+Product, user& category Management on Admin side
+
+Deployment in AWS
+
+Load balancer and more
+
+
+
+##  Used Techonlogy
+
+Node js 
+
+Express 
+
+MongoBD 
+
+Javascript 
+
+Html 
+
+CSS 
+
+Bootstrap 
+
+Ajax 
+
+HBS
+
+API integration of payment gateways 
+of Razor pay and PayPal
+
+Twilio 
+
+Deployment in AWS
+
+Nginx
 
 
 
