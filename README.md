@@ -130,7 +130,14 @@ Deployment in AWS
 
 Nginx
 
+## Screenshots
 
+![airchip landingpage](https://user-images.githubusercontent.com/107913841/210034564-42faec78-9159-487a-a731-a0a13ab14b6e.png)
+![airchip login](https://user-images.githubusercontent.com/107913841/210034726-91aa77d3-9ed8-47ed-93b7-8a7c40c89e60.png)
+![airchip allproducts](https://user-images.githubusercontent.com/107913841/210034658-53402f21-5183-4179-a5c1-8876fcfdf2a0.png)
+![airchip cart](https://user-images.githubusercontent.com/107913841/210034667-a6546784-4f30-445a-bb76-ad023b4f2d7f.png)
+![airchip whishlist](https://user-images.githubusercontent.com/107913841/210034674-fc6dfbe9-dbea-4abe-9e05-5967a9885b6a.png)
+![airchip checkout](https://user-images.githubusercontent.com/107913841/210034681-657f1a47-0180-4187-8cda-768a8f619137.png)
 
 
 
